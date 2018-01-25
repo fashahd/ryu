@@ -67,7 +67,7 @@
 <!-- slider-area-start -->
 <div class="slider-area">
 <div id="slider2">
-	<img src="<?=base_url()?>appsources/img/banner/powertools.jpg" alt="slider-img" title="#caption2" />
+	<img src="<?=base_url()?>appsources/img/slider/1.jpg" alt="slider-img" title="#caption2" />
 </div>
 <div class="nivo-html-caption" id="caption2" >
 	<div class="container">
@@ -106,7 +106,7 @@
 <!-- slider-area-start -->
 <div class="slider-area">
 <div id="slider3">
-	<img src="<?=base_url()?>appsources/img/banner/powertools.jpg" alt="slider-img" title="#caption3" />
+	<img src="<?=base_url()?>appsources/img/slider/3.jpg" alt="slider-img" title="#caption3" />
 </div>
 <div class="nivo-html-caption" id="caption3" >
 	<div class="container">
