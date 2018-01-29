@@ -77,6 +77,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
   font-size:14px;
 }
+.container2{
+	padding-right: 15px;
+	padding-left: 40px;
+}
 a {transition: all 0.3s ease 0s;text-decoration:none;}
 a:hover {
   color: #ec4445;
@@ -331,6 +335,10 @@ body {
 	font-size:25px;
 	padding-right:10px;
 }
+.search-area button{
+	display:inline-block;
+	margin-top:10px;
+}
 /*----------------------------------------*/
 /*  2.3  header-menu-area
 /*----------------------------------------*/
@@ -345,7 +353,7 @@ body {
 	background: transparent none repeat scroll 0 0;
 	color: #fff;
 	display: block;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 900;
 	line-height: 30px;
 	padding: 15px 16px;
@@ -450,7 +458,7 @@ body {
 	transition: all 0.4s ease 0s;
 	z-index: 99;
 	width: 180px;
-	padding: 0px;
+	padding: 20px;
     transform: scaleY(0);
     transform-origin: 0 0 0;
 	visibility:hidden;
@@ -1612,6 +1620,21 @@ a#scrollUp {
 /*----------------------------------------*/
 /* 14 	home-2
 /*----------------------------------------*/
+
+.home-2 .banner-area{
+	background: #f0f0f0;
+}
+.warranty{
+	background: #fff;
+	padding : 50px;
+	margin : 0px 70px 0px 70px;
+}
+.warranty h4{
+	font-size: 13pt;
+	font-weight: 600;
+	color: #000;
+	text-transform: uppercase;
+}
 
 .button-new{
 	background-color: #4f4f4f; /* Green */
@@ -3642,6 +3665,13 @@ a#scrollUp {
 .breadcrumb-content-down .breadcrumb-title h3{
 	margin-bottom:0;
 }
+.breadcrumb-content-down h2{
+	color: #000;
+	font-size: 25px;
+	font-weight: 900;
+	line-height:60px;
+	text-transform: uppercase;
+}
 .breadcrumb-content-down .breadcrumb-title h3 a{
 	color: #70c051;
 	font-size: 38px;
@@ -4321,7 +4351,7 @@ a#scrollUp {
 /* 24 	blog
 /*----------------------------------------*/
 .blog-sidebar-title h4{
-	border-bottom:1px solid rgb(235, 235, 235);
+  border-bottom: 1px solid #000;
 	margin: 0 0 30px;
 }
 .blog-sidebar-title h4 span{
@@ -4336,7 +4366,6 @@ a#scrollUp {
 	text-transform: uppercase;
 }
 .blog-sidebar-title h4 span:before{
-  border-bottom: 1px solid #6dbf50;
   bottom: 0;
   content: "";
   left: 0;
@@ -4459,7 +4488,6 @@ a#scrollUp {
 	width:100%;
 }
 .single-blog-main .postinfo-wrapper{
-	padding-left: 100px;
 	position: relative;
 	width: 100%;
 }
@@ -4492,14 +4520,31 @@ a#scrollUp {
 	transition:.3s;
 }
 .single-blog-main .postinfo-wrapper .post-info .entry-meta{
-	border-bottom: 1px solid #e5e5e5;
-	border-top: 1px solid #e5e5e5;
+	border-bottom: 3px dotted #000;
+	border-top: 3px dotted #000;
 	float: left;
 	font-weight: 600;
 	margin: 0 0 30px;
 	padding: 10px 0;
 	text-transform: uppercase;
 	width: 100%;
+}
+.single-blog-main .postinfo-wrapper .post-info .entry-meta2{
+	border-bottom: 3px dotted #000;
+	float: left;
+	font-weight: 600;
+	margin: 0 0 25px;
+	padding: 0;
+	text-transform: uppercase;
+	width: 100%;
+}
+.single-blog-main .postinfo-wrapper .post-info .entry-meta2 p{
+	margin:0px;
+	font-weight: 700;
+}
+.single-blog-main .postinfo-wrapper .post-info .entry-meta p{
+	margin:0px;
+	font-weight: 600;
 }
 .single-blog-main .postinfo-wrapper .post-info .entry-meta span{
 	color: #909295;
@@ -4860,6 +4905,61 @@ blockquote {
 	font-size:13px;
 }
 /*----------------------------------------*/
+/*  28 register-2
+/*----------------------------------------*/
+.single-register-2 {
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+.single-register-2 form{}
+.single-register-2 form label ,.single-register-2 label {
+  color: #626262;
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 7px;
+}
+.single-register-2 form input{
+	background: rgba(255,255,255,1) none repeat scroll 0 0;
+	border: 1px solid #eceff8;
+	box-shadow: none;
+    color: #626262;
+    font-size: 14px;
+    height: 45px;
+    width: 100%;
+}
+.single-register-2 .chosen-select{
+	height: 45px;
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	border: 1px solid #eceff8;
+	color: #626262;
+    font-size: 14px;
+    height: 45px;
+    padding-left: 10px;
+	box-shadow: none;
+	text-align:left;
+}
+.single-register-2 input#billing_address_2 {
+  margin-top: 15px;
+}
+.single-register-2 > a {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: 1px solid #eceff8;
+  box-shadow: none;
+  color: #626262;
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 6px;
+  padding: 12px 48px;
+  text-decoration:none;
+  transition:.3s;
+}
+.single-register-2 > a:hover{
+	background-color:#6dbf50;
+	color:#fff;
+	border:1px solid #6dbf50;
+}
+/*----------------------------------------*/
 /*  28 register
 /*----------------------------------------*/
 .single-register {
@@ -4979,12 +5079,16 @@ blockquote {
   padding-right: 6px;
 }
 .counter-area {
-  background: rgba(0, 0, 0, 0) url("img/banner/42.jpg") repeat scroll center center;
+	background: rgba(0, 0, 0, 0) url("img/banner/news.jpg") repeat scroll center center;
+	padding-top: 150px;
+	padding-bottom: 150px;
 }
 .single-counter h2{
+	background:  rgba(0, 0, 0, 0.6);
   font-size: 40px;
-  color:#444;
+  color:#6dbf50;
   font-weight:600;
+	text-transform: uppercase;
 }
 .single-counter span{
 	font-size: 15px;
