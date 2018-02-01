@@ -20,7 +20,7 @@ class Dashboard extends MX_Controller {
 	 */
 	public function front()
 	{
-		$data["tittle"] = "Home";
+		$data["tittle"] = "Dashboard";
 		$this->layout->content("front",$data);
 	}
 }

@@ -21,6 +21,25 @@ class Auth extends MX_Controller {
 	public function login()
 	{
 		$data["tittle"] = "Login";
-		$this->layout->content("login",$data);
+		$this->load->view("login",$data);
+	}
+
+	function validation(){
+		$username 	= $_POST["username"];
+		$pwd 		= $_POST["password"];
+		$password 	= md5($pwd);
+
+		$response 	= $this->ModelUsers->validation($username,$password);
+		$data = json_decode($response, true);
+		if($data["status"] == "error"){
+			echo "error";
+			return;
+		}
+
+		if($data["status"] == "sukses"){			
+			$this->session->set_userdata("username",$data["username"]);
+			echo "sukses";
+			return;
+		}
 	}
 }

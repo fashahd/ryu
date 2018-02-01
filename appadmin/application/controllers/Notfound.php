@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Notfound extends CI_Controller {
+class Notfound extends MX_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,7 +20,7 @@ class Notfound extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data["tittle"] = "Home";
+		$data["tittle"] = "Not Found";
 		$this->layout->content("404",$data);
 	}
 }

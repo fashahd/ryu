@@ -12,44 +12,44 @@
 
         public function headersource($module = null){
             $ret = '
-                <head>
-                    <meta charset="utf-8">
-                    <meta http-equiv="x-ua-compatible" content="ie=edge">
-                    <title>RYU | '.$module.'</title>
-                    <meta name="description" content="">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
+            <head>
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <title>AdminPage | '.$module.'</title>
+                <!-- Tell the browser to be responsive to screen width -->
+                <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+                <!-- Bootstrap 3.3.7 -->
+                <link rel="stylesheet" href="'.base_url().'appsources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="'.base_url().'appsources/bower_components/font-awesome/css/font-awesome.min.css">
+                <!-- Ionicons -->
+                <link rel="stylesheet" href="'.base_url().'appsources/bower_components/Ionicons/css/ionicons.min.css">
+                <!-- Theme style -->
+                <link rel="stylesheet" href="'.base_url().'appsources/dist/css/AdminLTE.min.css">
+                <!-- AdminLTE Skins. Choose a skin from the css/skins
+                    folder instead of downloading all of them to reduce the load. -->
+                <link rel="stylesheet" href="'.base_url().'appsources/dist/css/skins/_all-skins.min.css">
+                <!-- Morris chart -->
+                <link rel="stylesheet" href="'.base_url().'appsources/bower_components/morris.js/morris.css">
+                <!-- jvectormap -->
+                <link rel="stylesheet" href="'.base_url().'appsources/bower_components/jvectormap/jquery-jvectormap.css">
+                <!-- Date Picker -->
+                <link rel="stylesheet" href="'.base_url().'appsources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+                <!-- Daterange picker -->
+                <link rel="stylesheet" href="'.base_url().'appsources/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+                <!-- bootstrap wysihtml5 - text editor -->
+                <link rel="stylesheet" href="'.base_url().'appsources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
             
-                    <!-- Favicon -->
-                    <link rel="shortcut icon" type="image/x-icon" href="'.base_url().'/appsources/img/logo/ryu_logo.png">
+                <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
+                <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+                <![endif]-->
             
-                    <!-- all css here -->
-                    <!-- bootstrap v3.3.6 css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/bootstrap.min.css">
-                    <!-- animate css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/animate.css">
-                    <!-- jquery-ui.min css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/jquery-ui.min.css">
-                    <!-- meanmenu css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/meanmenu.min.css">
-                    <!-- owl.carousel css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/owl.carousel.css">
-                    <!-- font-awesome css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/font-awesome.min.css">
-                    <!-- material-design-iconic-font.css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/material-design-iconic-font.css">
-                    <!-- chosen.min.css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/chosen.min.css">
-                    <!-- nivo-slider.css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/nivo-slider.css">
-                    <!--flexslider.css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/flexslider.css">
-                    <!-- style css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/style.css">
-                    <!-- responsive css -->
-                    <link rel="stylesheet" href="'.base_url().'/appsources/css/responsive.css">
-                    <!-- modernizr css -->
-                    <script src="'.base_url().'/appsources/js/vendor/modernizr-2.8.3.min.js"></script>
-                </head>
+                <!-- Google Font -->
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+            </head>
             ';
 
             return $ret;
@@ -57,35 +57,43 @@
 
         function headersourcejs(){
             $ret = '
-                <!-- all js here -->
-                <!-- jquery latest version -->
-                <script src="'.base_url().'/appsources/js/vendor/jquery-1.12.0.min.js"></script>
-                <!-- bootstrap js -->
-                <script src="'.base_url().'/appsources/js/bootstrap.min.js"></script>
-                <!-- owl.carousel js -->
-                <script src="'.base_url().'/appsources/js/owl.carousel.min.js"></script>
-                <!-- meanmenu js -->
-                <script src="'.base_url().'/appsources/js/jquery.meanmenu.js"></script>
-                <!-- jquery-ui js -->
-                <script src="'.base_url().'/appsources/js/jquery-ui.min.js"></script>
-                <!-- wow js -->
-                <script src="'.base_url().'/appsources/js/wow.min.js"></script>
-                <!-- chosen.jquery.min.js -->
-                <script src="'.base_url().'/appsources/js/chosen.jquery.min.js"></script>
-                <!-- jquery.nivo.slider.js -->
-                <script src="'.base_url().'/appsources/js/jquery.nivo.slider.js"></script>
-                <!-- jquery.countdown.min.js -->
-                <script src="'.base_url().'/appsources/js/jquery.countdown.min.js"></script>
-                <!-- jquery.flexslider.js -->
-                <script src="'.base_url().'/appsources/js/jquery.flexslider.js"></script>
-                <!-- jquery.counterup.min.js -->
-                <script src="'.base_url().'/appsources/js/jquery.counterup.min.js"></script>
-                <!-- waypoints.min.js -->
-                <script src="'.base_url().'/appsources/js/waypoints.min.js"></script>
-                <!-- plugins js -->
-                <script src="'.base_url().'/appsources/js/plugins.js"></script>
-                <!-- main js -->
-                <script src="'.base_url().'/appsources/js/main.js"></script>
+            <!-- jQuery 3 -->
+            <script src="'.base_url().'appsources/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- jQuery UI 1.11.4 -->
+            <script src="'.base_url().'appsources/bower_components/jquery-ui/jquery-ui.min.js"></script>
+            <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+            <script>
+              $.widget.bridge("uibutton", $.ui.button);
+            </script>
+            <!-- Bootstrap 3.3.7 -->
+            <script src="'.base_url().'appsources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- Morris.js charts -->
+            <script src="'.base_url().'appsources/bower_components/raphael/raphael.min.js"></script>
+            <script src="'.base_url().'appsources/bower_components/morris.js/morris.min.js"></script>
+            <!-- Sparkline -->
+            <script src="'.base_url().'appsources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+            <!-- jvectormap -->
+            <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+            <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+            <!-- jQuery Knob Chart -->
+            <script src="'.base_url().'appsources/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+            <!-- daterangepicker -->
+            <script src="'.base_url().'appsources/bower_components/moment/min/moment.min.js"></script>
+            <script src="'.base_url().'appsources/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+            <!-- datepicker -->
+            <script src="'.base_url().'appsources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+            <!-- Bootstrap WYSIHTML5 -->
+            <script src="'.base_url().'appsources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+            <!-- Slimscroll -->
+            <script src="'.base_url().'appsources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="'.base_url().'appsources/bower_components/fastclick/lib/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="'.base_url().'appsources/dist/js/adminlte.min.js"></script>
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="'.base_url().'appsources/dist/js/pages/dashboard.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="'.base_url().'appsources/dist/js/demo.js"></script>
             ';
             return $ret;
         }

@@ -5089,6 +5089,7 @@ blockquote {
   color:#6dbf50;
   font-weight:600;
 	text-transform: uppercase;
+	padding: 20px;
 }
 .single-counter span{
 	font-size: 15px;
