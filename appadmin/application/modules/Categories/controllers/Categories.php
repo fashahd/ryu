@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends MX_Controller {
+class Categories extends MX_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,17 +25,13 @@ class Dashboard extends MX_Controller {
 			redirect("auth/login");
 			return;
 		}
+		$this->load->model("ModelAdmin");
 	}
 
 	public function index()
 	{
-		redirect("dashboard/front");
-		return;
-	}
-
-	public function front()
-	{
-		$data["tittle"] = "Dashboard";
-		$this->layout->content("front",$data);
+		$data["tittle"] = "Categories";
+		$data["optparentmenu"] = $this->ModelAdmin->getOptParentMenu();
+		$this->layout->content("index",$data);
 	}
 }

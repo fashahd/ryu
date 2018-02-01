@@ -94,6 +94,8 @@
             <script src="'.base_url().'appsources/dist/js/pages/dashboard.js"></script>
             <!-- AdminLTE for demo purposes -->
             <script src="'.base_url().'appsources/dist/js/demo.js"></script>
+            <script src="'.base_url().'appsources/admin/default.js"></script>
+            <script src="'.base_url().'appsources/admin/appadmin.js"></script>
             ';
             return $ret;
         }

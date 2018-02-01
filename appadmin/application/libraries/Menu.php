@@ -15,20 +15,20 @@
                             </a>
                         </li>
                         <li>
-                            <a href="'.base_url().'categories">
+                            <a href="'.base_url().'media">
                                 <i class="fa fa-camera-retro"></i> <span>Media</span>
                             </a>
                         </li>
                         <li class="treeview">
-                            <a href="'.base_url().'categories">
+                            <a href="">
                                 <i class="ion ion-bag"></i> <span>Products</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> All Products</a></li>
-                                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Add New</a></li>
+                                <li><a href="'.base_url().'product"><i class="fa fa-circle-o"></i> All Products</a></li>
+                                <li><a href="'.base_url().'product/add"><i class="fa fa-circle-o"></i> Add New</a></li>
                             </ul>
                         </li>
                         <li>
@@ -37,7 +37,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="'.base_url().'categories">
+                            <a href="'.base_url().'pages">
                                 <i class="fa fa-clone"></i> <span>Pages</span>
                             </a>
                         </li>
@@ -49,9 +49,9 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> All Users</a></li>
-                                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Add New</a></li>
-                                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Your Profile</a></li>
+                                <li><a href="'.base_url().'users"><i class="fa fa-circle-o"></i> All Users</a></li>
+                                <li><a href="'.base_url().'users/add"><i class="fa fa-circle-o"></i> Add New</a></li>
+                                <li><a href="'.base_url().'users/profile"><i class="fa fa-circle-o"></i> Your Profile</a></li>
                             </ul>
                         </li>
                     </ul>
