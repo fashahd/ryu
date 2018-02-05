@@ -9,49 +9,21 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
-                        <li class="active">
+                        <li>
                             <a href="'.base_url().'dashboard/front">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="'.base_url().'media">
-                                <i class="fa fa-camera-retro"></i> <span>Media</span>
-                            </a>
-                        </li>
                         <li class="treeview">
-                            <a href="">
-                                <i class="ion ion-bag"></i> <span>Products</span>
+                            <a href="#">
+                                <i class="fa fa-tags"></i> <span>Catalog</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="'.base_url().'product"><i class="fa fa-circle-o"></i> All Products</a></li>
-                                <li><a href="'.base_url().'product/add"><i class="fa fa-circle-o"></i> Add New</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="'.base_url().'categories">
-                                <i class="fa fa-folder-open"></i> <span>Categories</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="'.base_url().'pages">
-                                <i class="fa fa-clone"></i> <span>Pages</span>
-                            </a>
-                        </li>
-                        <li class="treeview">
-                            <a href="">
-                                <i class="fa fa-users"></i> <span>Users</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="'.base_url().'users"><i class="fa fa-circle-o"></i> All Users</a></li>
-                                <li><a href="'.base_url().'users/add"><i class="fa fa-circle-o"></i> Add New</a></li>
-                                <li><a href="'.base_url().'users/profile"><i class="fa fa-circle-o"></i> Your Profile</a></li>
+                                <li><a href="'.base_url().'catalog/categories"><i class="fa fa-circle-o"></i> Categories</a></li>
+                                <li><a href="'.base_url().'catalog/products"><i class="fa fa-circle-o"></i> Products</a></li>
                             </ul>
                         </li>
                     </ul>
