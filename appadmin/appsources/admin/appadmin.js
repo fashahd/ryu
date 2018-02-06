@@ -12,10 +12,40 @@ $('#categories').submit(function(event) {
 		data : form.serialize(),
 		// dataType: "json",
 		success: function(data){
-			alert(data);
-			return;
 			if(data =="sukses"){
-				window.location.href=toUrl+"/appadmin/dashboard/front";
+				alert(data);
+				window.location.href=toUrl+"/appadmin/catalog/category";
+				return;
+			}else{
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+                +'Wrong Username / Password</div>');
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			$("#loginbutton").html('<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>');
+		}
+	});
+});
+
+$('#subcategories').submit(function(event) {
+    event.preventDefault();
+
+    // alert("test");
+    // return;
+    var form = $('#subcategories');
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/catalog/addSubcategories",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			if(data =="sukses"){
+				alert(data);
+				window.location.href=toUrl+"/appadmin/catalog/subcategories";
 				return;
 			}else{
 				$("#notif").html('<div class="alert alert-danger alert-dismissible">'

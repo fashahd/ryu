@@ -23,6 +23,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="'.base_url().'catalog/categories"><i class="fa fa-circle-o"></i> Categories</a></li>
+                                <li><a href="'.base_url().'catalog/subcategories"><i class="fa fa-circle-o"></i> Sub Categories</a></li>
                                 <li><a href="'.base_url().'catalog/products"><i class="fa fa-circle-o"></i> Products</a></li>
                             </ul>
                         </li>
