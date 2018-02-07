@@ -1,3 +1,28 @@
+<?php
+    $product_name   = "";
+    $product_note   = "";
+    $product_image1     = "";
+    $product_image2     = "";
+    $product_image3     = "";
+    $product_category   = "";
+    $product_subcategory = "";
+    $optsubcategory = "";
+    if($product){
+        foreach($product as $row){
+            $product_name = $row->product_name;
+            $product_note = $row->product_note;
+            $product_category = $row->product_category;
+            $product_subcategory = $row->product_subcategory;
+            $product_image1 = "<img width='180px' src='".base_url()."$row->product_image1'/>";
+            $product_image2 = "<img width='180px' src='".base_url()."$row->product_image2'/>";
+            $product_image3 = "<img width='180px' src='".base_url()."$row->product_image3'/>";
+        }
+    }
+    $optparentmenu = $this->ModelAdmin->getOptParentMenu(0,$product_category);
+    // if($product_subcategory != ""){
+    $optsubcategory = $this->ModelAdmin->getOptSubCategory($product_category,$product_subcategory);
+    // }
+?>
 <!-- Content Header (Page header) -->
 <div id="notif"></div>
 <section class="content-header">
@@ -23,7 +48,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Product Name</label>
-                            <input required name="product" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Name">
+                            <input required name="product" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Name" value="<?=$product_name?>">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Product Category</label>
@@ -33,28 +58,29 @@
 							</select>
                         </div>
                         <div id="subcategory">
+                            <?=$optsubcategory?>
                         </div>
                         <div class="form-group">
                             <label>Product Information</label>
-                            <textarea name="information" class="form-control" rows="3" placeholder="This product is......"></textarea>
+                            <textarea name="information" class="form-control" rows="3" placeholder="This product is......"><?=$product_note?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="FileUpload1">Product Image</label>
                             <input id="FileUpload1" type="file" name="ImageUpload1" class="image" />
                             <p class="help-block">Image Size Max 2 MB</p>
-                            <div id="PreviewPicture1"></div>
+                            <div id="PreviewPicture1"><?=$product_image1?></div>
                         </div>
                         <div class="form-group">
                             <label for="FileUpload2">Product Image</label>
                             <input id="FileUpload2" type="file" name="ImageUpload2" class="image" />
                             <p class="help-block">Image Size Max 2 MB</p>
-                            <div id="PreviewPicture2"></div>
+                            <div id="PreviewPicture2"><?=$product_image2?></div>
                         </div>
                         <div class="form-group">
                             <label for="FileUpload3">Product Image</label>
                             <input id="FileUpload3" type="file" name="ImageUpload3" class="image" />
                             <p class="help-block">Image Size Max 2 MB</p>
-                            <div id="PreviewPicture3"></div>
+                            <div id="PreviewPicture3"><?=$product_image3?></div>
                         </div>
                     </div>
                 </div>

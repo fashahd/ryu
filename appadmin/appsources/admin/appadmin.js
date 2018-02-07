@@ -1,4 +1,72 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
+
+
+function deleteProduct(){
+	var sList = "";
+	$('input[name=product_id]:checked').each(function () {
+		sList += $(this).val() + "|";
+	});
+
+	if(sList == ""){
+		alert("Please select a product");
+		return;
+	}
+
+	if (confirm('Are you sure you?')) {
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/appadmin/catalog/deleteproduct",
+			data : {product_id:sList},
+			// dataType: "json",
+			success: function(data){
+				alert(data);
+				window.location.reload();
+			},error: function(xhr, ajaxOptions, thrownError){            
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		});
+		// Save it!
+	} else {
+		// Do nothing!
+	}
+}
+
+$('#selectall').click(function(event) {   
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;                        
+        });
+    }else{
+		$(':checkbox').each(function() {
+            this.checked = false;                        
+        });
+	}
+});
+
+$("#category").change(function(){
+	var category = $("#category").val();
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/catalog/getOptSubCategory",
+		data : {category:category},
+		// dataType: "json",
+		success: function(data){
+			$("#subcategory").html(data);
+		},error: function(xhr, ajaxOptions, thrownError){            
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+});
+
 $('#categories').submit(function(event) {
     event.preventDefault();
 
@@ -14,18 +82,22 @@ $('#categories').submit(function(event) {
 		success: function(data){
 			if(data =="sukses"){
 				alert(data);
-				window.location.href=toUrl+"/appadmin/catalog/category";
+				window.location.href=toUrl+"/appadmin/catalog/categories";
 				return;
 			}else{
 				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
-                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
-                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
-                +'Wrong Username / Password</div>');
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
 				return;
 			}
 		},error: function(xhr, ajaxOptions, thrownError){            
-			alert(xhr.responseText);
-			$("#loginbutton").html('<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>');
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
 		}
 	});
 });
@@ -49,14 +121,18 @@ $('#subcategories').submit(function(event) {
 				return;
 			}else{
 				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
-                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
-                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
-                +'Wrong Username / Password</div>');
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
 				return;
 			}
 		},error: function(xhr, ajaxOptions, thrownError){            
-			alert(xhr.responseText);
-			$("#loginbutton").html('<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>');
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
 		}
 	});
 });
@@ -117,23 +193,26 @@ $('#addproductform').submit(function(event) {
 		cache: false,
         contentType: false,
         processData: false,
-		// dataType: "json",
+		dataType: "json",
 		success: function(data){
-			alert(data);
-			return;
-			if(data =="sukses"){
-				window.location.href=toUrl+"/appadmin/dashboard/front";
-				return;
-			}else{
+			if(data.status =="sukses"){
+				alert(data.message);
+				window.location.href=toUrl+"/appadmin/catalog/products";
+			}else if(data.status =="max_upload"){
+				$("#notif").html('<div class="alert alert-warning alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}else {
 				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
                 +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
-                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
-                +'Wrong Username / Password</div>');
-				return;
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
 			}
 		},error: function(xhr, ajaxOptions, thrownError){            
 			alert(xhr.responseText);
-			$("#loginbutton").html('<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>');
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
 		}
 	});
 });

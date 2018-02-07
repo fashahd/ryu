@@ -1,7 +1,7 @@
 <?php
 	class ModelAdmin extends CI_Model {
 
-        function saveproduct($product,$category,$information,$model,$description,$image1,$image2,$image3){
+        function saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3){
             $this->db->trans_begin();
             $product_id = $this->getProductID();
             $data   = array(
@@ -13,6 +13,8 @@
                 "product_image2" => $image2,
                 "product_image3" => $image3,
                 "product_note"  => $information,
+                "product_subcategory" => $subcategory,
+                "product_dttm" => date("Y-m-d H:i:s"),
             );
             if($model != ""){
                 for($i=1;$i<=count($model);$i++){
@@ -39,7 +41,7 @@
             }
         }
 
-        function getOptParentMenu($parent =0){
+        function getOptParentMenu($parent =0,$category=""){
             $list = "";
             $sql    = " SELECT * FROM `ryu_menu`
                         WHERE menu_parent_id = '$parent' AND editable <> 'no'
@@ -48,15 +50,40 @@
             if($query->num_rows()>0){
                 foreach($query->result() as $h){
                     $cek_parent=$this->db->query("SELECT * from ryu_menu WHERE menu_parent_id='$h->menu_id'");
-                    // if($cek_parent->num_rows()>0){
-                    // 	$list .= "<tr><td></td><td>$h->menu_title</td><td>$h->menu_order</td></tr>";
-                    // }else{
-                        $list .= "<option value='$h->menu_id'>$h->menu_title</option>";
-                    // }
-                    $list .= $this->childmenu($h->menu_id,$h->menu_title);
+                    if($category == $h->menu_id){
+                        $slct = "selected";
+                    }else{
+                        $slct = "";
+                    }
+                    $list .= "<option $slct value='$h->menu_id'>$h->menu_title</option>";
+                    $list .= $this->childmenu($h->menu_id,$h->menu_title,$category);
                 }
             }
 
+            return $list;
+        }
+
+        function getOptSubCategory($category = null,$product_subcategory=null){
+            $cond = "";
+            if($category != ""){
+                $cond = "WHERE a.sub_parent_id = '$category'";
+            }
+            $list = "";
+            $sql    = " SELECT a.*,b.menu_title FROM `ryu_subcategory` as a
+                        LEFT JOIN ryu_menu as b on b.menu_id = a.sub_parent_id
+                        $cond
+                        ORDER BY a.sub_order asc";
+            $query  = $this->db->query($sql);
+            if($query->num_rows()>0){
+                foreach($query->result() as $h){
+                    if($product_subcategory == $h->sub_id){
+                        $slct = "selected";
+                    }else{
+                        $slct = "";
+                    }                
+                    $list .= "<option $slct value='$h->sub_id'>$h->sub_name</option>";
+                }
+            }
             return $list;
         }
 
@@ -84,7 +111,7 @@
             return $list;
         }
 
-        function childmenu($menu_id = 0,$menu_title){
+        function childmenu($menu_id = 0,$menu_title,$category=""){
             $CI     = &get_instance();
             $list = "";
             $sql    = " SELECT * FROM `ryu_menu`
@@ -94,8 +121,12 @@
             if($query->num_rows()>0){
                 foreach($query->result() as $h){
                     $cek_parent=$CI->db->query("SELECT * from ryu_menu as a WHERE a.menu_parent_id='$h->menu_id'");
-                    
-                    $list .= "<option value='$h->menu_id'>$menu_title > $h->menu_title</option>";
+                    if($category == $h->menu_id){
+                        $slct = "selected";
+                    }else{
+                        $slct = "";
+                    }
+                    $list .= "<option $slct value='$h->menu_id'>$menu_title > $h->menu_title</option>";
                     $list .= $this->childmenu($h->menu_id,$h->menu_title);
                 }
             }
@@ -120,8 +151,42 @@
             return $query->num_rows();
         }
 
-        function getProduct(){
-            $ret    = "";
+        function getProductByID($id=null){
+            $sql    = " SELECT a.*
+                        FROM `ryu_product` as a
+                        WHERE product_id = ?";
+            $query  = $this->db->query($sql,array($id));
+            if($query->num_rows()>0){
+                return $query->result();
+            }else{
+                return false;
+            }
+        }
+
+        function getListProduct(){
+            $ret = "";
+            $sql    = " SELECT a.product_id, a.product_image1, a.product_name, a.product_category , 
+                        a.product_subcategory, b.menu_title, c.sub_name, a.product_status
+                        FROM `ryu_product` as a
+                        LEFT JOIN ryu_menu as b on b.menu_id = a.product_category
+                        LEFT JOIN ryu_subcategory as c on c.sub_id = a.product_subcategory
+                        ORDER BY a.product_dttm desc";
+            $query  = $this->db->query($sql);
+            if($query->num_rows()>0){
+                foreach($query->result() as $row){
+                    if($row->sub_name != ""){
+                        $subcategory = " > $row->sub_name";
+                    }else{
+                        $subcategory = "";
+                    }
+                    $ret .= "<tr>
+                    <td><input type='checkbox' id='pro_$row->product_id' name='product_id' value='$row->product_id'/></td>
+                    <td><img width='70px' src='".base_url()."$row->product_image1'/></td><td>$row->product_name</td>
+                    <td>$row->menu_title $subcategory</td><td>$row->product_status</td>
+                    <td><a href='".base_url()."catalog/edit/product/$row->product_id' class='btn btn-default'><span class='fa fa-edit'></span></a></td>
+                    </tr>";
+                }
+            }
             return $ret;
         }
 

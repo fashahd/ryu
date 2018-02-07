@@ -44,6 +44,7 @@
 	}
 ?>
 <!-- Content Header (Page header) -->
+<div id="notif"></div>
 <section class="content-header">
 	<h1><?=$tittle?></h1>
 </section>
