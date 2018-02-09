@@ -18,9 +18,18 @@ class Product extends MX_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model("ModelHome");
+	}
+
 	public function index($category=null)
 	{
-		$data["tittle"] = $category;
+		$category_name 			= $this->ModelHome->getCategoryname($category);
+		$data["tittle"] 		= $category_name;
+		$data["category_id"]	= $category;
+		$data["listproduct"] 	= $this->ModelHome->getProductCategory($category);
 		$this->layout->content("index",$data);
 	}
 
@@ -30,7 +39,9 @@ class Product extends MX_Controller {
 	}
 
 	function detail($product_id){
-		$data["tittle"] = "Powertools";
+		$data["detail"] = $this->ModelHome->getDetailProduct($product_id);
+		$data["spek"]	= $this->ModelHome->getDetailProductSpec($product_id);
+		$data["tittle"] = "PRODUCT";
 		$this->layout->content("detail",$data);
 	}
 }

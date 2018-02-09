@@ -1,6 +1,69 @@
 <?php
 	class ModelAdmin extends CI_Model {
 
+        function getJmlProduct(){
+            $sql = "SELECT * FROM ryu_product";
+            $query  = $this->db->query($sql);
+            return $query->num_rows();
+        }
+
+        function updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id){
+            $this->db->trans_begin();
+            $data   = array(
+                "product_name"  => $product,
+                "product_category" => $category,
+                "product_note"  => $information,
+                "product_subcategory" => $subcategory,
+            );
+
+            if($image1 != ""){
+                $image1url = array("product_image1"=>$image1);
+                $this->db->where("product_id",$product_id);
+                $query = $this->db->update("ryu_product",$image1url);
+            }
+
+            if($image2 != ""){
+                $image2url = array("product_image1"=>$image2);
+                $this->db->where("product_id",$product_id);
+                $query = $this->db->update("ryu_product",$image2url);
+            }
+
+            if($image3 != ""){
+                $image3url = array("product_image1"=>$image3);
+                $this->db->where("product_id",$product_id);
+                $query = $this->db->update("ryu_product",$image3url);
+            }
+            
+            $this->db->where("product_id",$product_id);
+            $query = $this->db->update("ryu_product",$data);
+            if($query){                
+                $sqldelete1 	= "DELETE FROM ryu_product_detail WHERE product_id = '$product_id'";
+                $querydelete1 	= $this->db->query($sqldelete1);
+                
+                if($model != ""){
+                    for($i=1;$i<count($model);$i++){
+                        $datadetail = array(
+                            'product_id' => $product_id,
+                            'product_model' => $model[$i],
+                            'product_description' => $description[$i]
+                        );
+                        $this->db->insert('ryu_product_detail', $datadetail);
+                    }
+                }
+            }
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+                return "gagal";
+            }
+            else
+            {
+                $this->db->trans_commit();
+                return "sukses";
+            }
+        }
+
         function saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3){
             $this->db->trans_begin();
             $product_id = $this->getProductID();
@@ -99,10 +162,10 @@
                     // if($cek_parent->num_rows()>0){
                     // 	$list .= "<tr><td></td><td>$h->menu_title</td><td>$h->menu_order</td></tr>";
                     // }else{
-                        $list .= "<tr><td><input type='checkbox' id='cat_$h->sub_id' value='cat_$h->sub_id'/></td>
+                        $list .= "<tr><td><input type='checkbox' name='sub_id' id='cat_$h->sub_id' value='$h->sub_id'/></td>
                         <td>$h->menu_title > $h->sub_name</td>
                         <td>$h->sub_order</td>
-                        <td><button onClick='editSubategories(\"$h->sub_id\")'><span class='fa fa-edit'></span></button></td>
+                        <td><a href='".base_url()."catalog/edit/subcategory/$h->sub_id' class='btn btn-default'><span class='fa fa-edit'></span></a></td>
                         </tr>";
                     // }
                 }
@@ -133,9 +196,27 @@
             return $list;
         }
 
-        function getCategories(){
-            $sql = "SELECT a.* FROM `ryu_menu` as a
-                    WHERE a.menu_parent_id = 0 and a.editable != 'no'";
+        function getCategories($id = null){
+            if($id != ''){
+                $sql = "SELECT a.* FROM `ryu_menu` as a
+                        WHERE menu_id = '$id'";
+            }else{
+                $sql = "SELECT a.* FROM `ryu_menu` as a
+                        WHERE a.menu_parent_id = 0 and a.editable != 'no'";
+            }
+            $query  = $this->db->query($sql);
+            if($query->num_rows()>0){
+                return $query->result();
+            }else{
+                return false;
+            }
+        }
+
+        function getSubcategories($id = null){
+            if($id != ''){
+                $sql = "SELECT a.* FROM `ryu_subcategory` as a
+                        WHERE sub_id = '$id'";
+            }
             $query  = $this->db->query($sql);
             if($query->num_rows()>0){
                 return $query->result();
@@ -154,6 +235,18 @@
         function getProductByID($id=null){
             $sql    = " SELECT a.*
                         FROM `ryu_product` as a
+                        WHERE product_id = ?";
+            $query  = $this->db->query($sql,array($id));
+            if($query->num_rows()>0){
+                return $query->result();
+            }else{
+                return false;
+            }
+        }
+
+        function getDetailByID($id){
+            $sql    = " SELECT a.*
+                        FROM `ryu_product_detail` as a
                         WHERE product_id = ?";
             $query  = $this->db->query($sql,array($id));
             if($query->num_rows()>0){

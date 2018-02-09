@@ -89,6 +89,60 @@ class Catalog extends MX_Controller {
 		}
 	}
 
+	function updateCategories(){
+		$category_name 	= $_POST["category_name"];
+		$category_parent	= $_POST["category_parent"];
+		$category_order = $_POST["category_order"];
+		$category_id 	= $_POST["category_id"];
+		if($category_parent == ""){
+			$category_parent = 0;
+		}
+
+		$data = array(
+			"menu_title" => $category_name,
+			"menu_order" => $category_order,
+			"menu_parent_id" => $category_parent
+		);
+
+		$this->db->where("menu_id",$category_id);
+		$query = $this->db->update("ryu_menu",$data);
+		if($query){
+			echo "sukses";
+			return;
+		}else{
+			echo "gagal";
+			return;
+		}
+	}
+
+	function updateSubcategories(){
+		$category_name 	= $_POST["category_name"];
+		$category_parent 	= $_POST["category_parent"];
+		$category_order = $_POST["category_order"];
+		$category_id = $_POST["category_id"];
+		$url 	= str_replace(" ","_",$category_name);
+		$url 	= strtolower($url);
+		if($category_parent == ""){
+			$category_parent = 0;
+		}
+
+		$data = array(
+			"sub_name" => $category_name,
+			"sub_order" => $category_order,
+			"sub_parent_id" => $category_parent
+		);
+
+		$this->db->where("sub_id",$category_id);
+		$query = $this->db->update("ryu_subcategory",$data);
+		if($query){
+			echo "sukses";
+			return;
+		}else{
+			echo "gagal";
+			return;
+		}
+	}
+
 	function addSubcategories(){
 		$category_name 	= $_POST["category_name"];
 		$category_parent 	= $_POST["category_parent"];
@@ -125,10 +179,63 @@ class Catalog extends MX_Controller {
 			return;
 		}
 		if($type == "product"){
-			$data["tittle"] 	= "Edit Products";
-			$data["product"] 	= $this->ModelAdmin->getProductByID($id);
+			$data["tittle"] 		= "Edit Products";
+			$data["product"] 		= $this->ModelAdmin->getProductByID($id);
+			$data["detailproduct"] 	= $this->ModelAdmin->getDetailByID($id);
 			// $data["optparentmenu"] = $this->ModelAdmin->getOptParentMenu();
 			$this->layout->content("editproduct",$data);
+		}
+		if($type == "category"){
+			$data["tittle"] 		= "Edit Category";
+			$data["optparentmenu"] 	= $this->ModelAdmin->getOptParentMenu();
+			$data["categories"] 	= $this->ModelAdmin->getCategories($id);
+			$this->layout->content("editcategories",$data);
+		}
+		if($type == "subcategory"){
+			$data["tittle"] 		= "Edit Subcategory";
+			$data["optparentmenu"] 	= $this->ModelAdmin->getOptParentMenu();
+			$data["subcategories"] 	= $this->ModelAdmin->getSubcategories($id);
+			$this->layout->content("editsubcategories",$data);
+		}
+	}
+
+	function deletesubcategory(){
+		$tmppcat_id = $_POST["sub_id"];
+		$arrcat_id 	= explode("|",$tmppcat_id);
+		$this->db->trans_begin();
+		for($i=0;$i<count($arrcat_id);$i++){
+			$sqldelete 		= "DELETE FROM ryu_subcategory WHERE sub_id = '{$arrcat_id[$i]}'";
+			$querydelete 	= $this->db->query($sqldelete);
+		}
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			echo "Subategory deleted are failed";
+		}
+		else
+		{
+			$this->db->trans_commit();
+			echo "Subategory deleted are success";
+		}
+	}
+
+	function deletecategory(){
+		$tmppcat_id = $_POST["category_id"];
+		$arrcat_id 	= explode("|",$tmppcat_id);
+		$this->db->trans_begin();
+		for($i=0;$i<count($arrcat_id);$i++){
+			$sqldelete 		= "DELETE FROM ryu_menu WHERE menu_id = '{$arrcat_id[$i]}'";
+			$querydelete 	= $this->db->query($sqldelete);
+		}
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			echo "Category deleted are failed";
+		}
+		else
+		{
+			$this->db->trans_commit();
+			echo "Category deleted are success";
 		}
 	}
 
@@ -271,6 +378,124 @@ class Catalog extends MX_Controller {
 				$message = "Product Added";
 			}else{
 				$message = "Product Failed to Add";
+			}
+		}else{
+			$response = "max_upload";
+		}
+		
+		$data = array(
+			"status" 	=> $response,
+			"message"	=> $message
+		);
+		echo json_encode($data);
+		return;
+	}
+
+	function updateproduct(){
+		$product 	= $_POST["product"];
+		$category 	= $_POST["category"];
+		$information 	= $_POST["information"];
+		$subcategory = $_POST["subcategory"];
+		$product_id = $_POST["product_id"];
+		$model 		 = "";
+		$description = "";
+		$image1 	 = "";
+		$image2 	 = "";
+		$image3 	 = "";
+		$message 	 = "sukses";
+		if(isset($_POST["model"])){
+			$model 			= $_POST["model"];
+		}
+		if(isset($_POST["description"])){
+			$description 	= $_POST["description"];
+		}
+		if($_FILES["ImageUpload1"]["name"] != ''){
+			$validextensions = array("jpeg", "jpg", "png");
+			$temporary 		= explode(".", $_FILES["ImageUpload1"]["name"]);
+			$file_extension = end($temporary);
+			if ((($_FILES["ImageUpload1"]["type"] == "image/png") || ($_FILES["ImageUpload1"]["type"] == "image/jpg") || ($_FILES["ImageUpload1"]["type"] == "image/jpeg")) && ($_FILES["ImageUpload1"]["size"] < 200000000) && in_array($file_extension, $validextensions)) {
+				if ($_FILES["ImageUpload1"]["error"] > 0)
+				{
+					$message = "Upload Image 1 Error";
+				}else
+				{
+					$url = base_url()."appsources/products/";
+					$image=basename($_FILES['ImageUpload1']['name']);
+					$image=str_replace(' ','|',$image);
+					$type = explode(".",$image);
+					$type = $type[count($type)-1];
+					$tmppath="appsources/products/".uniqid(rand()).".".$type; // uniqid(rand()) function generates unique random number.
+					move_uploaded_file($_FILES['ImageUpload1']['tmp_name'],$tmppath);
+					unlink($_POST["deleteimage1"]);
+					$message = "sukses";
+					$image1 = $tmppath;
+				}
+			}else
+			{
+				$message = "Size More Than 2MB";
+			}
+		}
+
+		if($_FILES["ImageUpload2"]["name"] != ''){
+			$validextensions = array("jpeg", "jpg", "png");
+			$temporary 		= explode(".", $_FILES["ImageUpload2"]["name"]);
+			$file_extension = end($temporary);
+			if ((($_FILES["ImageUpload2"]["type"] == "image/png") || ($_FILES["ImageUpload2"]["type"] == "image/jpg") || ($_FILES["ImageUpload2"]["type"] == "image/jpeg")) && ($_FILES["ImageUpload2"]["size"] < 200000000) && in_array($file_extension, $validextensions)) {
+				if ($_FILES["ImageUpload2"]["error"] > 0)
+				{
+					$message = "Upload Image 2 Error";
+				}else
+				{
+					$url = base_url()."appsources/products/";
+					$image=basename($_FILES['ImageUpload2']['name']);
+					$image=str_replace(' ','|',$image);
+					$type = explode(".",$image);
+					$type = $type[count($type)-1];
+					$tmppath="appsources/products/".uniqid(rand()).".".$type; // uniqid(rand()) function generates unique random number.
+					move_uploaded_file($_FILES['ImageUpload2']['tmp_name'],$tmppath);
+					unlink($_POST["deleteimage2"]);
+					$message = "sukses";
+					$image2 = $tmppath;
+				}
+			}else
+			{
+				$message = "Size Image 2 More Than 2MB";
+			}
+		}
+
+		if($_FILES["ImageUpload3"]["name"] != ''){
+			$validextensions = array("jpeg", "jpg", "png");
+			$temporary 		= explode(".", $_FILES["ImageUpload3"]["name"]);
+			$file_extension = end($temporary);
+			if ((($_FILES["ImageUpload3"]["type"] == "image/png") || ($_FILES["ImageUpload3"]["type"] == "image/jpg") || ($_FILES["ImageUpload3"]["type"] == "image/jpeg")) && ($_FILES["ImageUpload3"]["size"] < 200000000) && in_array($file_extension, $validextensions)) {
+				if ($_FILES["ImageUpload3"]["error"] > 0)
+				{
+					$message = "Upload Image 3 Error";
+				}else
+				{
+					$url = base_url()."appsources/products/";
+					$image=basename($_FILES['ImageUpload3']['name']);
+					$image=str_replace(' ','|',$image);
+					$type = explode(".",$image);
+					$type = $type[count($type)-1];
+					$tmppath="appsources/products/".uniqid(rand()).".".$type; // uniqid(rand()) function generates unique random number.
+					move_uploaded_file($_FILES['ImageUpload3']['tmp_name'],$tmppath);
+					unlink($_POST["deleteimage3"]);
+					$message = "sukses";
+					$image3 = $tmppath;
+				}
+			}else
+			{
+				$message = "Size Image 3 More Than 2MB";
+			}
+		}
+
+		if($message == "sukses"){
+			$response = $this->ModelAdmin->updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id);
+			if($response == "sukses"){
+				$message = "Product Update";
+			}else{
+				$message = "Product Failed to Update";
 			}
 		}else{
 			$response = "max_upload";

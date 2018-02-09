@@ -1,4 +1,28 @@
-
+<?php
+	$retnewproduct = "";
+	if($newproduct){
+		foreach($newproduct as $row){
+			$retnewproduct .= '
+			<div class="single-product">
+				<div class="product-img">
+					<a href="#">
+						<img src="'.base_url().'/appadmin/'.$row->product_image1.'" alt="product" class="first" />
+					</a>
+				</div>
+				<div class="product-content">
+					<h3><a href="#">'.$row->menu_title.'</a></h3>
+					<div class="product-price">
+						<ul>
+							<li class="new-price">'.$row->product_name.'</li>
+						</ul>
+					</div>
+					<a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+				</div>
+			</div>
+			';
+		}
+	}
+?>
 		<!-- slider-area-start -->
 		<div class="slider-area">
 			<div id="slider">
@@ -84,78 +108,7 @@
 					</div>
 				</div>	
 				<div class="product-active">
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/36.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/37.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/38.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/39.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
+					<?=$retnewproduct?>
 				</div>
 				<div class="see-more">
 					<a class="button-new">SEE MORE</a>

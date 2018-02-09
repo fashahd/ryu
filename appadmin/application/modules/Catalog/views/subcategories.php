@@ -44,11 +44,16 @@
 		</div>
 		<div class="col-md-6">
 			<div class="box box-primary">
-				<div class="box-header with-border">
+				<div class="box-header">
 					<h3 class="box-title">Subcategory List</h3>
+					<div class="box-tools">
+						<a class="btn btn-danger" href="#" onClick="deletesubcategory()"><span class="fa fa-trash"></span></a>
+					</div>
+				</div>
+				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 10px">#</th>
+							<th style="width: 10px"><input type="checkbox" id="selectall"/></th>
 							<th>Subcategory Name</th>
 							<th>Sort Order</th>
 							<th style="width: 40px">Action</th>

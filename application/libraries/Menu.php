@@ -12,8 +12,8 @@
                 foreach($query->result() as $h){
                     $cek_parent=$CI->db->query("SELECT * from ryu_menu WHERE menu_parent_id='$h->menu_id'");
                     if($cek_parent->num_rows()>0){
-                        if($h->url == ""){
-                            $url = "#";
+                        if($h->url == ""){                            
+                            $url = base_url()."product/index/$h->menu_id";
                         }else{
                             $url = base_url().''.$h->url;
                         }
@@ -21,8 +21,8 @@
                         <div class="sub-menu"><ul>'.$this->childmenu($h->menu_id).'</ul></div></li>';
                     }
                     else {
-                        if($h->url == ""){
-                            $url = "#";
+                        if($h->url == ""){                            
+                            $url = base_url()."product/index/$h->menu_id";
                         }else{
                             $url = base_url().''.$h->url;
                         }

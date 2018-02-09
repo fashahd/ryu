@@ -18,8 +18,15 @@ class Dashboard extends MX_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model("ModelHome");
+	}
+
 	public function front()
 	{
+		$data["newproduct"] = $this->ModelHome->getNewProduct();
 		$data["tittle"] = "Home";
 		$this->layout->content("front",$data);
 	}

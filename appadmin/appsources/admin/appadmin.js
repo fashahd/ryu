@@ -1,5 +1,69 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
+function deletesubcategory(){
+	var sList = "";
+	$('input[name=sub_id]:checked').each(function () {
+		sList += $(this).val() + "|";
+	});
 
+	if(sList == ""){
+		alert("Please select a Subcategory");
+		return;
+	}
+	if (confirm('Are you sure you?')) {
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/appadmin/catalog/deletesubcategory",
+			data : {sub_id:sList},
+			// dataType: "json",
+			success: function(data){
+				alert(data);
+				window.location.reload();
+			},error: function(xhr, ajaxOptions, thrownError){            
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		});
+		// Save it!
+	} else {
+		// Do nothing!
+	}
+}
+
+function deletecategory(){
+	var sList = "";
+	$('input[name=category_id]:checked').each(function () {
+		sList += $(this).val() + "|";
+	});
+
+	if(sList == ""){
+		alert("Please select a Category");
+		return;
+	}
+	if (confirm('Are you sure you?')) {
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/appadmin/catalog/deletecategory",
+			data : {category_id:sList},
+			// dataType: "json",
+			success: function(data){
+				alert(data);
+				window.location.reload();
+			},error: function(xhr, ajaxOptions, thrownError){            
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		});
+		// Save it!
+	} else {
+		// Do nothing!
+	}
+}
 
 function deleteProduct(){
 	var sList = "";
@@ -67,6 +131,41 @@ $("#category").change(function(){
 	});
 });
 
+$('#editcategories').submit(function(event) {
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+    var form = $('#editcategories');
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/catalog/updateCategories",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			if(data =="sukses"){
+				alert(data);
+				window.location.href=toUrl+"/appadmin/catalog/categories";
+				return;
+			}else{
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
+
 $('#categories').submit(function(event) {
     event.preventDefault();
 
@@ -101,6 +200,41 @@ $('#categories').submit(function(event) {
 		}
 	});
 });
+
+$("#updatesubcategories").submit(function(event){
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+    var form = $('#updatesubcategories');
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/catalog/updateSubcategories",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			if(data =="sukses"){
+				alert(data);
+				window.location.href=toUrl+"/appadmin/catalog/subcategories";
+				return;
+			}else{
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
 
 $('#subcategories').submit(function(event) {
     event.preventDefault();
@@ -217,6 +351,44 @@ $('#addproductform').submit(function(event) {
 	});
 });
 
+$('#editproductform').submit(function(event) {
+    event.preventDefault();
+
+    // alert("test");
+    // return;
+    var formData = new FormData(this);
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/catalog/updateproduct",
+		data: formData,
+		cache: false,
+        contentType: false,
+        processData: false,
+		dataType: "json",
+		success: function(data){
+			if(data.status =="sukses"){
+				alert(data.message);
+				window.location.href=toUrl+"/appadmin/catalog/products";
+			}else if(data.status =="max_upload"){
+				$("#notif").html('<div class="alert alert-warning alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}else {
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+		}
+	});
+});
+
 var i = 1;
 $("#addspec").click(function(){
 	//menentukan target append
@@ -272,3 +444,7 @@ $("#addspec").click(function(){
 
     i++;
 })
+
+function deleterow(id){
+	$("#row_"+id).remove();
+}

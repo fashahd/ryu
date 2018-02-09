@@ -12,7 +12,7 @@
 				// if($cek_parent->num_rows()>0){
 				// 	$list .= "<tr><td></td><td>$h->menu_title</td><td>$h->menu_order</td></tr>";
 				// }else{
-					$list .= "<tr><td><input type='checkbox' id='cat_$h->menu_id' value='cat_$h->menu_id'/></td><td>$h->menu_title</td><td>$h->menu_order</td><td><button onClick='editCategories(\"$h->menu_id\")'><span class='fa fa-edit'></span></button></td></tr>";
+					$list .= "<tr><td><input type='checkbox' name='category_id' id='cat_$h->menu_id' value='$h->menu_id'/></td><td>$h->menu_title</td><td>$h->menu_order</td><td><a class='btn btn-default' href='".base_url()."catalog/edit/category/$h->menu_id/$parent'><span class='fa fa-edit'></span></a></td></tr>";
 				// }
 				$list .= childmenu($h->menu_id,$h->menu_title);
 			}
@@ -35,7 +35,7 @@
 				// 	$list .= "<tr><td></td><td>$menu_title > $h->menu_title</td><td>$h->menu_order</td></tr>";
 				// }
 				// else {
-					$list .= "<tr><td><input type='checkbox' id='cat_$h->menu_id' value='cat_$h->menu_id'/></td><td>$menu_title > $h->menu_title</td><td>$h->menu_order</td><td><button onClick='editCategories(\"$h->menu_id\")'><span class='fa fa-edit'></span></button></td></tr>";
+					$list .= "<tr><td><input type='checkbox' name='category_id' id='cat_$h->menu_id' value='$h->menu_id'/></td><td>$menu_title > $h->menu_title</td><td>$h->menu_order</td><td><a class='btn btn-default' href='".base_url()."catalog/edit/category/$h->menu_id/$menu_id'><span class='fa fa-edit'></span></a></td></tr>";
 				// }
 				$list .= childmenu($h->menu_id,$h->menu_title);
 			}
@@ -89,11 +89,16 @@
 		</div>
 		<div class="col-md-6">
 			<div class="box box-primary">
-				<div class="box-header with-border">
+				<div class="box-header">
 					<h3 class="box-title">Categories List</h3>
+					<div class="box-tools">
+						<a class="btn btn-danger" href="#" onClick="deletecategory()"><span class="fa fa-trash"></span></a>
+					</div>
+				</div>
+				<div class="box-body with-border">
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 10px">#</th>
+							<th style="width: 10px"><input type="checkbox" id="selectall"/></th>
 							<th>Category Name</th>
 							<th>Sort Order</th>
 							<th style="width: 40px">Action</th>

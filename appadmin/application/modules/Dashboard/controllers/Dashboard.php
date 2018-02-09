@@ -25,6 +25,7 @@ class Dashboard extends MX_Controller {
 			redirect("auth/login");
 			return;
 		}
+		$this->load->model("ModelAdmin");
 	}
 
 	public function index()
@@ -35,6 +36,7 @@ class Dashboard extends MX_Controller {
 
 	public function front()
 	{
+		$data["jml_product"] = $this->ModelAdmin->getJmlProduct();
 		$data["tittle"] = "Dashboard";
 		$this->layout->content("front",$data);
 	}
