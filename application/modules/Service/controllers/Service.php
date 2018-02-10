@@ -41,12 +41,12 @@ class Service extends MX_Controller {
 		}
 		if($type == "tips"){
 			$data["tittle"] = "Tips And Trick";
-			$this->layout->content("loan",$data);
+			$this->layout->content("tips",$data);
 			return;
 		}
 		if($type == "faq"){
 			$data["tittle"] = "FaQ";
-			$this->layout->content("loan",$data);
+			$this->layout->content("faq",$data);
 			return;
 		}
 		if($type == "contactus"){

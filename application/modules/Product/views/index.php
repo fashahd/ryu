@@ -1,4 +1,12 @@
 <?php
+	$sql 	= "SELECT image_cover, video FROM ryu_menu where menu_id = '$category_id'";
+	$query 	= $this->db->query($sql);
+	$row 	= $query->row();
+	$image_cover = $row->image_cover;
+	$video 	= $row->video;
+	if($image_cover == ""){
+		$image_cover = "appsources/banner/13.jpg";
+	}
 	function listdetail($category_id){
 		$CI     = &get_instance();
 		$list = "";
@@ -52,7 +60,7 @@
 		<!-- slider-area-start -->
 		<div class="slider-area">
 			<div id="slider">
-				<img src="<?=base_url()?>appsources/img/banner/powertools.jpg" alt="slider-img" title="#caption1" />
+				<img src="<?=base_url()."appadmin/".$image_cover?>" alt="slider-img" title="#caption1" />
 			</div>
 			<div class="nivo-html-caption" id="caption1" >
 				<div class="container">
@@ -125,7 +133,7 @@
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 						<div class="single-banner-2" style="text-align:center">
 							<video controls style="width:80%">
-								<source src="<?=base_url()?>appsources/video/ryu-video.mp4" type="video/mp4">
+							<source src='https://res.cloudinary.com/demo/video/upload/c_pad,du_10,h_360,q_70,w_480/dog.mp4' type='video/mp4'>
 								Your browser does not support HTML5 video.
 							</video>
 						</div>

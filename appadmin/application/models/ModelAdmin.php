@@ -103,6 +103,14 @@
                 return "sukses";
             }
         }
+        
+
+        function getCategoryname($category){
+            $sql    = "SELECT * FROM ryu_menu where menu_id = ?";
+            $query  = $this->db->query($sql, array($category));
+            $row    = $query->row();
+            return $row->menu_title;
+        }
 
         function getOptParentMenu($parent =0,$category=""){
             $list = "";

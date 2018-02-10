@@ -3,6 +3,17 @@
 
     class Menu {   
         public function treemenu(){
+            $menulist = "";
+            $CI =   &get_instance();
+            $sql = "SELECt * FROM ryu_menu where menu_parent_id = '0' and editable = 'ya'";
+            $query = $CI->db->query($sql);
+            if($query->num_rows()>0){
+                foreach($query->result() as $row){
+                    $menulist .= '
+                        <li><a href="'.base_url().'page/setting/'.$row->menu_id.'"><i class="fa fa-circle-o"></i> '.$row->menu_title.'</a></li>
+                    ';
+                }
+            }
             $ret = '
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
@@ -26,6 +37,27 @@
                                 <li><a href="'.base_url().'catalog/subcategories"><i class="fa fa-circle-o"></i> Sub Categories</a></li>
                                 <li><a href="'.base_url().'catalog/products"><i class="fa fa-circle-o"></i> Products</a></li>
                             </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-bookmark"></i> <span>Pages</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                '.$menulist.'
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="'.base_url().'page/news">
+                                <i class="fa fa-calendar"></i> <span>News & Events</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="'.base_url().'page/service">
+                                <i class="fa fa-map"></i> <span>Service Center</span>
+                            </a>
                         </li>
                     </ul>
                 </section>

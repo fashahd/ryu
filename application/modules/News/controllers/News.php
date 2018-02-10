@@ -23,4 +23,10 @@ class News extends MX_Controller {
 		$data["tittle"] = "News & Event";
 		$this->layout->content("index",$data);
 	}
+
+	function getlistevent(){
+		$month = $_POST["month"];
+
+		echo "<li>".$month."</li>";
+	}
 }

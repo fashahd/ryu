@@ -35,12 +35,16 @@
                 <link rel="stylesheet" href="'.base_url().'appsources/bower_components/jvectormap/jquery-jvectormap.css">
                 <!-- Date Picker -->
                 <link rel="stylesheet" href="'.base_url().'appsources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+                <!-- Bootstrap time Picker -->
+                <link rel="stylesheet" href="'.base_url().'appsources/plugins/timepicker/bootstrap-timepicker.min.css">
                 <!-- Daterange picker -->
                 <link rel="stylesheet" href="'.base_url().'appsources/bower_components/bootstrap-daterangepicker/daterangepicker.css">
                 <!-- bootstrap wysihtml5 - text editor -->
                 <link rel="stylesheet" href="'.base_url().'appsources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
                 <!-- bootstrap wysihtml5 - text editor -->
                 <link rel="stylesheet" href="'.base_url().'appsources/custom.css">
+                <!-- jQuery 3 -->
+                <script src="'.base_url().'appsources/bower_components/jquery/dist/jquery.min.js"></script>
             
                 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
                 <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
@@ -79,6 +83,8 @@
             <script src="'.base_url().'appsources/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
             <!-- datepicker -->
             <script src="'.base_url().'appsources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+            <!-- bootstrap time picker -->
+            <script src="'.base_url().'appsources/plugins/timepicker/bootstrap-timepicker.min.js"></script>
             <!-- Bootstrap WYSIHTML5 -->
             <script src="'.base_url().'appsources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
             <!-- Slimscroll -->
@@ -87,10 +93,25 @@
             <script src="'.base_url().'appsources/bower_components/fastclick/lib/fastclick.js"></script>
             <!-- AdminLTE App -->
             <script src="'.base_url().'appsources/dist/js/adminlte.min.js"></script>
+            <script src="'.base_url().'appsources/jquery.form.js"></script>
+            <script src="'.base_url().'appsources/imagesloaded.pkgd.min.js"></script>
             <!-- AdminLTE for demo purposes -->
             <script src="'.base_url().'appsources/dist/js/demo.js"></script>
             <script src="'.base_url().'appsources/admin/default.js"></script>
             <script src="'.base_url().'appsources/admin/appadmin.js"></script>
+            <script>
+                //Date picker
+                $("#datepicker").datepicker({
+                    format: "yyyy-mm-dd",
+                    minDate: 0,
+                })
+            </script>
+            <script>
+                //Timepicker
+                $(".timepicker").timepicker({
+                showInputs: false
+                })
+            </script>
             ';
             return $ret;
         }

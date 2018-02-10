@@ -6,50 +6,18 @@
 <div class="nivo-html-caption" id="caption1" >
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-7">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-					<h2><span>POWERTOOLS</span></h2>
+			<div class="col-lg-8">
+				<div class="slider-text">
+					<h2><span>METAL WORKING</span></h2>
 					<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
 				</div>
 			</div>
 			<div class="col-lg-2">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+				<div class="slider-text">
 					<p><span>Metal Working</span></p>
 					<ul>
 						<li>Grinders</li>
 						<li>Cut Off Show</li>
-						<li>Drill</li>
-						<li>Impact Drill</li>
-						<li>Magneting Drill</li>
-						<li>Bench Drill</li>
-						<li>Steel Body</li>
-						<li>Miter Saw</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-					<p><span>Others</span></p>
-					<ul>
-						<li>Polisher</li>
-						<li>Gun Polisher</li>
-						<li>Drill</li>
-						<li>Impact Drill</li>
-						<li>Magneting Drill</li>
-						<li>Bench Drill</li>
-						<li>Steel Body</li>
-						<li>Miter Saw</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-lg-7">
-			</div>
-			<div class="col-lg-3">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-					<p><span>Wood Working</span></p>
-					<ul>
-						<li>Polisher</li>
-						<li>Gun Polisher</li>
 						<li>Drill</li>
 						<li>Impact Drill</li>
 						<li>Magneting Drill</li>
@@ -74,8 +42,8 @@
 		<div class="row">
 			<div class="col-lg-2">
 			</div>
-			<div class="col-lg-3">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+			<div class="col-lg-2" style="text-align:right">
+				<div class="slider-text">
 					<p><span>Metal Working</span></p>
 					<ul>
 						<li>Grinders</li>
@@ -89,11 +57,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-lg-2">
-			</div>
-			<div class="col-lg-5">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-					<h2><span>POWERTOOLS</span></h2>
+			<div class="col-lg-8" style="text-align:right">
+				<div class="slider-text">
+					<h2><span>Wood Working</span></h2>
 					<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
 				</div>
 			</div>
@@ -112,13 +78,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-					<h2><span>POWERTOOLS</span></h2>
+				<div class="slider-text">
+					<h2><span>GENERAL WORKING</span></h2>
 					<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
 				</div>
 			</div>
 			<div class="col-lg-2">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+				<div class="slider-text">
 					<p><span>Metal Working</span></p>
 					<ul>
 						<li>Grinders</li>
@@ -133,7 +99,7 @@
 				</div>
 			</div>
 			<div class="col-lg-3">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+				<div class="slider-text">
 					<p><span>Others</span></p>
 					<ul>
 						<li>Polisher</li>
@@ -150,7 +116,7 @@
 			<div class="col-lg-7">
 			</div>
 			<div class="col-lg-3">
-				<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+				<div class="slider-text">
 					<p><span>Wood Working</span></p>
 					<ul>
 						<li>Polisher</li>

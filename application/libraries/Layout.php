@@ -49,6 +49,7 @@
                     <link rel="stylesheet" href="'.base_url().'/appsources/css/responsive.css">
                     <!-- modernizr css -->
                     <script src="'.base_url().'/appsources/js/vendor/modernizr-2.8.3.min.js"></script>
+                <script src="'.base_url().'/appsources/js/vendor/jquery-1.12.0.min.js"></script>
                 </head>
             ';
 

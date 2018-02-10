@@ -135,19 +135,6 @@
 						</div>
 					</div>
 				</div>
-			</div><div class="nivo-html-caption" id="caption5" >
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<h1>Now Shipping!</h1>
-								<h2>iphone<span> s7</span></h2>
-								<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
-								<a href="#"><i class="fa fa-shopping-cart"></i>buy now</a>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- slider-area-end -->

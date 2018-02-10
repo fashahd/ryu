@@ -1,3 +1,72 @@
+<?php
+	$month = date("m");
+	if($this->session->userdata("month") != ''){
+		$month = $this->session->userdata("month");
+	}
+	$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$month' order by event_date asc";
+	$query = $this->db->query($sql);
+	$list = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $row){
+			$list .= '
+				<div class="entry-meta">
+					<p>'.date("l, d M Y", strtotime($row->event_date)).' '.date("H:i", strtotime($row->event_time)).'</p>
+					<p>('.$row->event_tittle.')</p>
+				</div>
+			';
+		}
+	}else{
+		$list .= '
+			<div class="entry-meta">
+				<p>No any event</p>
+			</div>
+		';
+	}
+
+	$arrmonth = array(
+		"01" => "January",
+		"02" => "February",
+		"03" => "March",
+		"04" => "April",
+		"05" => "May",
+		"06" => "June",
+		"07" => "July",
+		"08" => "August",
+		"09" => "September",
+		"10" => "October",
+		"11" => "November",
+		"12" => "December",
+	);
+	
+	$listbulan = '';
+	foreach($arrmonth as $bulan => $ketbulan){
+		$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$bulan' order by event_date asc";
+		$query = $this->db->query($sql);
+		$listjadwal = "";
+		if($query->num_rows()>0){
+			foreach($query->result() as $row){
+				$listjadwal .= '
+					<li style="margin-left:20px">('.$row->event_tittle.')</li>
+				';
+			}
+		}else{
+			$listjadwal .= '
+				<li style="margin-left:20px">(No Any Event)<li>
+			';
+		}
+		$listbulan .= '
+		<li><a href="#'.$ketbulan.'" onclick="seemonth(\''.$bulan.'\')">'.$ketbulan.'</a>
+			<ul id="event_'.$bulan.'">
+				'.$listjadwal.'
+			</ul>
+		</li>';
+		$listbulan .= "
+			<script>
+				$('#event_$bulan').hide();
+			</script>
+		";
+	}
+?>
 <!-- counter-area-start -->
 <div class="counter-area ptb-70">
 	<div class="container">
@@ -28,14 +97,7 @@
 					<div class="single-blog-main mb-40">
 						<div class="postinfo-wrapper">
 							<div class="post-info">
-								<div class="entry-meta">
-									<p>(Date)</p>
-									<p>(News Title / Event Title)</p>
-								</div>
-								<div class="entry-meta">
-									<p>(Date)</p>
-									<p>(News Title / Event Title)</p>
-								</div>
+								<?=$list?>
 							</div>
 						</div>
 					</div>
@@ -50,10 +112,7 @@
 							<h4><span>INDEX</span></h4>
 						</div>
 						<ul class="blog-menu">
-							<li><a href="#">Dresses</a></li>
-							<li><a href="#">shoes</a></li>
-							<li><a href="#">Handbags</a></li>
-							<li><a href="#">Clothing</a></li>
+							<?=$listbulan?>
 						</ul>
 					</div>
 				</div>
@@ -62,3 +121,8 @@
 	</div>
 </div>
 <!-- single-blog-sidebar-end -->
+<script>
+	function seemonth(month){
+		$("#event_"+month).toggle();
+	}
+</script>
