@@ -1,5 +1,28 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
+function deleteslider(image_id){
+	if (confirm('Are you sure you?')) {
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/appadmin/dashboard/deleteslider",
+			data : {image_id:image_id},
+			// dataType: "json",
+			success: function(data){
+				alert(data);
+				window.location.reload();
+			},error: function(xhr, ajaxOptions, thrownError){            
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		});
+		// Save it!
+	} else {
+		// Do nothing!
+	}
+}
 function deleteservice(){
 	var sList = "";
 	$('input[name=service_id]:checked').each(function () {
@@ -258,7 +281,7 @@ $('#categories').submit(function(event) {
 				return;
 			}
 		},error: function(xhr, ajaxOptions, thrownError){            
-			// alert(xhr.responseText);
+			alert(xhr.responseText);
 			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
 			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
 			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
@@ -413,6 +436,44 @@ $("#FileUpload3").on("change", function(){
 		alert("Upload an image");
 	}
 });
+
+$('#addslider').submit(function(event) {
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+    var formData = new FormData(this);
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/dashboard/addslider",
+		data: formData,
+		cache: false,
+        contentType: false,
+        processData: false,
+		dataType: "json",
+		success: function(data){
+			if(data.status =="sukses"){
+				alert(data.message);
+				window.location.href=toUrl+"/appadmin/dashboard/front";
+			}else if(data.status =="max_upload"){
+				$("#notif").html('<div class="alert alert-warning alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}else {
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+		}
+	});
+})
 
 $('#addproductform').submit(function(event) {
     event.preventDefault();

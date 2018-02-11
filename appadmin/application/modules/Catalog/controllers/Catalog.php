@@ -77,9 +77,15 @@ class Catalog extends MX_Controller {
 			$category_parent = 0;
 		}
 
+		$data = array(
+			"menu_parent_id" => $category_parent,
+			"menu_title" => $category_name,
+			"menu_order" => $category_order
+		);
+
 		$sql 	= "INSERT INTO ryu_menu values('','$category_parent','$category_name','$category_order','y','','ya')";
 
-		$query 	= $this->db->query($sql);
+		$query 	= $this->db->insert("ryu_menu",$data);
 		if($query){
 			echo "sukses";
 			return;

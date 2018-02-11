@@ -34,8 +34,11 @@ class Product extends MX_Controller {
 	}
 
 	function shop($type=null){
-		$data["tittle"] = $type;
-		$this->layout->content("product",$data);
+		$category_name 			= $this->ModelHome->getCategoryname($type);
+		$data["tittle"] 		= $category_name;
+		$data["category_id"]	= $type;
+		$data["listproduct"] 	= $this->ModelHome->getProductType($type);
+		$this->layout->content("shop",$data);
 	}
 
 	function detail($product_id){

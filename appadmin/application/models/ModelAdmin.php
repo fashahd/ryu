@@ -103,7 +103,28 @@
                 return "sukses";
             }
         }
-        
+
+        function addslider($image1,$position,$imagedesc){
+            $this->db->trans_begin();
+            $data   = array(
+                "image_url"     => $image1,
+                "image_desc"    => $imagedesc,
+                "position"      => $position,
+                "created_dttm"  => date("Y-m-d H:i:s"),
+            );            
+            $query  = $this->db->insert("ryu_image", $data);
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+                return "gagal";
+            }
+            else
+            {
+                $this->db->trans_commit();
+                return "sukses";
+            }
+        }        
 
         function getCategoryname($category){
             $sql    = "SELECT * FROM ryu_menu where menu_id = ?";

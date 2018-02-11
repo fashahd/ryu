@@ -73,51 +73,6 @@
 						</div>
 						<div class="col-lg-6">
 						<?=listdetail($category_id)?>
-							<!-- <div class="col-lg-6">
-								<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-									<p><span>Metal Working</span></p>
-									<ul>
-										<li>Grinders</li>
-										<li>Cut Off Show</li>
-										<li>Drill</li>
-										<li>Impact Drill</li>
-										<li>Magneting Drill</li>
-										<li>Bench Drill</li>
-										<li>Steel Body</li>
-										<li>Miter Saw</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-									<p><span>Others</span></p>
-									<ul>
-										<li>Polisher</li>
-										<li>Gun Polisher</li>
-										<li>Drill</li>
-										<li>Impact Drill</li>
-										<li>Magneting Drill</li>
-										<li>Bench Drill</li>
-										<li>Steel Body</li>
-										<li>Miter Saw</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-									<p><span>Wood Working</span></p>
-									<ul>
-										<li>Polisher</li>
-										<li>Gun Polisher</li>
-										<li>Drill</li>
-										<li>Impact Drill</li>
-										<li>Magneting Drill</li>
-										<li>Bench Drill</li>
-										<li>Steel Body</li>
-										<li>Miter Saw</li>
-									</ul>
-								</div>
-							</div> -->
 						</div>
 					</div>
 				</div>
