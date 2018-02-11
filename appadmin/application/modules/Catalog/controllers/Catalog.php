@@ -403,6 +403,7 @@ class Catalog extends MX_Controller {
 		$information 	= $_POST["information"];
 		$subcategory = $_POST["subcategory"];
 		$product_id = $_POST["product_id"];
+		$product_layout = $_POST["product_layout"];
 		$model 		 = "";
 		$description = "";
 		$image1 	 = "";
@@ -497,7 +498,7 @@ class Catalog extends MX_Controller {
 		}
 
 		if($message == "sukses"){
-			$response = $this->ModelAdmin->updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id);
+			$response = $this->ModelAdmin->updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id,$product_layout);
 			if($response == "sukses"){
 				$message = "Product Update";
 			}else{

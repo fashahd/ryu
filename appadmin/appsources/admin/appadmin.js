@@ -551,7 +551,7 @@ $('#editproductform').submit(function(event) {
 	});
 });
 
-var i = 1;
+var i = 0;
 $("#addspec").click(function(){
 	//menentukan target append
     var productrow = document.getElementById('productrow');
@@ -575,7 +575,7 @@ $("#addspec").click(function(){
 	
     var inputModel   =   document.createElement("input");
     inputModel.setAttribute('class','form-control');
-    inputModel.setAttribute('name','model['+i+']');
+    inputModel.setAttribute('name','model[]');
     inputModel.setAttribute('required','required');
 	colModel.appendChild(labelModel);
 	colModel.appendChild(inputModel);
@@ -589,7 +589,7 @@ $("#addspec").click(function(){
 	
     var inputDesc   =   document.createElement("input");
     inputDesc.setAttribute('class','form-control');
-    inputDesc.setAttribute('name','description['+i+']');
+    inputDesc.setAttribute('name','description[]');
     inputDesc.setAttribute('required','required');
     colDesc.appendChild(labelDesc);
     colDesc.appendChild(inputDesc);
@@ -633,6 +633,75 @@ $("#addService").submit(function(event){
 				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
 				+"Can't Connect, Please Try Again</div>");
 				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
+
+$("#addsocial").submit(function(event){
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+	var form = $('#addsocial');
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/addsocial",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			if(data =="sukses"){
+				alert("Updated");
+				window.location.href=toUrl+"/appadmin/page/socialmedia";
+				return;
+			}else{
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
+
+$("#desc_page").submit(function(event) {
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+	var form = $('#desc_page');
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/setDesc",
+		data : form.serialize(),
+		dataType: "json",
+		success: function(data){
+			if(data.status =="sukses"){
+				alert(data.message);
+				window.location.href=toUrl+"/appadmin/page/setting/"+data.setting;
+			}else if(data.status =="max_upload"){
+				$("#notif").html('<div class="alert alert-warning alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}else {
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
 			}
 		},error: function(xhr, ajaxOptions, thrownError){            
 			// alert(xhr.responseText);

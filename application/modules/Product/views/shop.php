@@ -1,3 +1,16 @@
+<?php
+	$sql 	= "SELECT * FROM ryu_subcategory WHERE sub_parent_id = '$category_id'";
+	$query	= $this->db->query($sql);
+	$sublist = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $row){
+			$sql 		= "SELECT * FROM ryu_product WHERE product_subcategory = '$row->sub_id'";
+			$query 		= $this->db->query($sql);
+			$sublist   .= '<li><a href="'.base_url().'product/shop/'.$category_id.'/'.$row->sub_id.'">'.$row->sub_name.' ('.$query->num_rows().')</a></li>';
+		}
+	}
+?>
+
 <!-- breadcrumb-area-start -->
 <div class="breadcrumb-area">
 	<div class="container">
@@ -33,15 +46,15 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 				<!-- shop-left-area-start -->
-				<div class="shop-left-area" style="padding-top:130px">
+				<div class="shop-left-area" style="padding-top:40px">
 					<!-- single-shop-left-start -->
 					<div class="single-shop-left mb-30">
 						<div class="shop-left-title">
-							<h3> Enabled filters:</h3>
+							<h3> <?=$tittle?> Category</h3>
 						</div>
 						<div class="shop-left-menu">
 							<ul>
-								<li><a href="<?=base_url()?>powertools">Price: 20.95 € - 52 €</a></li>
+								<?=$sublist?>
 							</ul>
 						</div>
 					</div>

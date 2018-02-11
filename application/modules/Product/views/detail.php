@@ -1,5 +1,5 @@
 <?php
-	list($product_note,$product_id,$product_name,$product_image1,$product_image2,$product_image3,$menu_title,$sub_name)=$detail;
+	list($product_note,$product_id,$product_name,$product_image1,$product_image2,$product_image3,$menu_title,$sub_name,$product_layout)=$detail;
 	if($sub_name != ''){
 		$sub_name1 = '<li><a href="#">/</a></li><li><a href="#">'.$sub_name.'</a></li>';
 	}else{
@@ -74,6 +74,7 @@
 	</div>
 </div>
 <!-- product-details-area-end -->
+<?php if($product_layout == "layout_1"){?>
 <!-- more-info-area-start -->
 <div class="more-info-area pt-50">
 	<div class="container">
@@ -125,3 +126,64 @@
 		</div>
 	</div>
 </div>
+<?php } ?>
+
+<!-- product-details-area-end -->
+<?php if($product_layout == "layout_2"){?>
+<!-- more-info-area-start -->
+<div class="more-info-area pt-50">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- tab-menu-start -->
+				<div class="tab-menu mb-40">
+					<ul>
+						<li>Description</li>
+					</ul>
+				</div>
+				<!-- tab-menu-end -->
+			</div>
+		</div>
+		<!-- tab-area-start -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="More">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="rate">
+							<div class="table-responsive">          
+							<table class="">
+								<colgroup>
+									<col width="40%">
+									<col width="10%">
+									<col width="50%">
+								</colgroup>
+								<thead>
+									<tr>
+										<th style="text-transform:uppercase">Model</th>
+										<th style="text-transform:uppercase">Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										if($spek){
+											foreach($spek as $row){
+												echo '
+													<tr>
+														<td style="padding: 5px 0 5px 0">'.$row->product_model.'</td>
+														<td style="padding: 5px 0 5px 0">'.$row->product_description.'</td>
+													</tr>
+												';
+											}
+										}
+									?>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php } ?>

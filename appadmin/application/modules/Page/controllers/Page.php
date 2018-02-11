@@ -41,6 +41,32 @@ class Page extends MX_Controller {
 		$this->layout->content("service",$data);
 	}
 
+	function socialmedia(){
+		$data["tittle"] = "Social Media";
+		$this->layout->content("socialmedia",$data);
+	}
+
+	function addsocial(){
+		$data = array(
+			"facebook"=>$_POST["facebook"],
+			"instagram"=>$_POST["instagram"]
+		);
+		$sql 	= "SELECT * FROM ryu_social";
+		$query	= $this->db->query($sql);
+		if($query->num_rows()>0){
+			$update = $this->db->update("ryu_social",$data);
+		}else{			
+			$update = $this->db->insert("ryu_social",$data);
+		}
+		if($update){
+			echo "sukses";
+			return;
+		}else{
+			echo "gagal";
+			return;
+		}
+	}
+
 	function addService(){
 		$data = array(
 			"service_store" => $_POST["store"],
@@ -58,6 +84,32 @@ class Page extends MX_Controller {
 			echo "gagal";
 			return;
 		}
+	}
+
+	function setDesc(){
+		$sql 	= "UPDATE ryu_menu SET menu_desc= '$_POST[desc]' WHERE menu_id = '$_POST[menu_id]'";
+		$query 	= $this->db->query($sql);
+		if($query){
+			$response = "sukses";
+		}else{
+			$response = "gagal";
+		}
+		
+		if($response == "sukses"){
+			$message = "Description Updated";
+		}else{
+			$message = "Description Failed to Update";
+		}
+
+		
+		
+		$data = array(
+			"status" 	=> $response,
+			"message"	=> $message,
+			"setting"	=> $_POST["menu_id"]
+		);
+		echo json_encode($data);
+		return;
 	}
 
 	function setVideo(){

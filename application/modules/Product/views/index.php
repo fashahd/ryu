@@ -1,9 +1,10 @@
 <?php
-	$sql 	= "SELECT image_cover, video FROM ryu_menu where menu_id = '$category_id'";
+	$sql 	= "SELECT image_cover, video, menu_desc FROM ryu_menu where menu_id = '$category_id'";
 	$query 	= $this->db->query($sql);
 	$row 	= $query->row();
 	$image_cover = $row->image_cover;
 	$video 	= $row->video;
+	$menu_desc = $row->menu_desc;
 	if($image_cover == ""){
 		$image_cover = "appsources/banner/13.jpg";
 	}
@@ -18,7 +19,7 @@
 			foreach($query->result() as $h){
 				$list .= '
 					<div class="col-lg-6">
-						<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+						<div class="slider-text wow" >
 							<p><span>'.$h->menu_title.'</span></p>
 							<ul>
 								'.listchild($h->menu_id).'
@@ -43,8 +44,8 @@
 			foreach($query->result() as $h){
 				$list .= '
 					<div class="col-lg-6">
-						<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-							<p><span>'.$h->menu_title.'</span></p>
+						<div class="slider-text wow" >
+							<p style="font-size:12pt;margin-left:-15px">'.$h->menu_title.'</p>
 							<ul>
 								'.listchild($h->menu_id).'
 							</ul>
@@ -66,9 +67,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-6">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+							<div class="slider-text wow" >
 								<h2><span><?=$tittle?></span></h2>
-								
+								<p><?=$menu_desc?></p>
 							</div>
 						</div>
 						<div class="col-lg-6">

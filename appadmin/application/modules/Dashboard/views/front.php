@@ -13,7 +13,7 @@
 			';
 		}
 	}
-	$sql 	= "SELECT * FROM ryu_image where position = 'bottom' order by created_dttm desc";
+	$sql 	= "SELECT * FROM ryu_image where position = 'down' order by created_dttm desc";
 	$query	= $this->db->query($sql);
 	$listimagebottom = "";
 	if($query->num_rows()>0){

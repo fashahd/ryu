@@ -1,9 +1,10 @@
 <?php
-	$sql 	= "SELECT image_cover, video FROM ryu_menu where menu_id = '$page_id'";
+	$sql 	= "SELECT image_cover, video, menu_desc FROM ryu_menu where menu_id = '$page_id'";
 	$query 	= $this->db->query($sql);
 	$row 	= $query->row();
 	$image_cover = $row->image_cover;
 	$video 	= $row->video;
+	$menu_desc 	= $row->menu_desc;
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -13,6 +14,29 @@
 <!-- Main content -->
 <section class="content">
 	<!-- Small boxes (Stat box) -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Page Description</h3>
+				</div>
+				<div class="box-body">
+					<form method="post" id="desc_page">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label><?=$category_name?> Description</label>
+									<textarea name="desc" class="form-control"><?=$menu_desc?></textarea>
+									<input type="hidden" name="menu_id" value="<?=$page_id?>" />
+								</div>
+							</div>
+						</div>
+						<button class="btn btn-primary" type="submit">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="box">

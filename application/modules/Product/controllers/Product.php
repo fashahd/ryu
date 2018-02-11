@@ -33,12 +33,21 @@ class Product extends MX_Controller {
 		$this->layout->content("index",$data);
 	}
 
-	function shop($type=null){
-		$category_name 			= $this->ModelHome->getCategoryname($type);
-		$data["tittle"] 		= $category_name;
-		$data["category_id"]	= $type;
-		$data["listproduct"] 	= $this->ModelHome->getProductType($type);
-		$this->layout->content("shop",$data);
+	function shop($type=null,$sub_id=null){
+		if($sub_id == ""){
+			$category_name 			= $this->ModelHome->getCategoryname($type);
+			$data["tittle"] 		= $category_name;
+			$data["category_id"]	= $type;
+			$data["listproduct"] 	= $this->ModelHome->getProductType($type);
+			$this->layout->content("shop",$data);
+		}else{
+			$category_name 			= $this->ModelHome->getCategoryname($type);
+			$sub_name 				= $this->ModelHome->getSubname($sub_id);
+			$data["tittle"] 		= $category_name;
+			$data["category_id"]	= $type;
+			$data["listproduct"] 	= $this->ModelHome->getProductTypeSub($sub_id);
+			$this->layout->content("shop",$data);
+		}
 	}
 
 	function detail($product_id){

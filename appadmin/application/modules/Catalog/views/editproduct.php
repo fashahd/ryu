@@ -1,4 +1,8 @@
 <?php
+    $arrlayout = array(
+        "layout_1" => "Layout 1",
+        "layout_2" => "Layout 2"
+    );
     $product_name   = "";
     $product_note   = "";
     $product_image1     = "";
@@ -22,10 +26,20 @@
             $product_image1 = $row->product_image1;
             $product_image2 = $row->product_image2;
             $product_image3 = $row->product_image3;
+            $product_layout = $row->product_layout;
             $url_product_image1 = "<img width='180px' src='".base_url()."$row->product_image1'/>";
             $url_product_image2 = "<img width='180px' src='".base_url()."$row->product_image2'/>";
             $url_product_image3 = "<img width='180px' src='".base_url()."$row->product_image3'/>";
         }
+    }
+    $optlayout = "";
+    foreach($arrlayout as $k => $layoutname){
+        if($k == $product_layout){
+            $slct = "selected";
+        }else{
+            $slct = "";
+        }
+        $optlayout .= "<option $slct value='$k'>$layoutname</option>";
     }
     if($detailproduct){
         foreach($detailproduct as $key){
@@ -92,6 +106,15 @@
                                 <select name='subcategory' class='form-control'>
                                     <option>-- Select Subcategory --</option>
                                     <?=$optsubcategory?>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="subcategory">
+                            <div class='form-group'>
+                                <label>Layout</label>
+                                <select required name='product_layout' class='form-control'>
+                                    <option>-- Select Layout --</option>
+                                    <?=$optlayout?>
                                 </select>
                             </div>
                         </div>

@@ -22,12 +22,45 @@
 			';
 		}
 	}
+	$sql 	= "SELECT * FROM ryu_image where position = 'top' order by created_dttm desc";
+	$query	= $this->db->query($sql);
+	$listimagetop = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $row){
+			$listimagetop .= '
+			<img src="'.base_url().'/appadmin/'.$row->image_url.'" alt="slider-img" title="#caption1" />
+			';
+		}
+	}
+	$sql 	= "SELECT * FROM ryu_image where position = 'down' order by created_dttm desc";
+	$query	= $this->db->query($sql);
+	$listimagebottom = "";
+	$capbottom 		 = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $row){
+			$listimagebottom .= '
+				<img src="'.base_url().'/appadmin/'.$row->image_url.'" alt="slider-img" title="#caption'.$row->image_id.'" />
+			';
+			$capbottom .= '				
+				<div class="nivo-html-caption" id="caption'.$row->image_id.'" >
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+									<h2>'.$row->image_desc.'</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			';
+		}
+	}
 ?>
 		<!-- slider-area-start -->
 		<div class="slider-area">
 			<div id="slider">
-				<img src="<?=base_url()?>appsources/img/slider/1.jpg" alt="slider-img" title="#caption1" />
-				<img src="<?=base_url()?>appsources/img/slider/2.jpg" alt="slider-img" title="#caption2" />
+				<?=$listimagetop?>
 			</div>
 		</div>
 		<!-- slider-area-end -->
@@ -119,22 +152,8 @@
 		<!-- slider-area-start -->
 		<div class="slider-area">
 			<div id="slider2">
-				<img src="<?=base_url()?>appsources/img/slider/1.jpg" alt="slider-img" title="#caption4" />
-				<img src="<?=base_url()?>appsources/img/slider/2.jpg" alt="slider-img" title="#caption5" />
+				<?=$listimagebottom?>
 			</div>
-			<div class="nivo-html-caption" id="caption4" >
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<h1>Now Shipping!</h1>
-								<h2>iphone<span> s7</span></h2>
-								<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
-								<a href="#"><i class="fa fa-shopping-cart"></i>buy now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?=$capbottom?>
 		</div>
 		<!-- slider-area-end -->

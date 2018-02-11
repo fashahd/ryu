@@ -7,13 +7,14 @@
             return $query->num_rows();
         }
 
-        function updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id){
+        function updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id,$product_layout){
             $this->db->trans_begin();
             $data   = array(
                 "product_name"  => $product,
                 "product_category" => $category,
                 "product_note"  => $information,
                 "product_subcategory" => $subcategory,
+                "product_layout"=>$product_layout
             );
 
             if($image1 != ""){
@@ -41,7 +42,7 @@
                 $querydelete1 	= $this->db->query($sqldelete1);
                 
                 if($model != ""){
-                    for($i=1;$i<count($model);$i++){
+                    for($i=0;$i<count($model);$i++){
                         $datadetail = array(
                             'product_id' => $product_id,
                             'product_model' => $model[$i],
@@ -133,7 +134,7 @@
             return $row->menu_title;
         }
 
-        function getOptParentMenu($parent =0,$category=""){
+        function getOptParentMenu($parent =0,$category=null){
             $list = "";
             $sql    = " SELECT * FROM `ryu_menu`
                         WHERE menu_parent_id = '$parent' AND editable <> 'no'
@@ -219,7 +220,7 @@
                         $slct = "";
                     }
                     $list .= "<option $slct value='$h->menu_id'>$menu_title > $h->menu_title</option>";
-                    $list .= $this->childmenu($h->menu_id,$h->menu_title);
+                    $list .= $this->childmenu($h->menu_id,$h->menu_title,$category);
                 }
             }
             return $list;
