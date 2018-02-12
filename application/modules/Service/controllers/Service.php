@@ -22,6 +22,80 @@ class Service extends MX_Controller {
 		redirect('/service/page/service');
 	}
 
+	function getlokasi($city = null,$province=null){
+		// Header File XML
+		header("Content-type: text/xml");
+		
+		// 	// Parent node XML
+		echo '<markers>';
+		$sql 	= "SELECT * FROM ryu_service";
+		$query 	= $this->db->query($sql);
+		// $listservice = "";
+		if($query->num_rows()>0){
+			foreach($query->result() as $row){
+				// $listservice .= '
+				// <div class="entry-meta2">
+				// 	<p>'.$row->service_store.'</p>
+				// 	<p style="font-weight:normal">'.$row->service_address.' - '.$row->service_phone.'</p>
+				// </div>
+				// ';
+
+				$lat = "";
+				$lng = "";
+				$address = str_replace(" ","+",$row->service_address);
+				// $address = $row->service_address;
+				$coordinates = $this->getCoordinates($address);
+				$results = $coordinates->results;
+				// print_r($coordinates);
+				foreach($results as $key){
+					$lat = $key->geometry->location->lat;
+					$lng = $key->geometry->location->lng;
+				}
+				echo '<marker ';
+				echo 'name="' . $this->parseToXML($row->service_store) . '" ';
+				echo 'address="' . $this->parseToXML($row->service_address) . '" ';
+				echo 'telpon="' . $this->parseToXML($row->service_phone) . '" ';
+				echo 'lat="' . $lat . '" ';
+				echo 'lng="' . $lng . '" ';
+
+				echo '/>';
+			}
+		}else{
+			echo "0 results";
+		}
+		echo '</markers>';
+	}
+
+	function getCoordinates($address){
+		$url = "https://maps.googleapis.com/maps/api/geocode/json?address=$address&key=AIzaSyBpPTMY70Xnw93pGr6VSJ1rJngApIfPr7E";
+		//  Initiate curl
+		$ch = curl_init();
+		// Disable SSL verification
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		// Will return the response, if false it print the response
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// Set the url
+		curl_setopt($ch, CURLOPT_URL,$url);
+		// Execute
+		$result=curl_exec($ch);
+		// Closing
+		curl_close($ch);
+
+		// Will dump a beauty json :3
+		// return $url;
+		return json_decode($result);
+	}
+
+	function parseToXML($htmlStr)
+	{
+		$xmlStr=str_replace('<','<',$htmlStr);
+		$xmlStr=str_replace('>','>',$xmlStr);
+		$xmlStr=str_replace('"','"',$xmlStr);
+		$xmlStr=str_replace("'","'",$xmlStr);
+		$xmlStr=str_replace("&",'&',$xmlStr);
+		return $xmlStr;
+	}
+
 	public function page($type)
 	{
 		if($type == "service"){

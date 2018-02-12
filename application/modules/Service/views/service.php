@@ -90,9 +90,91 @@
 		</div>
 	</div>
 </div>
+<script>
+      var customLabel = {
+        restaurant: {
+          label: 'R'
+        },
+        bar: {
+          label: 'B'
+        }
+      };
+
+        function initMap() {
+        var map = new google.maps.Map(document.getElementById('googleMap'), {
+          center: new google.maps.LatLng(-6.0940741, 106.7257935),
+          zoom: 12
+        });
+        var infoWindow = new google.maps.InfoWindow;
+
+          // Change this depending on the name of your PHP or XML file
+          downloadUrl('<?=base_url()?>service/getlokasi', function(data) {
+            var xml = data.responseXML;
+            var markers = xml.documentElement.getElementsByTagName('marker');
+            Array.prototype.forEach.call(markers, function(markerElem) {
+              var id = markerElem.getAttribute('name');
+              var name = markerElem.getAttribute('name');
+              var address = markerElem.getAttribute('address');
+              var type = markerElem.getAttribute('telpon');
+              var point = new google.maps.LatLng(
+                  parseFloat(markerElem.getAttribute('lat')),
+                  parseFloat(markerElem.getAttribute('lng')));
+
+              var infowincontent = document.createElement('div');
+              var strong = document.createElement('strong');
+              strong.textContent = name
+              infowincontent.appendChild(strong);
+			  infowincontent.appendChild(document.createElement('br'));
+
+              var text = document.createElement('text');
+              text.textContent = address
+              infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+			  
+              var strong1 = document.createElement('text');
+              strong1.textContent = type
+              infowincontent.appendChild(strong1);
+              infowincontent.appendChild(document.createElement('br'));
+              var icon = customLabel[type] || {};
+              var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+                label: icon.label
+              });
+              marker.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, marker);
+              });
+            });
+          });
+        }
+
+
+
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+      function doNothing() {}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpPTMY70Xnw93pGr6VSJ1rJngApIfPr7E&callback=initMap">
+    </script>
 
 <!-- googleapis -->
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script type="text/javascript">
 	var map, geocoder, marker, infowindow;
 	/* Google Map js */
@@ -115,4 +197,4 @@
 
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+</script> -->

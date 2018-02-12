@@ -42,5 +42,20 @@
 	</div>
 	<div class="warranty">
 		<?=$support_isi?>
+		<div style="margin-top:40px;color:#000;font-size:13pt">
+			<b>CAN'T FIND THE CORRECT ANSWER</b> <a href="<?=base_url()?>contactus" style="background: #383838 none repeat scroll 0 0;
+	background: #6DBF50;
+	border:none;
+	color:#fff;
+	display: inline-block;
+	margin-left: 30px;
+	font-size: 13px;
+	font-weight: 600;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 28px;
+	text-transform: uppercase;
+	transition:.3s;">CONTACT US</a>
+		</div>
 	</div>
 </div>

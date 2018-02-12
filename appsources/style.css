@@ -1625,11 +1625,23 @@ a#scrollUp {
 	background: #f0f0f0;
 }
 .warranty{
+	color:#000;
 	background: #fff;
 	padding : 50px;
 	margin : 0px 70px 0px 70px;
 }
-.warranty h4{
+.warranty h4,h1,h2,h5{
+	font-weight: 600;
+	color: #000;
+	text-transform: uppercase;
+}
+.warranty h2{
+	font-size: 13pt;
+	font-weight: 600;
+	color: #000;
+	text-transform: uppercase;
+}
+.warranty b{
 	font-size: 13pt;
 	font-weight: 600;
 	color: #000;
