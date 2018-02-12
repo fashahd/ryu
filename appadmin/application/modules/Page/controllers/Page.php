@@ -41,6 +41,69 @@ class Page extends MX_Controller {
 		$this->layout->content("service",$data);
 	}
 
+	function support($type){
+		if($type == "warranty"){
+			$data["tittle"] = "Warranty";
+		}
+		if($type == "loan"){
+			$data["tittle"] = "Loan Programme";
+		}
+		if($type == "tips"){
+			$data["tittle"] = "Tips & Tricks";
+		}
+		if($type == "faq"){
+			$data["tittle"] = "Frequently Asked Questions";
+		}
+		$data["support_id"] = $type;
+		$this->layout->content("support",$data);
+	}
+
+	function update_support(){
+		$this->db->trans_begin();
+		$support_id = $_POST["support_id"];
+		$title 		= $_POST["title"];
+		$tagline	= $_POST["tagline"];
+		$subtitle 	= $_POST["subtitle"];
+		$content 	= $_POST["content"];
+		$sql 	= "SELECT * FROM ryu_support where support_id = '$support_id'";
+		$query	= $this->db->query($sql);
+		if($query->num_rows()>0){
+			$data = array(
+				"support_title" 	=> $title,
+				"support_tagline" 	=> $tagline,
+				"support_subtitle" 	=> $subtitle,
+				"support_isi" 	=> $content,
+			);
+			
+			$this->db->where("support_id",$support_id);
+			$query = $this->db->update("ryu_support",$data);
+		}else{
+			$data = array(
+				"support_id" 		=> $support_id,
+				"support_title" 	=> $title,
+				"support_tagline" 	=> $tagline,
+				"support_subtitle" 	=> $subtitle,
+				"support_isi" 		=> $content,
+			);
+			
+			$query = $this->db->insert("ryu_support",$data);
+		}
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			$status = "gagal";
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$status = "sukses";
+		}
+		echo json_encode(array(
+			"status"=>$status,
+			"support_id"=>$support_id)
+		);
+	}
+
 	function socialmedia(){
 		$data["tittle"] = "Social Media";
 		$this->layout->content("socialmedia",$data);

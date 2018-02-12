@@ -6,7 +6,7 @@
 		foreach($query->result() as $row){
 			$sql 		= "SELECT * FROM ryu_product WHERE product_subcategory = '$row->sub_id'";
 			$query 		= $this->db->query($sql);
-			$sublist   .= '<li><a href="'.base_url().'product/shop/'.$category_id.'/'.$row->sub_id.'">'.$row->sub_name.' ('.$query->num_rows().')</a></li>';
+			$sublist   .= '<li><a href="'.base_url().'product/category/'.$row->sub_id.'">'.$row->sub_name.' ('.$query->num_rows().')</a></li>';
 		}
 	}
 ?>
@@ -72,10 +72,8 @@
 				</div>
 				<!-- pagination-area-start -->
 				<div class="pagination-area">
-					<div class="product-count">
-						<p>Showing 1 - 12 of 13 items</p>
-					</div>
-					<div class="pagination-number">
+					<?=$pagination?>
+					<!-- <div class="pagination-number">
 						<ul>
 							<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
 							<li class="active"><a href="#">1</a></li>
@@ -83,7 +81,7 @@
 							<li><a href="#">3</a></li>
 							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
 						</ul>
-					</div>
+					</div> -->
 				</div>
 				<!-- pagination-area-end -->
 			</div>

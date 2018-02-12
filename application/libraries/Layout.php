@@ -18,6 +18,8 @@
                     <title>RYU | '.$module.'</title>
                     <meta name="description" content="">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="canonical" href="http://www.vmdindonesia.com" />
+
             
                     <!-- Favicon -->
                     <link rel="shortcut icon" type="image/x-icon" href="'.base_url().'/appsources/img/logo/ryu_logo.png">

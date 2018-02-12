@@ -22,6 +22,7 @@ class Product extends MX_Controller {
 	{
 		parent::__construct();
 		$this->load->model("ModelHome");
+		$this->load->library("pagination");
 	}
 
 	public function index($category=null)
@@ -33,21 +34,96 @@ class Product extends MX_Controller {
 		$this->layout->content("index",$data);
 	}
 
-	function shop($type=null,$sub_id=null){
-		if($sub_id == ""){
-			$category_name 			= $this->ModelHome->getCategoryname($type);
-			$data["tittle"] 		= $category_name;
-			$data["category_id"]	= $type;
-			$data["listproduct"] 	= $this->ModelHome->getProductType($type);
-			$this->layout->content("shop",$data);
-		}else{
-			$category_name 			= $this->ModelHome->getCategoryname($type);
-			$sub_name 				= $this->ModelHome->getSubname($sub_id);
-			$data["tittle"] 		= $category_name;
-			$data["category_id"]	= $type;
-			$data["listproduct"] 	= $this->ModelHome->getProductTypeSub($sub_id);
-			$this->layout->content("shop",$data);
+	function shop($type=null){
+		 // konfigurasi class pagination
+		$config['per_page']		= 12;
+		$config['num_links'] 	= 2;
+		$config['uri_segment']	= 4;
+		$config['full_tag_open'] = '<div class="pagination-number"><ul>';
+		$config['full_tag_close'] = '</ul></div>';
+		
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_link'] = '>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		
+		$config['prev_link'] = '<';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['base_url']		= base_url()."product/shop/$type";
+		$config['total_rows']	= $this->db->query("SELECT * FROM ryu_product WHERE product_category = '$type'")->num_rows();
+		
+		$this->pagination->initialize($config);
+		$start = $this->uri->segment(4, 0);
+		$category_name 			= $this->ModelHome->getCategoryname($type);
+		$data["listproduct"] 	= $this->ModelHome->getProductType($type,$config['per_page'],$start);
+		$data["tittle"] 		= $category_name;
+		$data["category_id"]	= $type;
+		$data["pagination"]		= $this->pagination->create_links();
+		$data["start"]			= $start;
+		$data["jml_record"]		= $config['total_rows'];
+		$this->layout->content("shop",$data);
+	}
+
+	function category($type){
+		$config['per_page']		= 12;
+		$config['num_links'] 	= 2;
+		$config['uri_segment']	= 4;
+		$config['full_tag_open'] = '<div class="pagination-number"><ul>';
+		$config['full_tag_close'] = '</ul></div>';
+		
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_link'] = '>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		
+		$config['prev_link'] = '<';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['base_url']		= base_url()."product/category/$type";
+		$config['total_rows']	= $this->db->query("SELECT * FROM ryu_product WHERE product_subcategory = '$type'")->num_rows();
+		$sql 	= "SELECT * FROM ryu_subcategory WHERE sub_id = '$type'";
+		$query	= $this->db->query($sql);
+		if($query->num_rows()>0){
+			$row = $query->row();
+			$sub_parent_id = $row->sub_parent_id;
 		}
+		$this->pagination->initialize($config);
+		$start = $this->uri->segment(4, 0);
+		$category_name 			= $this->ModelHome->getSubname($type);
+		$data["listproduct"] 	= $this->ModelHome->getProductTypeSub($type,$config['per_page'],$start);
+		$data["tittle"] 		= $category_name;
+		$data["category_id"]	= $sub_parent_id;
+		$data["pagination"]		= $this->pagination->create_links();
+		$data["start"]			= $start;
+		$data["jml_record"]		= $config['total_rows'];
+		$this->layout->content("shop",$data);
 	}
 
 	function detail($product_id){

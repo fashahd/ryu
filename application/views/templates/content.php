@@ -16,7 +16,7 @@
 	$menufooter = "";
 	if($query->num_rows()>0){
 		foreach($query->result() as $h){
-			$menufooter .= '<li><a href="#">'.$h->menu_title.'</a></li>';
+			$menufooter .= '<li><a href="'.base_url().'product/index/'.$h->menu_id.'">'.$h->menu_title.'</a></li>';
 		}
 	}
 ?>

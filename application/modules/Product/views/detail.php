@@ -64,7 +64,6 @@
 						<p><?=$product_note?></p>
 					</div>
 					<div class="socialsharing_product">
-						<p>share this product</p>
 						<a href="#" style="margin-left:0px"><img src="<?=base_url()?>/appsources/img/logo/facebook.jpg" alt="flag" /></a> 
 						<a href="#" style="margin-left:0px"><img src="<?=base_url()?>/appsources/img/logo/instagram.jpg" alt="flag" /></a> 
 					</div>
@@ -187,3 +186,11 @@
 	</div>
 </div>
 <?php } ?>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script >
+  window.___gcfg = {
+    lang: 'zh-CN',
+    parsetags: 'onload'
+  };
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>

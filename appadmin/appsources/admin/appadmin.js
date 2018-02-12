@@ -645,6 +645,39 @@ $("#addService").submit(function(event){
 	});
 })
 
+$("#update_support").submit(function(event){
+	event.preventDefault();
+	var form = $('#update_support');
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/update_support",
+		data : form.serialize(),
+		dataType: "json",
+		success: function(data){
+			// alert(data);
+			// return;
+			if(data.status =="sukses"){
+				alert("Updated");
+				window.location.href=toUrl+"/appadmin/page/support/"+data.support_id;
+				return;
+			}else{
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
+
 $("#addsocial").submit(function(event){
 	event.preventDefault();
 
