@@ -60,7 +60,7 @@
                     if($query->num_rows()>0){
                         foreach($query->result() as $row){
                             if (strlen($row->product_name) > 30){
-                                $product_name = substr($row->product_name, 0, 35) . '...';
+                                $product_name = substr($row->product_name, 0, 30) . '...';
                             }else{
                                 $product_name = $row->product_name;
                             }
@@ -90,6 +90,58 @@
             }
         }
 
+        function getProductSearch($category,$limit, $start = 0){
+            $this->db->like("product_name", $category);
+            $this->db->limit($limit, $start);
+            $query = $this->db->get("ryu_product");
+            // echo $sql = $this->db->last_query();
+            $list = "";
+            if($query->num_rows()>0){
+                foreach($query->result() as $row){
+                    if (strlen($row->product_name) > 30){
+                        $product_name = substr($row->product_name, 0, 30) . '...';
+                    }else{
+                        $product_name = $row->product_name;
+                    }
+                    $list .= '
+                    <div class="col-lg-4">
+                        <div class="single-product mb-30">
+                            <div class="product-img">
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'">
+                                    <img src="'.base_url().'appadmin/'.$row->product_image1.'"  alt="'.$row->product_name.'" title="'.$row->product_name.'" class="first" />
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-price">
+                                    <ul>
+                                        <li class="new-price">'.$product_name.'</li>
+                                    </ul>
+                                </div>
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                            </div>
+                        </div>
+                    </div>
+                    ';
+                }
+            }else{
+                $list .= '
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="entry-header text-center mb-20">
+                                <p>Oops! That product can’t be found.</p>
+                            </div>
+                            <div class="entry-content text-center mb-30">
+                                <p>Sorry, but the product you are looking for is not found. Please, make sure you have typed the correct keywords.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ';
+            }
+            return $list;
+        }
+
         function getProductType($category,$limit, $start = 0){
             $this->db->where("product_category", $category);
             $this->db->limit($limit, $start);
@@ -98,7 +150,7 @@
             if($query->num_rows()>0){
                 foreach($query->result() as $row){
                     if (strlen($row->product_name) > 30){
-                        $product_name = substr($row->product_name, 0, 35) . '...';
+                        $product_name = substr($row->product_name, 0, 30) . '...';
                     }else{
                         $product_name = $row->product_name;
                     }
@@ -177,7 +229,7 @@
             if($query->num_rows()>0){
                 foreach($query->result() as $row){
                     if (strlen($row->product_name) > 30){
-                        $product_name = substr($row->product_name, 0, 35) . '...';
+                        $product_name = substr($row->product_name, 0, 30) . '...';
                     }else{
                         $product_name = $row->product_name;
                     }

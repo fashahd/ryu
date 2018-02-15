@@ -288,6 +288,7 @@ class Catalog extends MX_Controller {
 		$product 	= $_POST["product"];
 		$category 	= $_POST["category"];
 		$information 	= $_POST["information"];
+		$product_layout = $_POST["product_layout"];
 		if(isset($_POST["subcategory"])){
 			$subcategory = $_POST["subcategory"];
 		}else{
@@ -383,7 +384,7 @@ class Catalog extends MX_Controller {
 		}
 
 		if($message == "sukses"){
-			$response = $this->ModelAdmin->saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3);
+			$response = $this->ModelAdmin->saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_layout);
 			if($response == "sukses"){
 				$message = "Product Added";
 			}else{

@@ -65,7 +65,7 @@
             }
         }
 
-        function saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3){
+        function saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_layout){
             $this->db->trans_begin();
             $product_id = $this->getProductID();
             $data   = array(
@@ -78,6 +78,7 @@
                 "product_image3" => $image3,
                 "product_note"  => $information,
                 "product_subcategory" => $subcategory,
+                "product_layout"=>$product_layout,
                 "product_dttm" => date("Y-m-d H:i:s"),
             );
             if($model != ""){

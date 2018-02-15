@@ -3,7 +3,7 @@
 	if($newproduct){
 		foreach($newproduct as $row){
 			if (strlen($row->product_name) > 30){
-				$product_name = substr($row->product_name, 0, 35) . '...';
+				$product_name = substr($row->product_name, 0, 30) . '...';
 			}else{
 				$product_name = $row->product_name;
 			}

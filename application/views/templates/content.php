@@ -43,8 +43,8 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="search-area">
 								<form action="#">
-									<input type="text" placeholder="Search entire store here ..." />
-									<a href="#"><i class="fa fa-search"></i></a>
+									<input id="keyword" type="text" placeholder="Search entire store here ..." />
+									<a href="#" onClick="searchproduct()"><i class="fa fa-search"></i></a>
 								</form>
 							</div>
 						</div>
@@ -299,3 +299,21 @@
         <?=$this->layout->headersourcejs()?>
     </body>
 </html>
+<script>
+	var getUrl 	= window.location;
+	var toUrl 	= getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+	function searchproduct(){
+		var keyword = $("#keyword").val();
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/dashboard/setSearchValue",
+			data: {keyword:keyword},
+			// dataType: "json",
+			success: function(data){
+				window.location.href= toUrl+"/product/search?key="+data;
+			},error: function(xhr, ajaxOptions, thrownError){            
+				alert(xhr.responseText);
+			}
+		});
+	}
+</script>

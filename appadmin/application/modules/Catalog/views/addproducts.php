@@ -42,7 +42,7 @@
 								<?=$optparentmenu?>
 							</select>
                         </div>
-                        <div id="subcategory">
+                        <div>
                             <div class='form-group'>
                                 <label>Layout</label>
                                 <select required name='product_layout' class='form-control'>

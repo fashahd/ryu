@@ -30,4 +30,10 @@ class Dashboard extends MX_Controller {
 		$data["tittle"] = "Home";
 		$this->layout->content("front",$data);
 	}
+
+	function setSearchValue(){
+		$keyword = str_replace(" ","%",$_POST["keyword"]);
+		echo $keyword;
+		return;
+	}
 }
