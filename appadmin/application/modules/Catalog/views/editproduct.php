@@ -89,9 +89,9 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Product Name</label>
-                            <input required name="product" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Name" value="<?=$product_name?>">
-                            <input name="product_id" type="hidden" class="form-control" id="exampleInputEmail1" value="<?=$product_id?>">
+                            <label>Product Name</label>
+                            <input required name="product" type="text" class="form-control" placeholder="Product Name" value="<?=$product_name?>">
+                            <input name="product_id" type="hidden" class="form-control" value="<?=$product_id?>">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Product Category</label>

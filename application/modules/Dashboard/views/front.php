@@ -2,8 +2,13 @@
 	$retnewproduct = "";
 	if($newproduct){
 		foreach($newproduct as $row){
+			if (strlen($row->product_name) > 30){
+				$product_name = substr($row->product_name, 0, 35) . '...';
+			}else{
+				$product_name = $row->product_name;
+			}
 			$retnewproduct .= '
-			<div class="single-product">
+			<div class="single-product" style="margin-left:15px">
 				<div class="product-img">
 					<a href="#">
 						<img src="'.base_url().'/appadmin/'.$row->product_image1.'" alt="product" class="first" />
@@ -13,7 +18,7 @@
 					<h3><a href="#">'.$row->menu_title.'</a></h3>
 					<div class="product-price">
 						<ul>
-							<li class="new-price">'.$row->product_name.'</li>
+							<li class="new-price">'.$product_name.'</li>
 						</ul>
 					</div>
 					<a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>

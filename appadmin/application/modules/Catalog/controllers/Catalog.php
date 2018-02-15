@@ -288,7 +288,11 @@ class Catalog extends MX_Controller {
 		$product 	= $_POST["product"];
 		$category 	= $_POST["category"];
 		$information 	= $_POST["information"];
-		$subcategory = $_POST["subcategory"];
+		if(isset($_POST["subcategory"])){
+			$subcategory = $_POST["subcategory"];
+		}else{
+			$subcategory = "";
+		}
 		$model 		 = "";
 		$description = "";
 		$image1 	 = "";

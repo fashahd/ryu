@@ -43,7 +43,7 @@
 		if($query->num_rows()>0){
 			foreach($query->result() as $h){
 				$list .= '
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div class="slider-text wow" >
 							<p style="font-size:12pt;margin-left:-15px">'.$h->menu_title.'</p>
 							<ul>

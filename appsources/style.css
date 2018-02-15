@@ -855,7 +855,6 @@ body {
 	overflow:hidden;
 	position:relative;
 	padding:5px;
-	margin : 10px 10px 10px 10px;
 	transition:.5s;
 	background:#fff;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
@@ -957,7 +956,7 @@ body {
 }
 .product-price ul li.new-price{
 	color: #101010;
-	font-size: 18px;
+	font-size: 12px;
 	font-weight: 700;
 	text-align: center;
 }

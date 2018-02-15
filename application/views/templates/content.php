@@ -50,10 +50,10 @@
 						</div>
 						<div class="col-lg-3 col-md-3">
 							<div class="header-user">
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/en.jpg" alt="flag" /></a> 
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/id.jpg" alt="flag" /></a>
-								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook.jpg" alt="flag" /></a> 
-								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram.jpg" alt="flag" /></a> 
+								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/en.jpg" alt="en" /></a> 
+								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/id.jpg" alt="id" /></a>
+								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook.jpg" alt="facebook" /></a> 
+								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram_black.png" alt="instagram" /></a> 
 							</div>
 						</div>
 					</div>
@@ -221,7 +221,7 @@
 							<div class="payment-area">
 								FOLLOW US 
 								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook_black.png" alt="flag" /></a> 
-								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram_black.png" alt="flag" /></a> 
+								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram.png" alt="flag" /></a> 
 							</div>
 						</div>
 					</div>

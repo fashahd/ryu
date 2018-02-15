@@ -1,3 +1,13 @@
+<?php
+    $arrlayout = array(
+        "layout_1" => "Layout 1",
+        "layout_2" => "Layout 2"
+    );
+    $optlayout = "";
+    foreach($arrlayout as $k => $layoutname){
+        $optlayout .= "<option value='$k'>$layoutname</option>";
+    }
+?>
 <!-- Content Header (Page header) -->
 <div id="notif"></div>
 <section class="content-header">
@@ -31,6 +41,14 @@
 								<option>-- Select Category --</option>
 								<?=$optparentmenu?>
 							</select>
+                        </div>
+                        <div id="subcategory">
+                            <div class='form-group'>
+                                <label>Layout</label>
+                                <select required name='product_layout' class='form-control'>
+                                    <?=$optlayout?>
+                                </select>
+                            </div>
                         </div>
                         <div id="subcategory">
                         </div>

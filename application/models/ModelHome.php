@@ -59,18 +59,23 @@
                     $query  = $this->db->query($sql,array($h->menu_id));
                     if($query->num_rows()>0){
                         foreach($query->result() as $row){
+                            if (strlen($row->product_name) > 30){
+                                $product_name = substr($row->product_name, 0, 35) . '...';
+                            }else{
+                                $product_name = $row->product_name;
+                            }
                             $list .= '
-                            <div class="single-product">
+                            <div class="single-product" style="margin-left:15px">
                                 <div class="product-img">
                                     <a href="'.base_url().'product/detail/'.$row->product_id.'">
-                                        <img src="'.base_url().'appadmin/'.$row->product_image1.'" alt="product" class="first" />
+                                        <img src="'.base_url().'appadmin/'.$row->product_image1.'"  alt="'.$row->product_name.'" title="'.$row->product_name.'" class="first" />
                                     </a>
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="#">'.$row->menu_title.'</a></h3>
                                     <div class="product-price">
                                         <ul>
-                                            <li class="new-price">'.$row->product_name.'</li>
+                                            <li class="new-price">'.$product_name.'</li>
                                         </ul>
                                     </div>
                                     <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
@@ -92,21 +97,27 @@
             $list = "";
             if($query->num_rows()>0){
                 foreach($query->result() as $row){
+                    if (strlen($row->product_name) > 30){
+                        $product_name = substr($row->product_name, 0, 35) . '...';
+                    }else{
+                        $product_name = $row->product_name;
+                    }
                     $list .= '
-                    <div class="single-product col-lg-3 mb-30">
-                        <div class="product-img">
-                            <a href="'.base_url().'product/detail/'.$row->product_id.'">
-                                <img src="'.base_url().'appadmin/'.$row->product_image1.'" alt="product" class="first" />
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="#"></a></h3>
-                            <div class="product-price">
-                                <ul>
-                                    <li class="new-price">'.$row->product_name.'</li>
-                                </ul>
+                    <div class="col-lg-4">
+                        <div class="single-product mb-30">
+                            <div class="product-img">
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'">
+                                    <img src="'.base_url().'appadmin/'.$row->product_image1.'"  alt="'.$row->product_name.'" title="'.$row->product_name.'" class="first" />
+                                </a>
                             </div>
-                            <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                            <div class="product-content">
+                                <div class="product-price">
+                                    <ul>
+                                        <li class="new-price">'.$product_name.'</li>
+                                    </ul>
+                                </div>
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                            </div>
                         </div>
                     </div>
                     ';
@@ -165,21 +176,28 @@
             $query = $this->db->get("ryu_product");
             if($query->num_rows()>0){
                 foreach($query->result() as $row){
+                    if (strlen($row->product_name) > 30){
+                        $product_name = substr($row->product_name, 0, 35) . '...';
+                    }else{
+                        $product_name = $row->product_name;
+                    }
                     $list .= '
-                    <div class="single-product col-lg-3 mb-30">
-                        <div class="product-img">
-                            <a href="'.base_url().'product/detail/'.$row->product_id.'">
-                                <img src="'.base_url().'appadmin/'.$row->product_image1.'" alt="product" class="first" />
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="#"></a></h3>
-                            <div class="product-price">
-                                <ul>
-                                    <li class="new-price">'.$row->product_name.'</li>
-                                </ul>
+                    <div class="col-lg-4">
+                        <div class="single-product mb-30">
+                            <div class="product-img">
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'">
+                                    <img src="'.base_url().'appadmin/'.$row->product_image1.'" alt="'.$row->product_name.'" title="'.$row->product_name.'" class="first" />
+                                </a>
                             </div>
-                            <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                            <div class="product-content">
+                                <h3><a href="#"></a></h3>
+                                <div class="product-price">
+                                    <ul>
+                                        <li class="new-price">'.$product_name.'</li>
+                                    </ul>
+                                </div>
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                            </div>
                         </div>
                     </div>
                     ';

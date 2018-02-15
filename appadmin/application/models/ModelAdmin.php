@@ -81,7 +81,7 @@
                 "product_dttm" => date("Y-m-d H:i:s"),
             );
             if($model != ""){
-                for($i=1;$i<=count($model);$i++){
+                for($i=0;$i<count($model);$i++){
                     $datadetail = array(
                         'product_id' => $product_id,
                         'product_model' => $model[$i],
