@@ -62,8 +62,49 @@ class Catalog extends MX_Controller {
 
 	public function products()
 	{
+		$config['per_page']		= 10;
+		$config['num_links'] 	= 2;
+		$config['uri_segment']	= 3;
+		$config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_link'] = '>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		
+		$config['prev_link'] = '<';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['base_url']		= base_url()."catalog/products";
+		$config['total_rows']	= $this->db->query("SELECT * FROM ryu_product where product_status = 'actived'")->num_rows();
+		$this->pagination->initialize($config);
+		$start = $this->uri->segment(3, 0);
+
 		$data["tittle"] = "Products";
-		$data["listproduct"] = $this->ModelAdmin->getListProduct();
+		$data["pagination"]		= $this->pagination->create_links();
+		$data["start"]			= $start;
+		$data["jml_record"]		= $config['total_rows'];
+		$data['from'] = (int)$this->uri->segment(3) + 1;
+		if ($this->uri->segment(3) + $config['per_page'] > $config['total_rows']) {
+			$data['to'] = $config['total_rows'];
+		} else {
+			$data['to'] = (int)$this->uri->segment(3) + $config['per_page'];
+		}
+		$data["listproduct"] = $this->ModelAdmin->getListProduct($config['per_page'],$start);
 		$this->layout->content("products",$data);
 	}
 

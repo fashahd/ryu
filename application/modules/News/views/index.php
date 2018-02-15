@@ -3,7 +3,8 @@
 	if($this->session->userdata("month") != ''){
 		$month = $this->session->userdata("month");
 	}
-	$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$month' order by event_date asc";
+	$year = date("Y");
+	$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$month' AND YEAR(event_date) = '$year' order by event_date asc";
 	$query = $this->db->query($sql);
 	$list = "";
 	if($query->num_rows()>0){

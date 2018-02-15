@@ -88,7 +88,7 @@ class Product extends MX_Controller {
 	}
 
 	function shop($type=null){
-		 // konfigurasi class pagination
+		// konfigurasi class pagination
 		$config['per_page']		= 12;
 		$config['num_links'] 	= 2;
 		$config['uri_segment']	= 4;

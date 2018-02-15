@@ -7,6 +7,12 @@
             return $query->num_rows();
         }
 
+        function getJmlEvent(){
+            $sql = "SELECT * FROM ryu_event";
+            $query  = $this->db->query($sql);
+            return $query->num_rows();
+        }
+
         function updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id,$product_layout){
             $this->db->trans_begin();
             $data   = array(
@@ -287,14 +293,15 @@
             }
         }
 
-        function getListProduct(){
+        function getListProduct($limit, $start = 0){
             $ret = "";
             $sql    = " SELECT a.product_id, a.product_image1, a.product_name, a.product_category , 
                         a.product_subcategory, b.menu_title, c.sub_name, a.product_status
                         FROM `ryu_product` as a
                         LEFT JOIN ryu_menu as b on b.menu_id = a.product_category
                         LEFT JOIN ryu_subcategory as c on c.sub_id = a.product_subcategory
-                        ORDER BY a.product_dttm desc";
+                        ORDER BY a.product_dttm desc
+                        LIMIT $start,$limit";
             $query  = $this->db->query($sql);
             if($query->num_rows()>0){
                 foreach($query->result() as $row){

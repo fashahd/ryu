@@ -28,6 +28,15 @@
 						<?=$listproduct?>
 					</table>
 				</div>
+				<!-- pagination-area-start -->
+				<div class="box-footer clearfix">
+					<ul class="pagination pagination-sm no-margin pull-left">
+						<p>Showing <?=$from?> to <?=$to?> Of Total Product <?=$jml_record?></p>
+					</ul>
+					<ul class="pagination pagination-sm no-margin pull-right">
+						<?=$pagination?>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
