@@ -227,7 +227,7 @@ body {
   padding: 10px 15px;
   position: absolute;
   top: 40px;
-  z-index: 99999999;
+  z-index: 00099;
   opacity: 0;
   visibility: hidden;
   transition:.4s;
@@ -276,7 +276,7 @@ body {
 .search-area form input{
 	border: 0 none;
 	border-radius: 10px;
-	color: #999999;
+	color: #000;
 	font-size: 13px;
 	height: 50px;
 	line-height: 50px;
@@ -505,16 +505,6 @@ body {
   visibility: visible;
 }
 
-
-
-
-
-
-
-
-
-
-
 .cart-area{
 	float:right;
 }
@@ -566,7 +556,7 @@ body {
 	transition: all 0.3s ease 0s;
 	visibility: hidden;
 	width: 280px;
-	z-index: 99999999;
+	z-index: 00099;
 }
 .cart-area ul > li:hover .mini-cart-sub, .cart-area ul > li:hover .mini-cart-sub{
 	opacity:1;
@@ -1558,6 +1548,9 @@ body {
 	position: absolute;
 	width: 60px;
 }
+.footer-title a{
+	color : #000;
+}
 .footer-menu ul li{
 	line-height: 30px;
 	padding-bottom: 5px;
@@ -2097,7 +2090,7 @@ a#scrollUp {
   position: absolute;
   top: 120%;
   right: 0;
-  z-index: 9999999;
+  z-index: 0009;
   opacity:0;
   visibility:hidden;
   transition:.4s;
@@ -3582,7 +3575,7 @@ a#scrollUp {
 .model-text form input {
   background: #eceff8 none repeat scroll 0 0;
   border: 1px solid #aaa;
-  color: #626262;
+  color: #000;
   font-size: 16px;
   height: 40px;
   text-align: center;
@@ -3892,7 +3885,7 @@ a#scrollUp {
 	margin-right:10px;
 }
 .toolbar-sorter span{
-	color: #999999;
+	color: #000;
 	font-size: 12px;
 	padding-right:6px;
 }
@@ -3911,7 +3904,7 @@ a#scrollUp {
   margin-top: 6px;
 }
 .field-limiter .label-title span{
-	color: #999999;
+	color: #000;
 	font-size: 12px;
 	padding-right:6px;
 }
@@ -3927,7 +3920,7 @@ a#scrollUp {
 .field-limiter .control span{
 	float:right;
 	padding-left:6px;
-	color: #999999;
+	color: #000;
 	font-size: 12px;
 	margin-top: 6px;
 }
@@ -4814,17 +4807,17 @@ blockquote {
 .contact-form h3 i {
   padding-right: 8px;
 }
-.contact-form .single-form-3 form input,.contact-form .single-form-3 form textarea {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+.contact-form .single-form-3 input,.contact-form .single-form-3 textarea {
+  background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
   border: 1px solid #eceff8;
   font-size: 14px;
   margin-bottom: 16px;
   padding: 12px 10px;
   width: 100%;
-  color: #626262;
+  color: #000;
 }
-.contact-form .single-form-3 form input[type="submit"] {
-  background: #252525 none repeat scroll 0 0;
+.contact-form .single-form-3 button {
+  background: #6dbf50 none repeat scroll 0 0;
   border: medium none;
   border-radius: 0;
   color: #fff;
@@ -4837,7 +4830,7 @@ blockquote {
   transition: all 0.3s ease 0s;
   width: 140px;
 }
-.contact-form .single-form-3 form input[type="submit"]:hover {
+.contact-form .single-form-3 button:hover {
   background: #6dbf50 none repeat scroll 0 0;
 }
 /*----------------------------------------*/
@@ -4869,7 +4862,7 @@ blockquote {
 	margin-bottom:15px;
 }
 .login-form .single-login label{
-	color: #626262;
+	color: #000;
 	font-size: 15px;
 	font-weight: 400;
 	margin-top:7px;
@@ -4886,7 +4879,7 @@ blockquote {
   border: 1px solid #eceff8;
   display: inline-block;
   padding: 10px 43px;
-  color: #626262;
+  color: #000;
   text-transform: capitalize;
   text-decoration: none;
   float: left;
@@ -4924,7 +4917,7 @@ blockquote {
 }
 .single-register-2 form{}
 .single-register-2 form label ,.single-register-2 label {
-  color: #626262;
+  color: #000;
   display: block;
   font-size: 16px;
   font-weight: 400;
@@ -4934,7 +4927,7 @@ blockquote {
 	background: rgba(255,255,255,1) none repeat scroll 0 0;
 	border: 1px solid #eceff8;
 	box-shadow: none;
-    color: #626262;
+    color: #000;
     font-size: 14px;
     height: 45px;
     width: 100%;
@@ -4943,7 +4936,7 @@ blockquote {
 	height: 45px;
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	border: 1px solid #eceff8;
-	color: #626262;
+	color: #000;
     font-size: 14px;
     height: 45px;
     padding-left: 10px;
@@ -4957,7 +4950,7 @@ blockquote {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: 1px solid #eceff8;
   box-shadow: none;
-  color: #626262;
+  color: #000;
   display: inline-block;
   font-size: 14px;
   margin-top: 6px;
@@ -4979,7 +4972,7 @@ blockquote {
 }
 .single-register form{}
 .single-register form label ,.single-register label {
-  color: #626262;
+  color: #000;
   display: block;
   font-size: 16px;
   font-weight: 400;
@@ -4989,7 +4982,7 @@ blockquote {
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	border: 1px solid #eceff8;
 	box-shadow: none;
-    color: #626262;
+    color: #000;
     font-size: 14px;
     height: 45px;
     padding-left: 10px;
@@ -4999,7 +4992,7 @@ blockquote {
 	height: 45px;
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	border: 1px solid #eceff8;
-	color: #626262;
+	color: #000;
     font-size: 14px;
     height: 45px;
     padding-left: 10px;
@@ -5029,7 +5022,7 @@ blockquote {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: 1px solid #eceff8;
   box-shadow: none;
-  color: #626262;
+  color: #000;
   display: inline-block;
   font-size: 14px;
   margin-top: 6px;

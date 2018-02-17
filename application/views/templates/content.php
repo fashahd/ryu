@@ -170,7 +170,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>News & Event</h4>
+											<h4><a href="<?=base_url()?>news">News & Event</a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -179,7 +179,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Service & Support</h4>
+											<h4><a href="<?=base_url()?>service/page/service">Service & Support</a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -188,7 +188,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Download</h4>
+											<h4><a href="<?=base_url()?>download">Download</a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -197,7 +197,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Contact Us</h4>
+											<h4><a href="<?=base_url()?>contactus">Contact Us</a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -316,4 +316,32 @@
 			}
 		});
 	}
+</script>
+
+<script>
+	var getUrl 	= window.location;
+	var toUrl 	= getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    $("#contactus").submit(function(event){
+		event.preventDefault();
+        var form = $('#contactus');
+
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/contactus/send",
+			data : form.serialize(),
+			dataType: "json",
+			success: function(data){
+				// alert(data.status);
+				if(data.status =="sukses"){
+					$("#contentus").html(data.response);
+				}else{
+					$("#contentus").html(data.response);
+				}
+			},error: function(xhr, ajaxOptions, thrownError){            
+				// alert(xhr.responseText);
+				$("#contentus").html(data.response);
+				return;
+			}
+		});
+    })
 </script>
