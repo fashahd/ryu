@@ -52,15 +52,29 @@
 		</div>
 		<div class="col-lg-3 col-xs-6">
 		<!-- small box -->
-		<div class="small-box bg-yellow">
-			<div class="inner">
-				<h3><?=$jml_event?></h3>
-					<p>News & Event</p>
+			<div class="small-box bg-yellow">
+				<div class="inner">
+					<h3><?=$jml_event?></h3>
+						<p>News & Event</p>
 				</div>
 				<div class="icon">
 					<i class="fa fa-calendar"></i>
 				</div>
-				<a href="#" class="small-box-footer">See More <i class="fa fa-arrow-circle-right"></i></a>
+				<a href="<?=base_url()?>page/news" class="small-box-footer">See More <i class="fa fa-arrow-circle-right"></i></a>
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+			<div class="small-box bg-green">
+				<div class="inner">
+					<h3><?=$jml_message?></h3>
+					<p>User Messages</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-commenting-o"></i>
+				</div>
+				<a href="<?=base_url()?>page/messages" class="small-box-footer">See More <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->

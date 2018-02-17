@@ -99,6 +99,28 @@
             <script src="'.base_url().'appsources/dist/js/demo.js"></script>
             <script src="'.base_url().'appsources/admin/default.js"></script>
             <script src="'.base_url().'appsources/admin/appadmin.js"></script>
+            
+            <!-- iCheck -->
+            <script src="'.base_url().'appsources/plugins/iCheck/icheck.min.js"></script>
+            <!-- Page Script -->
+            <script>
+            $(function () {
+                //Enable check and uncheck all functionality
+                $(".checkbox-toggle").click(function () {
+                    var clicks = $(this).data("clicks");
+                    if (clicks) {
+                        //Uncheck all checkboxes
+                        $(".mailbox-messages input[type=checkbox]").iCheck("uncheck");
+                        $(".fa", this).removeClass("fa-check-square-o").addClass("fa-square-o");
+                    } else {
+                        //Check all checkboxes
+                        $(".mailbox-messages input[type=checkbox]").iCheck("check");
+                        $(".fa", this).removeClass("fa-square-o").addClass("fa-check-square-o");
+                    }
+                    $(this).data("clicks", !clicks);
+                });
+            });
+            </script>
             <script>
                 //Date picker
                 $("#datepicker").datepicker({

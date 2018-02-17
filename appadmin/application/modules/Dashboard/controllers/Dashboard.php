@@ -38,6 +38,7 @@ class Dashboard extends MX_Controller {
 	{
 		$data["jml_product"] = $this->ModelAdmin->getJmlProduct();
 		$data["jml_event"] = $this->ModelAdmin->getJmlEvent();
+		$data["jml_message"] = $this->ModelAdmin->getJmlMessage();
 		$data["tittle"] = "Dashboard";
 		$this->layout->content("front",$data);
 	}

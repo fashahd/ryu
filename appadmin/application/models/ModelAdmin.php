@@ -13,6 +13,12 @@
             return $query->num_rows();
         }
 
+        function getJmlMessage(){
+            $sql = "SELECT * FROM ryu_support_ticket";
+            $query  = $this->db->query($sql);
+            return $query->num_rows();
+        }
+
         function updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id,$product_layout){
             $this->db->trans_begin();
             $data   = array(

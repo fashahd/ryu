@@ -41,6 +41,55 @@ class Page extends MX_Controller {
 		$this->layout->content("service",$data);
 	}
 
+	function messages(){
+		$data["tittle"] = "User Messages";
+		$this->layout->content("messages",$data);
+	}
+
+	function read($support_id){
+		$sql 	= "SELECT * FROM ryu_support_ticket where support_id = '$support_id'";
+		$query	= $this->db->query($sql);
+		$row = $query->row();
+		if($row->status == 'open'){
+			$sql 	= "UPDATE ryu_support_ticket SET status = 'read' WHERE support_id = ?";
+			$query	= $this->db->query($sql, array($support_id));
+		}
+		$data["tittle"] = "Read Messages";
+		$data["support_id"] = $support_id;
+		$this->layout->content("read",$data);
+	}
+
+	function reply($support_id){
+		$data["tittle"] = "Reply Messages";
+		$data["support_id"] = $support_id;
+		$this->layout->content("reply",$data);
+	}
+
+	function sendemail(){
+		$config = Array(  
+			'protocol' => 'smtp',  
+			'smtp_host' => 'ssl://smtp.googlemail.com',  
+			'smtp_port' => 465,  
+			'smtp_user' => 'vmdidn@gmail.com',   
+			'smtp_pass' => 'visioncode',   
+			'mailtype' => 'html',   
+			'charset' => 'iso-8859-1'  
+		); 
+		$this->load->library('email', $config);  
+		$this->email->set_newline("\r\n");  
+		$this->email->from('fashahdarullah22@gmail.com', "Team Support RYU");   
+		$this->email->to($_POST["email"]);   
+		$this->email->subject($_POST["subject"]);   
+		$this->email->message($_POST["message"]);  
+		if (!$this->email->send()) {  
+			show_error($this->email->print_debugger());   
+		}else{			
+			$sql 	= "UPDATE ryu_support_ticket SET status = 'answer' WHERE support_id = ?";
+			$query	= $this->db->query($sql, array($_POST["support_id"]));
+			echo 'Success to send email';   
+		}  
+	}
+
 	function support($type){
 		if($type == "warranty"){
 			$data["tittle"] = "Warranty";
@@ -296,6 +345,26 @@ class Page extends MX_Controller {
 		{
 			$this->db->trans_commit();
 			echo "Store deleted are success";
+		}
+	}
+
+	function deletemessage(){
+		$tmppcat_id = $_POST["support_id"];
+		$arrcat_id 	= explode("|",$tmppcat_id);
+		$this->db->trans_begin();
+		for($i=0;$i<count($arrcat_id);$i++){
+			$sqldelete 		= "DELETE FROM ryu_support_ticket WHERE support_id = '{$arrcat_id[$i]}'";
+			$querydelete 	= $this->db->query($sqldelete);
+		}
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			echo "Message deleted are failed";
+		}
+		else
+		{
+			$this->db->trans_commit();
+			echo "Message deleted are success";
 		}
 	}
 

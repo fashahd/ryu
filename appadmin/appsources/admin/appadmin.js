@@ -23,6 +23,38 @@ function deleteslider(image_id){
 		// Do nothing!
 	}
 }
+
+function deletemessage(){
+	var sList = "";
+	$('input[name=support_id]:checked').each(function () {
+		sList += $(this).val() + "|";
+	});
+
+	if(sList == ""){
+		alert("Please select a Message");
+		return;
+	}
+	if (confirm('Are you sure you?')) {
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/appadmin/page/deletemessage",
+			data : {support_id:sList},
+			// dataType: "json",
+			success: function(data){
+				alert(data);
+				window.location.reload();
+			},error: function(xhr, ajaxOptions, thrownError){            
+				alert(data);
+				window.location.reload();
+				return;
+			}
+		});
+		// Save it!
+	} else {
+		// Do nothing!
+	}
+}
+
 function deleteservice(){
 	var sList = "";
 	$('input[name=service_id]:checked').each(function () {
@@ -220,6 +252,31 @@ $("#category").change(function(){
 		}
 	});
 });
+
+$("#replymessage").submit(function(event) {
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+    var form = $('#replymessage');
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/sendemail",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			alert(data);
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			// $("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			// +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			// +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			// +"Can't Connect, Please Try Again</div>");
+			// return;
+		}
+	});
+})
 
 $('#editcategories').submit(function(event) {
 	event.preventDefault();

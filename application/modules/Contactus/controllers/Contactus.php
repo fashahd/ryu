@@ -36,6 +36,7 @@ class Contactus extends MX_Controller {
 			"subject"	=> $_POST["subject"],
 			"message"	=> $_POST["message"],
 			"status"	=> "open",
+			"created_dttm" => date("Y-m-d H:i:s"),
 		);
 
 		$query	= $this->db->insert("ryu_support_ticket",$data);

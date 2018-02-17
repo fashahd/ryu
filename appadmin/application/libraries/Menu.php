@@ -74,6 +74,11 @@
                                 <i class="fa fa-instagram"></i> <span>Social Media</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="'.base_url().'page/messages">
+                                <i class="fa fa-commenting-o"></i> <span>User Messages</span>
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
