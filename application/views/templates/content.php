@@ -43,15 +43,15 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="search-area">
 								<form action="#">
-									<input id="keyword" type="text" placeholder="Search entire store here ..." />
+									<input id="keyword" type="text" placeholder="<?=$this->lang->line('search_text');?> ..." />
 									<a href="#" onClick="searchproduct()"><i class="fa fa-search"></i></a>
 								</form>
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-3">
 							<div class="header-user">
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/en.jpg" alt="en" /></a> 
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/id.jpg" alt="id" /></a>
+								<a href="<?=base_url(); ?>LanguageSwitcher/switchLang/english" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/en.jpg" alt="en" /></a> 
+								<a href="<?=base_url(); ?>LanguageSwitcher/switchLang/indonesia" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/id.jpg" alt="id" /></a>
 								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook.jpg" alt="facebook" /></a> 
 								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram_black.png" alt="instagram" /></a> 
 							</div>
@@ -197,7 +197,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4><a href="<?=base_url()?>contactus">Contact Us</a></h4>
+											<h4><a href="<?=base_url()?>contactus"><?=$this->lang->line('contact_us');?></a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -219,7 +219,7 @@
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="payment-area">
-								FOLLOW US 
+								<?=$this->lang->line('follow_us');?> 
 								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook_black.png" alt="flag" /></a> 
 								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram.png" alt="flag" /></a> 
 							</div>

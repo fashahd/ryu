@@ -43,7 +43,7 @@
 	<div class="warranty">
 		<?=$support_isi?>
 		<div style="margin-top:40px;color:#000;font-size:13pt">
-			<b>CAN'T FIND THE CORRECT ANSWER</b> <a href="<?=base_url()?>contactus" style="background: #383838 none repeat scroll 0 0;
+			<b><?=$this->lang->line('cant_find');?></b> <a href="<?=base_url()?>contactus" style="background: #383838 none repeat scroll 0 0;
 	background: #6DBF50;
 	border:none;
 	color:#fff;
@@ -55,7 +55,7 @@
 	line-height: 40px;
 	padding: 0 28px;
 	text-transform: uppercase;
-	transition:.3s;">CONTACT US</a>
+	transition:.3s;"><?=$this->lang->line('contact_us');?></a>
 		</div>
 	</div>
 </div>

@@ -38,34 +38,58 @@
 		"11" => "November",
 		"12" => "December",
 	);
-	
-	$listbulan = '';
-	foreach($arrmonth as $bulan => $ketbulan){
-		$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$bulan' order by event_date asc";
-		$query = $this->db->query($sql);
-		$listjadwal = "";
-		if($query->num_rows()>0){
-			foreach($query->result() as $row){
-				$listjadwal .= '
-					<li style="margin-left:20px">('.$row->event_tittle.')</li>
-				';
+	$sql 	= "SELECT YEAR(event_date) as year FROM `ryu_event` GROUP BY YEAR(event_date)";
+	$query	= $this->db->query($sql);
+	$listtahun = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $key){
+			$sql = "SELECT MONTH(event_date) as month FROM `ryu_event` WHERE YEAR(event_date) = '$key->year' GROUP BY MONTH(event_date)";
+			$query	= $this->db->query($sql);
+			$listbulan = "";
+			if($query->num_rows()>0){
+				foreach($query->result() as $h){
+					if($h->month < 10){
+						$h->month = "0".$h->month;
+					}
+					$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$h->month' order by event_date asc";
+					$query = $this->db->query($sql);
+					$listjadwal = "";
+					if($query->num_rows()>0){
+						foreach($query->result() as $row){
+							$listjadwal .= '
+								<li style="margin-left:20px">('.$row->event_tittle.')</li>
+							';
+						}
+					}else{
+						$listjadwal .= '
+							<li style="margin-left:20px">(No Any Event)<li>
+						';
+					}
+					$listbulan .= '
+					<li><a href="#'.$arrmonth[$h->month].'" onclick="seemonth(\''.$h->month.'\')">'.$arrmonth[$h->month].'</a>
+						<ul id="event_'.$h->month.'">
+							'.$listjadwal.'
+						</ul>
+					</li>';
+					$listbulan .= "
+						<script>
+							$('#event_$h->month').hide();
+						</script>
+					";
+				}
 			}
-		}else{
-			$listjadwal .= '
-				<li style="margin-left:20px">(No Any Event)<li>
-			';
+			$listtahun .= '
+			<li><a href="#'.$key->year.'" onclick="seeyear(\''.$key->year.'\')">'.$key->year.'</a>
+				<ul id="event_'.$key->year.'">
+					'.$listbulan.'
+				</ul>
+			</li>';
+			$listtahun .= "
+				<script>
+					$('#event_$key->year').hide();
+				</script>
+			";
 		}
-		$listbulan .= '
-		<li><a href="#'.$ketbulan.'" onclick="seemonth(\''.$bulan.'\')">'.$ketbulan.'</a>
-			<ul id="event_'.$bulan.'">
-				'.$listjadwal.'
-			</ul>
-		</li>';
-		$listbulan .= "
-			<script>
-				$('#event_$bulan').hide();
-			</script>
-		";
 	}
 ?>
 <!-- counter-area-start -->
@@ -113,7 +137,7 @@
 							<h4><span>INDEX</span></h4>
 						</div>
 						<ul class="blog-menu">
-							<?=$listbulan?>
+							<?=$listtahun?>
 						</ul>
 					</div>
 				</div>
@@ -124,6 +148,9 @@
 <!-- single-blog-sidebar-end -->
 <script>
 	function seemonth(month){
+		$("#event_"+month).toggle();
+	}
+	function seeyear(month){
 		$("#event_"+month).toggle();
 	}
 </script>

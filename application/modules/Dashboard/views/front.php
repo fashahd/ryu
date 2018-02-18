@@ -21,7 +21,7 @@
 							<li class="new-price">'.$product_name.'</li>
 						</ul>
 					</div>
-					<a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+					<a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> '.$this->lang->line("view_product").'</a>
 				</div>
 			</div>
 			';
@@ -79,7 +79,7 @@
 								<a href="#"><img src="<?=base_url()?>appsources/img/banner/1.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Affordable Prices</h4>
+								<h4><?=$this->lang->line('banner_text_price');?></h4>
 							</div>
 						</div>
 					</div>
@@ -89,7 +89,7 @@
 								<a href="#"><img src="<?=base_url()?>appsources/img/banner/4.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Japanese Technology</h4>
+								<h4><?=$this->lang->line('banner_text_tech');?></h4>
 							</div>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 								<a href="#"><img src="<?=base_url()?>appsources/img/banner/2.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Compatible Spare parts And Easy Be Obtained</h4>
+								<h4><?=$this->lang->line('banner_text_compatible');?></h4>
 							</div>
 						</div>
 					</div>
@@ -109,7 +109,7 @@
 								<a href="#"><img src="<?=base_url()?>appsources/img/banner/3.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Spread Service Center</h4>
+								<h4><?=$this->lang->line('banner_text_spread');?></h4>
 							</div>
 						</div>
 					</div>
@@ -141,7 +141,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="section-title mb-30">
-							<h2><span class="alphabetic">n</span>ew arrivals</h2>
+							<h2><?=$this->lang->line('new_arrival');?></h2>
 						</div>
 					</div>
 				</div>	
@@ -149,7 +149,7 @@
 					<?=$retnewproduct?>
 				</div>
 				<div class="see-more">
-					<a class="button-new">SEE MORE</a>
+					<a class="button-new"><?=$this->lang->line('see_more');?></a>
 				</div>
 			</div>
 		</div>
