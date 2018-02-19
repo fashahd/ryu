@@ -46,7 +46,7 @@
                     $cek_parent=$CI->db->query("SELECT * from ryu_menu WHERE menu_parent_id='$h->menu_id'");
                     if($cek_parent->num_rows()>0){
                         if($h->url == ""){
-                            $url = "#";
+                            $url = base_url()."product/shop/".$h->menu_id;
                         }else{
                             $url = base_url().''.$h->url;
                         }

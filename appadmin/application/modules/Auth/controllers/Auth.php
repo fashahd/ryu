@@ -21,10 +21,6 @@ class Auth extends MX_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		// if($this->session->userdata("username")){
-		// 	redirect("dashboard/front");
-		// 	return;
-		// }
 	}
 
 	function signout(){
@@ -36,6 +32,12 @@ class Auth extends MX_Controller {
 	{
 		$data["tittle"] = "Login";
 		$this->load->view("login",$data);
+	}
+
+	public function profile()
+	{
+		$data["tittle"] = "Profile";
+		$this->layout->content("profile",$data);
 	}
 
 	function validation(){

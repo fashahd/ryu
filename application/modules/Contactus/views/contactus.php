@@ -32,13 +32,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="single-form-3">
-                                                            <label>First Name *</label>
+                                                            <label><?=$this->lang->line('first_name');?> *</label>
                                                             <input required type="text" name="name_first" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="single-form-3">
-                                                            <label>Last Name *</label>
+                                                            <label><?=$this->lang->line('last_name');?> *</label>
                                                             <input required type="text" name="name_last" />
                                                         </div>
                                                     </div>
@@ -56,7 +56,7 @@
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="single-form-3">
-                                                            <label>Phone Number *</label>
+                                                            <label><?=$this->lang->line('phone_number');?> *</label>
                                                             <input required type="text" name="phone" />
                                                         </div>
                                                     </div>
@@ -64,13 +64,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="single-form-3">
-                                                            <label>Address *</label>
+                                                            <label><?=$this->lang->line('address');?> *</label>
                                                             <input required type="text" name="address" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="single-form-3">
-                                                            <label>Country *</label>
+                                                            <label><?=$this->lang->line('country');?> *</label>
                                                             <input required type="text" name="country" />
                                                         </div>
                                                     </div>
@@ -82,19 +82,19 @@
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="single-form-3">
-                                                            <label>City *</label>
+                                                            <label><?=$this->lang->line('city');?> *</label>
                                                             <input required type="text" name="city" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="single-form-3">
-                                                            <label>Your Message *</label>
+                                                            <label><?=$this->lang->line('your_message');?> *</label>
                                                             <textarea required name="message" cols="30" rows="8"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="single-form-3" style="text-align:center">
-                                                    <button type="submit" value="Continue">Continue</button>
+                                                    <button type="submit" value="Continue"><?=$this->lang->line('send');?></button>
                                                 </div>
                                             </div>
                                         </form>

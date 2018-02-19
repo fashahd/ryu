@@ -38,7 +38,7 @@
 								<ul class="dropdown-menu">
 									<li class="user-body">
 										<div class="pull-left">
-											<a href="#" class="btn btn-default btn-flat">Profile</a>
+											<a href="<?=base_url()?>auth/profile" class="btn btn-default btn-flat">Profile</a>
 										</div>
 										<div class="pull-right">
 										<a href="<?=base_url()?>auth/signout" class="btn btn-default btn-flat">Sign out</a>

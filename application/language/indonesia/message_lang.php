@@ -11,6 +11,14 @@
     $lang["go_to_home"]  = "Ke Beranda";
     $lang["follow_us"] = "Ikuti Kami";
     $lang["contact_us"] = "Hubungi Kami";
+    $lang["first_name"] = "Nama Depan";
+    $lang["last_name"] = "Nama Belakang";
+    $lang["phone_number"] = "Nomor Handphone";
+    $lang["address"] = "Alamat";
+    $lang["country"] = "Negara";
+    $lang["city"] = "Kota";
+    $lang["your_message"] = "Pesan Anda";
+    $lang["send"] = "Kirim";
     $lang["cant_find"] = "TIDAK MENEMUKAN JAWABAN YANG TEPAT";
     $lang["not_found_2"]  = "Maaf, halaman yang Anda cari tidak ditemukan. Tolong, pastikan Anda telah mengetik URL saat ini.";
 ?>

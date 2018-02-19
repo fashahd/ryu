@@ -11,6 +11,14 @@
     $lang["go_to_home"]  = "Go To Home";
     $lang["follow_us"] = "Follow Us";
     $lang["contact_us"] = "Contact Us";
+    $lang["first_name"] = "First Name";
+    $lang["last_name"] = "Last Name";
+    $lang["phone_number"] = "Phone Number";
+    $lang["address"] = "Address";
+    $lang["country"] = "Country";
+    $lang["city"] = "City";
+    $lang["your_message"] = "Your Message";
+    $lang["send"] = "Send";
     $lang["cant_find"] = "CAN'T FIND THE CORRECT ANSWER";
     $lang["not_found_2"]  = "Sorry, but the page you are looking for is not found. Please, make sure you have typed the current URL.";
 ?>
