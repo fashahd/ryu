@@ -253,6 +253,83 @@ $("#category").change(function(){
 	});
 });
 
+$("#account").submit(function(event) {
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+    var form = $('#account');
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/auth/updateaccount",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			if(data == "not_match"){
+				alert("Password Tidak Sama");
+				return;
+			}else{
+				alert("Sukses");
+				window.location.reload();
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			// $("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			// +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			// +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			// +"Can't Connect, Please Try Again</div>");
+			// return;
+		}
+	});
+})
+
+function setLanguage(lang){
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/catalog/setLanguage",
+		data : {lang:lang},
+		success: function(data){
+			window.location.reload();
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+		}
+	});
+}
+
+$("#profile").submit(function(event) {
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+    var form = $('#profile');
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/auth/updateprofile",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			if(data == "error"){
+				alert("Gagal");
+				return;
+			}else{
+				alert("Sukses");
+				window.location.reload();
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			// $("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			// +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			// +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			// +"Can't Connect, Please Try Again</div>");
+			// return;
+		}
+	});
+})
+
 $("#replymessage").submit(function(event) {
 	event.preventDefault();
 
@@ -267,8 +344,9 @@ $("#replymessage").submit(function(event) {
 		// dataType: "json",
 		success: function(data){
 			alert(data);
-		},error: function(xhr, ajaxOptions, thrownError){            
-			alert(xhr.responseText);
+		},error: function(xhr, ajaxOptions, thrownError){
+			alert("Can't Connect To Mail Server, Please Try Again");          
+			// alert(xhr.responseText);
 			// $("#notif").html('<div class="alert alert-danger alert-dismissible">'
 			// +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
 			// +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
@@ -628,7 +706,7 @@ $("#addspec").click(function(){
 	colModel.setAttribute('class','form-group col-lg-6');
 	
     var labelModel   = document.createElement("label");
-	labelModel.appendChild(document.createTextNode('Product Model'));
+	labelModel.appendChild(document.createTextNode('Product Model (English)'));
 	
     var inputModel   =   document.createElement("input");
     inputModel.setAttribute('class','form-control');
@@ -642,19 +720,49 @@ $("#addspec").click(function(){
 	colDesc.setAttribute('class','form-group col-lg-6');
 	
     var labelDesc   = document.createElement("label");
-	labelDesc.appendChild(document.createTextNode('Product Description'));
+	labelDesc.appendChild(document.createTextNode('Product Description (English)'));
 	
     var inputDesc   =   document.createElement("input");
     inputDesc.setAttribute('class','form-control');
     inputDesc.setAttribute('name','description[]');
     inputDesc.setAttribute('required','required');
     colDesc.appendChild(labelDesc);
-    colDesc.appendChild(inputDesc);
+	colDesc.appendChild(inputDesc);
+	
+	//membuat form-group Komponen
+    var colModel_id = document.createElement('div');
+	colModel_id.setAttribute('class','form-group col-lg-6');
+	
+    var labelModel_id   = document.createElement("label");
+	labelModel_id.appendChild(document.createTextNode('Product Model (Indonesia)'));
+	
+    var inputModel_id   =   document.createElement("input");
+    inputModel_id.setAttribute('class','form-control');
+    inputModel_id.setAttribute('name','model_id[]');
+    inputModel_id.setAttribute('required','required');
+	colModel.appendChild(labelModel_id);
+	colModel.appendChild(inputModel_id);
+	
+    //membuat form-group Desc
+    var colDesc_id = document.createElement('div');
+	colDesc_id.setAttribute('class','form-group col-lg-6');
+	
+    var labelDesc_id   = document.createElement("label");
+	labelDesc_id.appendChild(document.createTextNode('Product Description (Indonesia)'));
+	
+    var inputDesc_id   =   document.createElement("input");
+    inputDesc_id.setAttribute('class','form-control');
+    inputDesc_id.setAttribute('name','description_id[]');
+    inputDesc_id.setAttribute('required','required');
+    colDesc.appendChild(labelDesc_id);
+    colDesc.appendChild(inputDesc_id);
 
 
     productrow.appendChild(row);
     row.appendChild(colModel);
 	row.appendChild(colDesc);
+	row.appendChild(colModel_id);
+	row.appendChild(colDesc_id);
 	row.appendChild(deleteRow);
     
     deleteRow.onclick = function () {

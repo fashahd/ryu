@@ -53,8 +53,12 @@
                         <div id="subcategory">
                         </div>
                         <div class="form-group">
-                            <label>Product Information</label>
-                            <textarea name="information" class="form-control" rows="3" placeholder="This product is......"></textarea>
+                            <label>Product Information (English)</label>
+                            <textarea name="information_english" class="form-control" rows="3" placeholder="This product is......"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Information (Indonesia)</label>
+                            <textarea name="information_indonesia" class="form-control" rows="3" placeholder="Product ini adalah......"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="FileUpload1">Product Image</label>

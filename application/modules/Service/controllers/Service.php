@@ -99,6 +99,18 @@ class Service extends MX_Controller {
 	public function page($type)
 	{
 		if($type == "service"){
+			if($this->session->userdata("city") != ''){
+				$city = $this->session->userdata("city");
+			}else{
+				$city = "";
+			}
+			if($this->session->userdata("province") != ''){
+				$province = $this->session->userdata("province");
+			}else{
+				$province = "";
+			}
+			$data["city"]	= $city;
+			$data["province"]	= $province;
 			$data["tittle"] = "Service Center";
 			$this->layout->content("service",$data);
 			return;

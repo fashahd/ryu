@@ -16,11 +16,13 @@
     $optsubcategory = "";
     $detailret = "";
     $product_id = "";
+    $product_note_id = "";
     if($product){
         foreach($product as $row){
             $product_id = $row->product_id;
             $product_name = $row->product_name;
             $product_note = $row->product_note;
+            $product_note_id = $row->product_note_id;
             $product_category = $row->product_category;
             $product_subcategory = $row->product_subcategory;
             $product_image1 = $row->product_image1;
@@ -46,12 +48,20 @@
             $detailret .= '
             <div class="row" id="row_'.$key->id.'">            
                 <div class="form-group col-lg-6">
-                    <label for="exampleInputEmail1">Product Model</label>
+                    <label for="exampleInputEmail1">Product Model (English)</label>
                     <input required name="model[]" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Model" value="'.$key->product_model.'">
                 </div>           
                 <div class="form-group col-lg-6">
-                    <label for="exampleInputEmail1">Product Description</label>
+                    <label for="exampleInputEmail1">Product Description (English)</label>
                     <input required name="description[]" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Description" value="'.$key->product_description.'">
+                </div>            
+                <div class="form-group col-lg-6">
+                    <label for="exampleInputEmail1">Product Model (Indonesia)</label>
+                    <input name="model_id[]" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Model" value="'.$key->product_model_id.'">
+                </div>           
+                <div class="form-group col-lg-6">
+                    <label for="exampleInputEmail1">Product Description (Indonesia)</label>
+                    <input name="description_id[]" type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Description" value="'.$key->product_description_id.'">
                 </div>
                 <div class="col-md-2 col-xs-2">
                     <i class="fa fa-trash fa-2x" onClick="deleterow(\''.$key->id.'\')"></i>
@@ -76,8 +86,22 @@
     <form id="editproductform"  method="post" enctype="multipart/form-data">
 	    <div class="row">
             <div class="col-md-12">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-original-title="Language">
+                    <i class="fa fa-language"></i></button>
+                    <ul class="dropdown-menu" role="menu">
+                        <?php if($lang == "english"){ ?>
+                        <li class="active"><a href="#english" onClick="setLanguage('English')">English</a></li>
+                        <li><a href="#" onClick="setLanguage('Indonesia')">Indonesia</a></li>
+                        <?php }else{ ?>
+                        <li><a href="#" onClick="setLanguage('English')">English</a></li>
+                        <li class="active"><a href="#indonesia" onClick="setLanguage('Indonesia')">Indonesia</a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
                 <a href="<?=base_url()?>catalog/products" class="btn btn-default pull-right" style="margin: 0 5px 5px 0"><i class="fa fa-mail-reply-all"></i></a>
                 <button class="btn btn-primary pull-right" style="margin: 0 5px 5px 0"><i class="fa fa-save"></i></button>
+                
             </div>
         </div>
 	    <div class="row">
@@ -119,8 +143,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Product Information</label>
-                            <textarea name="information" class="form-control" rows="3" placeholder="This product is......"><?=$product_note?></textarea>
+                            <label>Product Information (English)</label>
+                            <textarea name="information_english" class="form-control" rows="3" placeholder="This product is......"><?=$product_note?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Information (Indonesia)</label>
+                            <textarea name="information_indonesia" class="form-control" rows="3" placeholder="Product ini adalah......"><?=$product_note_id?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="FileUpload1">Product Image</label>

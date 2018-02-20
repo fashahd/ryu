@@ -9,7 +9,12 @@
                         ORDER BY menu_order asc";
             $query  = $CI->db->query($sql);
             if($query->num_rows()>0){
-                foreach($query->result() as $h){
+                foreach($query->result() as $h){                        
+                    if($CI->session->userdata('site_lang') == "indonesia"){
+                        if($h->menu_title_id != ''){
+                            $h->menu_title = $h->menu_title_id;
+                        }
+                    }
                     $cek_parent=$CI->db->query("SELECT * from ryu_menu WHERE menu_parent_id='$h->menu_id'");
                     if($cek_parent->num_rows()>0){
                         if($h->url == "" AND $h->editable == "ya"){                            
@@ -42,7 +47,12 @@
                         ORDER BY menu_order asc";
             $query  = $CI->db->query($sql);
             if($query->num_rows()>0){
-                foreach($query->result() as $h){
+                foreach($query->result() as $h){                        
+                    if($CI->session->userdata('site_lang') == "indonesia"){
+                        if($h->menu_title_id != ''){
+                            $h->menu_title = $h->menu_title_id;
+                        }
+                    }
                     $cek_parent=$CI->db->query("SELECT * from ryu_menu WHERE menu_parent_id='$h->menu_id'");
                     if($cek_parent->num_rows()>0){
                         if($h->url == ""){

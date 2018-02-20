@@ -19,12 +19,13 @@
             return $query->num_rows();
         }
 
-        function updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id,$product_layout){
+        function updateproduct($product,$category,$subcategory,$information,$information_id,$model,$description,$image1,$image2,$image3,$product_id,$product_layout,$description_id,$model_id){
             $this->db->trans_begin();
             $data   = array(
                 "product_name"  => $product,
                 "product_category" => $category,
                 "product_note"  => $information,
+                "product_note_id"  => $information_id,
                 "product_subcategory" => $subcategory,
                 "product_layout"=>$product_layout
             );
@@ -58,7 +59,9 @@
                         $datadetail = array(
                             'product_id' => $product_id,
                             'product_model' => $model[$i],
-                            'product_description' => $description[$i]
+                            'product_description' => $description[$i],
+                            'product_model_id' => $model_id[$i],
+                            "product_description_id" => $description_id[$i]
                         );
                         $this->db->insert('ryu_product_detail', $datadetail);
                     }
@@ -77,7 +80,7 @@
             }
         }
 
-        function saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_layout){
+        function saveproduct($product,$category,$subcategory,$information,$information_id,$model,$description,$image1,$image2,$image3,$product_layout,$model_id,$description_id){
             $this->db->trans_begin();
             $product_id = $this->getProductID();
             $data   = array(
@@ -91,6 +94,7 @@
                 "product_note"  => $information,
                 "product_subcategory" => $subcategory,
                 "product_layout"=>$product_layout,
+                "product_note_id" => $information_id,
                 "product_dttm" => date("Y-m-d H:i:s"),
             );
             if($model != ""){
@@ -98,7 +102,9 @@
                     $datadetail = array(
                         'product_id' => $product_id,
                         'product_model' => $model[$i],
-                        'product_description' => $description[$i]
+                        'product_description' => $description[$i],
+                        'product_model_id' => $model_id[$i],
+                        'product_description_id' => $description_id[$i]
                     );
                     $this->db->insert('ryu_product_detail', $datadetail);
                 }
@@ -299,7 +305,7 @@
             }
         }
 
-        function getListProduct($limit, $start = 0){
+        function getListProduct($limit = 0, $start = 0){
             $ret = "";
             $sql    = " SELECT a.product_id, a.product_image1, a.product_name, a.product_category , 
                         a.product_subcategory, b.menu_title, c.sub_name, a.product_status

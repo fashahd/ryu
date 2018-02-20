@@ -16,7 +16,7 @@
         }
 
         function getDetailProduct($product_id=null){
-            $sql    = "SELECT a.product_note,a.product_id, a.product_name, a.product_image1, a.product_image2, a.product_image3, b.menu_title, c.sub_name, a.product_layout
+            $sql    = "SELECT a.product_note,a.product_note_id,a.product_id, a.product_name, a.product_image1, a.product_image2, a.product_image3, b.menu_title, c.sub_name, a.product_layout
                     FROM ryu_product as a 
                     LEFT JOIN ryu_menu as b on b.menu_id = a.product_category
                     LEFT JOIN ryu_subcategory as c on c.sub_id = a.product_subcategory
@@ -24,7 +24,7 @@
             $query  = $this->db->query($sql,array($product_id));
             if($query->num_rows()>0){
                 $row = $query->row();
-                $hasil = array($row->product_note,$row->product_id,$row->product_name,$row->product_image1,$row->product_image2,$row->product_image3,$row->menu_title,$row->sub_name,$row->product_layout);
+                $hasil = array($row->product_note,$row->product_note_id,$row->product_id,$row->product_name,$row->product_image1,$row->product_image2,$row->product_image3,$row->menu_title,$row->sub_name,$row->product_layout);
                 return $hasil;
             }else{
                 return false;
@@ -78,7 +78,7 @@
                                             <li class="new-price">'.$product_name.'</li>
                                         </ul>
                                     </div>
-                                    <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                                    <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> '.$this->lang->line("view_product").'</a>
                                 </div>
                             </div>
                             ';
@@ -117,7 +117,7 @@
                                         <li class="new-price">'.$product_name.'</li>
                                     </ul>
                                 </div>
-                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> '.$this->lang->line("view_product").'</a>
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                                         <li class="new-price">'.$product_name.'</li>
                                     </ul>
                                 </div>
-                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new">'.$this->lang->line("view_product").'</a>
                             </div>
                         </div>
                     </div>
@@ -248,7 +248,7 @@
                                         <li class="new-price">'.$product_name.'</li>
                                     </ul>
                                 </div>
-                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> View Product</a>
+                                <a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> '.$this->lang->line("view_product").'</a>
                             </div>
                         </div>
                     </div>

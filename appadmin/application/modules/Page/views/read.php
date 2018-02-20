@@ -33,7 +33,7 @@
                 <div class="box-tools pull-right">
                     <a href="<?=base_url()?>page/reply/<?=$support_id?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
                         <i class="fa fa-reply"></i></a>
-                    <a href="<?=base_url()?>page/messages" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
+                    <a href="<?=base_url()?>page/messages" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Back">
                         Back</a> 
                 </div>
             </div>

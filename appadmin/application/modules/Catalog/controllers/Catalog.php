@@ -214,9 +214,13 @@ class Catalog extends MX_Controller {
 
 	function addproduct(){
 		$data["tittle"] 	= "Add Products";
-		$data["product"] 	= $this->ModelAdmin->getListProduct();
 		$data["optparentmenu"] = $this->ModelAdmin->getOptParentMenu();
 		$this->layout->content("addproducts",$data);
+	}
+
+	function setLanguage(){
+		$this->session->set_userdata("lang",$_POST["lang"]);
+		return true;
 	}
 
 	function edit($type=null,$id=null){
@@ -226,6 +230,11 @@ class Catalog extends MX_Controller {
 			return;
 		}
 		if($type == "product"){
+			if($this->session->userdata("lang") == ""){
+				$data["lang"] = "English";
+			}else{
+				$data["lang"] = $this->session->userdata("lang");
+			}
 			$data["tittle"] 		= "Edit Products";
 			$data["product"] 		= $this->ModelAdmin->getProductByID($id);
 			$data["detailproduct"] 	= $this->ModelAdmin->getDetailByID($id);
@@ -328,7 +337,8 @@ class Catalog extends MX_Controller {
 	function saveproduct(){
 		$product 	= $_POST["product"];
 		$category 	= $_POST["category"];
-		$information 	= $_POST["information"];
+		$information 	= $_POST["information_english"];
+		$information_id = $_POST["information_indonesia"];
 		$product_layout = $_POST["product_layout"];
 		if(isset($_POST["subcategory"])){
 			$subcategory = $_POST["subcategory"];
@@ -336,17 +346,26 @@ class Catalog extends MX_Controller {
 			$subcategory = "";
 		}
 		$model 		 = "";
+		$model_id	 = "";
 		$description = "";
+		$description_id = "";
 		$image1 	 = "";
 		$image2 	 = "";
 		$image3 	 = "";
+		$message = "";
 		if(isset($_POST["model"])){
 			$model 			= $_POST["model"];
 		}
 		if(isset($_POST["description"])){
 			$description 	= $_POST["description"];
 		}
-		if(isset($_FILES["ImageUpload1"]["name"])){
+		if(isset($_POST["model_id"])){
+			$model_id			= $_POST["model_id"];
+		}
+		if(isset($_POST["description_id"])){
+			$description_id 	= $_POST["description_id"];
+		}
+		if($_FILES["ImageUpload1"]["name"] != ''){
 			$validextensions = array("jpeg", "jpg", "png");
 			$temporary 		= explode(".", $_FILES["ImageUpload1"]["name"]);
 			$file_extension = end($temporary);
@@ -424,8 +443,8 @@ class Catalog extends MX_Controller {
 			}
 		}
 
-		if($message == "sukses"){
-			$response = $this->ModelAdmin->saveproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_layout);
+		if($message == "sukses" OR $message == ""){
+			$response = $this->ModelAdmin->saveproduct($product,$category,$subcategory,$information,$information_id,$model,$description,$image1,$image2,$image3,$product_layout,$model_id,$information_id);
 			if($response == "sukses"){
 				$message = "Product Added";
 			}else{
@@ -446,11 +465,14 @@ class Catalog extends MX_Controller {
 	function updateproduct(){
 		$product 	= $_POST["product"];
 		$category 	= $_POST["category"];
-		$information 	= $_POST["information"];
+		$information 	= $_POST["information_english"];
+		$information_id 	= $_POST["information_indonesia"];
 		$subcategory = $_POST["subcategory"];
 		$product_id = $_POST["product_id"];
 		$product_layout = $_POST["product_layout"];
 		$model 		 = "";
+		$model_id 	 = "";
+		$description_id = "";
 		$description = "";
 		$image1 	 = "";
 		$image2 	 = "";
@@ -461,6 +483,12 @@ class Catalog extends MX_Controller {
 		}
 		if(isset($_POST["description"])){
 			$description 	= $_POST["description"];
+		}
+		if(isset($_POST["model_id"])){
+			$model_id 			= $_POST["model_id"];
+		}
+		if(isset($_POST["description_id"])){
+			$description_id 	= $_POST["description_id"];
 		}
 		if($_FILES["ImageUpload1"]["name"] != ''){
 			$validextensions = array("jpeg", "jpg", "png");
@@ -544,7 +572,7 @@ class Catalog extends MX_Controller {
 		}
 
 		if($message == "sukses"){
-			$response = $this->ModelAdmin->updateproduct($product,$category,$subcategory,$information,$model,$description,$image1,$image2,$image3,$product_id,$product_layout);
+			$response = $this->ModelAdmin->updateproduct($product,$category,$subcategory,$information,$information_id,$model,$description,$image1,$image2,$image3,$product_id,$product_layout,$description_id,$model_id);
 			if($response == "sukses"){
 				$message = "Product Update";
 			}else{

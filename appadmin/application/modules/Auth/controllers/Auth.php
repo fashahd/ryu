@@ -36,6 +36,10 @@ class Auth extends MX_Controller {
 
 	public function profile()
 	{
+		if(!$this->session->userdata("username")){
+			redirect("auth/login");
+			return;
+		}
 		$data["tittle"] = "Profile";
 		$this->layout->content("profile",$data);
 	}
@@ -55,6 +59,43 @@ class Auth extends MX_Controller {
 		if($data["status"] == "sukses"){			
 			$this->session->set_userdata("username",$data["username"]);
 			echo "sukses";
+			return;
+		}
+	}
+
+	function updateaccount(){
+		$username = $this->session->userdata("username");
+		if($_POST["new_password"] != '' AND $_POST["password"] != ''){
+			if($_POST["new_password"] == $_POST["password"]){
+				$password = md5($_POST["new_password"]);
+				$sql = "UPDATE ryu_users SET password = '$password' WHERE username = '$username'";
+				$this->db->query($sql);
+			}else{
+				echo "not_match";
+				return;
+			}
+		}
+		if($_POST["username"] != ''){
+			$sql 	= "UPDATE ryu_users SET username = '$_POST[username]' WHERE username = '$username'";
+			$query = $this->db->query($sql);
+			if($query){				
+				$this->session->set_userdata("username",$_POST["username"]);
+			}
+		}
+
+		echo "sukses";
+		return;
+	}
+
+	function updateprofile(){
+		$username = $this->session->userdata("username");
+		$sql 	= "UPDATE ryu_users SET fullname = '$_POST[fullname]', email ='$_POST[email]' WHERE username = '$username'";
+		$query = $this->db->query($sql);
+		if($query){
+			echo "sukses";
+			return;
+		}else{
+			echo "error";
 			return;
 		}
 	}

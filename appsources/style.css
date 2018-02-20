@@ -270,10 +270,10 @@ body {
 .header-mid-area{
 	background:#1F1F1F;
 }
-.search-area form{
+.search-area {
 	position:relative;
 }
-.search-area form input{
+.search-area input{
 	border: 0 none;
 	border-radius: 10px;
 	color: #000;
@@ -284,7 +284,7 @@ body {
 	width: 100%;
 	position:relative;
 }
-.search-area form select.header-option {
+.search-area select.header-option {
   background: #fff none repeat scroll 0 0;
   border: 0 none;
   box-shadow: none;
@@ -300,8 +300,8 @@ body {
   transform: translateY(-50%);
   outline:none;
 }
-.search-area form input:before{}
-.search-area form a{
+.search-area input:before{}
+.search-area a{
 	background: #fff none repeat scroll 0 0;
 	border: 0 none;
 	border-radius: 30px;
@@ -317,11 +317,11 @@ body {
 	transition: all 300ms linear 0s;
 	width: 75px;
 }
-.search-area form a i{
+.search-area a i{
 	transform:scale(1);
 	transition:.3s;
 }
-.search-area form a:hover i{
+.search-area a:hover i{
 	transform:scale(1.1);
 }
 .header-user a{
@@ -1855,7 +1855,7 @@ a#scrollUp {
   position: absolute;
   right: 0;
   top: -75px;
-  transition;.3s;
+  transition:.3s;
 }
 .product-active-4.owl-carousel.owl-theme .owl-controls .owl-nav div:hover,.product-active-5.owl-carousel.owl-theme .owl-controls .owl-nav div:hover,.tab-active-3.owl-carousel.owl-theme .owl-controls .owl-nav div:hover,.product-active-6.owl-carousel.owl-theme .owl-controls .owl-nav div:hover,.blog-active-2.owl-carousel.owl-theme .owl-controls .owl-nav div:hover{
 	color:#6dbf50;
@@ -2727,7 +2727,7 @@ a#scrollUp {
 .home-6 .header-menu-area{
 	background:#1197d6 ;
 }
-.home-6 .search-area form input {
+.home-6 .search-area input {
   border: 2px solid #E7E7E7;
 }
 .home-6 .header-user a {
@@ -2751,10 +2751,10 @@ a#scrollUp {
 .home-6 .cart-area ul > li .cart-bottom a:hover {
   color: #6dbf50;
 }
-.home-6 .search-area form a {
+.home-6 .search-area a {
   background: #101010 none repeat scroll 0 0;
 }
-.home-6 .search-area form a:hover {
+.home-6 .search-area a:hover {
   background: #1197d6 none repeat scroll 0 0;
 }
 .home-6 .section-title{
@@ -3221,7 +3221,7 @@ a#scrollUp {
 .home-8 .cart-area ul > li .cart-bottom a:hover {
   color: #6dbf50;
 }
-.home-8 .search-area form input{
+.home-8 .search-area input{
 	background: #fff none repeat scroll 0 0;
 	border: 1px solid #dadada;
 	border-radius: 20px;
@@ -3234,7 +3234,7 @@ a#scrollUp {
 	width: 100%;
 	z-index: 1;
 }
-.home-8 .search-area form a {
+.home-8 .search-area a {
   background: #393939 none repeat scroll 0 0;
   border: medium none;
   border-radius: 0 20px 20px 0;
@@ -3254,7 +3254,7 @@ a#scrollUp {
   width: 50px;
   z-index:999;
 }
-.home-8 .search-area form a:hover{
+.home-8 .search-area a:hover{
 	background:#c79447;
 }
 .home-8 .header-menu-area {
@@ -5359,7 +5359,7 @@ blockquote {
 }
 .coupon p {
   font-size:12px;
-  color::#777;
+  color:#777;
 }
 .coupon form input{
 	border: 1px solid #e5e5e5;

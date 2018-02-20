@@ -1,9 +1,14 @@
 <?php
-	list($product_note,$product_id,$product_name,$product_image1,$product_image2,$product_image3,$menu_title,$sub_name,$product_layout)=$detail;
+	list($product_note,$product_note_id,$product_id,$product_name,$product_image1,$product_image2,$product_image3,$menu_title,$sub_name,$product_layout)=$detail;
 	if($sub_name != ''){
 		$sub_name1 = '<li><a href="#">/</a></li><li><a href="#">'.$sub_name.'</a></li>';
 	}else{
 		$sub_name1 = "";
+	}
+	if($this->session->userdata('site_lang') == "indonesia"){
+		if($product_note_id != ''){
+			$product_note = $product_note_id;
+		}
 	}
 ?>
 
@@ -82,7 +87,7 @@
 				<!-- tab-menu-start -->
 				<div class="tab-menu mb-40">
 					<ul>
-						<li>Specification</li>
+						<li><?=$this->lang->line("spec")?></li>
 					</ul>
 				</div>
 				<!-- tab-menu-end -->
@@ -105,6 +110,12 @@
 									<?php
 										if($spek){
 											foreach($spek as $row){
+												if($this->session->userdata('site_lang') == "indonesia"){
+													if($row->product_model_id != ''){
+														$row->product_model = $row->product_model_id;
+														$row->product_description = $row->product_description_id;
+													}
+												}
 												echo '
 													<tr>
 														<td style="font-weight:700;font-size:12pt">'.$row->product_model.'</td>
@@ -137,7 +148,7 @@
 				<!-- tab-menu-start -->
 				<div class="tab-menu mb-40">
 					<ul>
-						<li>Description</li>
+						<li><?=$this->lang->line("desc")?></li>
 					</ul>
 				</div>
 				<!-- tab-menu-end -->
@@ -159,7 +170,7 @@
 								<thead>
 									<tr>
 										<th style="text-transform:uppercase">Model</th>
-										<th style="text-transform:uppercase">Description</th>
+										<th style="text-transform:uppercase"><?=$this->lang->line("desc")?></th>
 									</tr>
 								</thead>
 								<tbody>

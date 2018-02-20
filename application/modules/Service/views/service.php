@@ -20,8 +20,8 @@
 			<div class="col-lg-12">
 				<div class="breadcrumb-content text-center">
 					<div class="breadcrumb-title text-left">
-						<h3><a href="#">Need Repairs?</a></h3>
-						<p style="font-weight:700;margin-top:10px">Use the form below to search for an authorized RYU service center near you.</p>
+						<h3><a href="#"><?=$this->lang->line("need_repairs")?>?</a></h3>
+						<p style="font-weight:700;margin-top:10px"><?=$this->lang->line("repair_ket")?>.</p>
 					</div>
 				</div>
 			</div>
@@ -34,20 +34,16 @@
 			<div class="col-lg-12" style="margin-top:30px">
 				<div class="breadcrumb-content-down text-center">					
 					<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
-						<h2>Find a service center :</h2>
+						<h2><?=$this->lang->line("find_service")?> :</h2>
 					</div>			
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 						<div class="search-area">
-							<form action="#">
-								<input type="text" placeholder="City" />
-							</form>
+								<input type="text" placeholder="City" value="<?=$city?>"/>
 						</div>
 					</div>				
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 						<div class="search-area">
-							<form action="#">
-								<input type="text" placeholder="Province" />
-							</form>
+								<input type="text" placeholder="Province" value="<?=$province?>" />
 						</div>
 					</div>				
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
@@ -102,7 +98,7 @@
 
         function initMap() {
         var map = new google.maps.Map(document.getElementById('googleMap'), {
-          center: new google.maps.LatLng(-6.0940741, 106.7257935),
+          center: new google.maps.LatLng(-6.167537, 106.826463),
           zoom: 12
         });
         var infoWindow = new google.maps.InfoWindow;

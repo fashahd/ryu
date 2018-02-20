@@ -140,7 +140,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Product</h4>
+											<h4><?=$this->lang->line('product');?></h4>
 										</div>
 										<div class="footer-menu">
 											<ul>
@@ -188,7 +188,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4><a href="<?=base_url()?>download">Download</a></h4>
+											<h4><a href="<?=base_url()?>download"><?=$this->lang->line('download');?></a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->

@@ -7,6 +7,8 @@
     $lang["new_arrival"] = "<span class='alphabetic'>P</span>endatang Baru";
     $lang["see_more"]   = "Lebih Lanjut";
     $lang["view_product"]   = "Lihat Produk";
+    $lang["product"]   = "Produk";
+    $lang["download"]   = "Unduhan";
     $lang["not_found"]  = "Oops! Halaman yang anda cari tidak ditemukan.";
     $lang["go_to_home"]  = "Ke Beranda";
     $lang["follow_us"] = "Ikuti Kami";
@@ -19,6 +21,11 @@
     $lang["city"] = "Kota";
     $lang["your_message"] = "Pesan Anda";
     $lang["send"] = "Kirim";
+    $lang["spec"] = "Spesifikasi";
+    $lang["desc"] = "Deskripsi";
     $lang["cant_find"] = "TIDAK MENEMUKAN JAWABAN YANG TEPAT";
+    $lang["need_repairs"] = "Butuh Perbaikan";
+    $lang["repair_ket"] = "Gunakan form di bawah ini untuk mencari pusat layanan resmi RYU di dekat Anda";
+    $lang["find_service"] = "Temukan service center";
     $lang["not_found_2"]  = "Maaf, halaman yang Anda cari tidak ditemukan. Tolong, pastikan Anda telah mengetik URL saat ini.";
 ?>

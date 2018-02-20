@@ -1,3 +1,15 @@
+<?php
+    $username = $this->session->userdata("username");
+    $sql = "SELECT * FROM ryu_users WHERE username = '$username'";
+    $query = $this->db->query($sql);
+    if($query->num_rows()){
+        $row        = $query->row();
+        $username   = $row->username;
+        $fullname   = $row->fullname;
+        $email      = $row->email;
+    }
+?>
+
 
 <!-- Content Header (Page header) -->
 <div id="notif"></div>
@@ -9,54 +21,48 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-6">
-            <form class="form-horizontal">
+            <form class="form" id="profile">
                 <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="inputName">Name</label>
+                    <input type="text" class="form-control" name="fullname" placeholder="Name" value="<?=$fullname?>">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Email" value="<?=$email?>">
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputName" placeholder="Name">
-                    </div>
+<section class="content-header">
+    <h1>Account Information</h1>
+</section>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-6">
+            <form class="form" id="account">
+                <div class="form-group">
+                    <label for="inputName">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" value="<?=$username?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
+                    <label for="inputEmail">New Password</label>
+                    <input type="password" class="form-control" name="new_password" placeholder="New Password">
                 </div>
                 <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputName" placeholder="Name">
-                    </div>
+                    <label for="inputEmail">Re-type Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Re-type Password">
                 </div>
                 <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-danger">Submit</button>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </form>
