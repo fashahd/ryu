@@ -3,10 +3,10 @@
     $sql = "SELECT * FROM ryu_users WHERE username = '$username'";
     $query = $this->db->query($sql);
     if($query->num_rows()){
-        $row        = $query->row();
-        $username   = $row->username;
-        $fullname   = $row->fullname;
-        $email      = $row->email;
+        $row            = $query->row();
+        $username       = $row->username;
+        $fullname       = $row->fullname;
+        $email          = $row->email;
     }
 ?>
 

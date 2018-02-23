@@ -1,5 +1,15 @@
 <?php
-	$sql 	= "SELECT * FROM ryu_service limit 4";
+	if($this->session->userdata("city") != ''){
+		$city = $this->session->userdata("city");
+	}else{
+		$city = "";
+	}
+	if($this->session->userdata("province") != ''){
+		$province = $this->session->userdata("province");
+	}else{
+		$province = "";
+	}
+	$sql 	= "SELECT * FROM ryu_service WHERE service_city like '%$city%' AND service_province like '%$province%' limit 4";
 	$query 	= $this->db->query($sql);
 	$listservice = "";
 	if($query->num_rows()>0){
@@ -35,22 +45,24 @@
 				<div class="breadcrumb-content-down text-center">					
 					<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
 						<h2><?=$this->lang->line("find_service")?> :</h2>
-					</div>			
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-						<div class="search-area">
-								<input type="text" placeholder="City" value="<?=$city?>"/>
-						</div>
-					</div>				
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-						<div class="search-area">
-								<input type="text" placeholder="Province" value="<?=$province?>" />
-						</div>
-					</div>				
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-						<div class="search-area text-left">
-							<button class="btn btn-success">Search</button>
-						</div>
 					</div>
+					<form method="post">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+							<div class="search-area">
+									<input name="city" type="text" placeholder="City" value="<?=$city?>"/>
+							</div>
+						</div>				
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+							<div class="search-area">
+									<input name="province" placeholder="Province" value="<?=$province?>" />
+							</div>
+						</div>				
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+							<div class="search-area text-left">
+								<button class="btn btn-success">Search</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -1,12 +1,19 @@
 <?php
-	$sql 	= "SELECT image_cover, video, menu_desc FROM ryu_menu where menu_id = '$category_id'";
+	$sql 	= "SELECT image_cover, video, menu_desc, menu_desc_id FROM ryu_menu where menu_id = '$category_id'";
 	$query 	= $this->db->query($sql);
 	$row 	= $query->row();
 	$image_cover = $row->image_cover;
 	$video 	= $row->video;
 	$menu_desc = $row->menu_desc;
+	$menu_desc_id = $row->menu_desc_id;
 	if($image_cover == ""){
 		$image_cover = "appsources/banner/13.jpg";
+	}
+	
+	if($this->session->userdata('site_lang') == "indonesia"){
+		if($menu_desc_id != ''){
+			$menu_desc = $menu_desc_id;
+		}
 	}
 	function listdetail($category_id){
 		$CI     = &get_instance();
@@ -88,10 +95,9 @@
 					</div>
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 						<div class="single-banner-2" style="text-align:center">
-							<video controls style="width:80%">
-							<source src='https://res.cloudinary.com/demo/video/upload/c_pad,du_10,h_360,q_70,w_480/dog.mp4' type='video/mp4'>
-								Your browser does not support HTML5 video.
-							</video>
+						<div style="width:100%;height:100%;width: 820px; height: 461.25px; float: none; clear: both; margin: 2px auto;">
+  <embed src="http://www.youtube.com/v/<?=$video?>=6s?version=3&amp;hl=en_US&amp;rel=0&amp;autohide=1&amp;autoplay=1" wmode="transparent" type="application/x-shockwave-flash" width="100%" height="100%" allowfullscreen="true" title="Adobe Flash Player">
+</div> 
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">

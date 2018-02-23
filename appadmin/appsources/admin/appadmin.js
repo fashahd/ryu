@@ -335,7 +335,8 @@ $("#replymessage").submit(function(event) {
 
     // alert("test");
     // return;
-    var form = $('#replymessage');
+	var form = $('#replymessage');
+	$("#buttonreply").html("Sending ......");
 
 	$.ajax({
 		type : 'POST',
@@ -344,8 +345,10 @@ $("#replymessage").submit(function(event) {
 		// dataType: "json",
 		success: function(data){
 			alert(data);
+			window.location.href=toUrl+"/appadmin/page/messages";
 		},error: function(xhr, ajaxOptions, thrownError){
-			alert("Can't Connect To Mail Server, Please Try Again");          
+			alert("Can't Connect To Mail Server, Please Try Again");
+			$("#buttonreply").html('<button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>');    
 			// alert(xhr.responseText);
 			// $("#notif").html('<div class="alert alert-danger alert-dismissible">'
 			// +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
@@ -843,6 +846,41 @@ $("#update_support").submit(function(event){
 	});
 })
 
+
+
+$("#update_support_id").submit(function(event){
+	event.preventDefault();
+	var form = $('#update_support_id');
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/update_support_id",
+		data : form.serialize(),
+		dataType: "json",
+		success: function(data){
+			// alert(data);
+			// return;
+			if(data.status =="sukses"){
+				alert("Updated");
+				window.location.href=toUrl+"/appadmin/page/support/"+data.support_id;
+				return;
+			}else{
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
+
 $("#addsocial").submit(function(event){
 	event.preventDefault();
 
@@ -865,6 +903,41 @@ $("#addsocial").submit(function(event){
 				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
 				+"Can't Connect, Please Try Again</div>");
 				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
+
+$("#desc_page_segmentation").submit(function(event){
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+	var form = $('#desc_page_segmentation');
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/setDescSeg",
+		data : form.serialize(),
+		dataType: "json",
+		success: function(data){
+			if(data.status =="sukses"){
+				alert(data.message);
+				window.location.href=toUrl+"/appadmin/page/segmentation/"+data.setting;
+			}else if(data.status =="max_upload"){
+				$("#notif").html('<div class="alert alert-warning alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}else {
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
 			}
 		},error: function(xhr, ajaxOptions, thrownError){            
 			// alert(xhr.responseText);
@@ -966,6 +1039,46 @@ $('#image_upload_form').submit(function(event) {
 			if(data.status =="sukses"){
 				alert(data.message);
 				window.location.href=toUrl+"/appadmin/page/setting/"+data.setting;
+			}else if(data.status =="max_upload"){
+				$("#notif").html('<div class="alert alert-warning alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}else {
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'+data.message);
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+		}
+	});
+});
+
+
+
+$('#image_upload_form_segment').submit(function(event) {
+    event.preventDefault();
+
+    // alert("test");
+    // return;
+    var formData = new FormData(this);
+
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/setCoverSegment",
+		data: formData,
+		cache: false,
+        contentType: false,
+        processData: false,
+		dataType: "json",
+		success: function(data){
+			if(data.status =="sukses"){
+				alert(data.message);
+				window.location.href=toUrl+"/appadmin/page/segmentation/"+data.setting;
 			}else if(data.status =="max_upload"){
 				$("#notif").html('<div class="alert alert-warning alert-dismissible">'
                 +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'

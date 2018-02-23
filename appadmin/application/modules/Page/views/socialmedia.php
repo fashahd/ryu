@@ -7,6 +7,7 @@
 		$row 	= $query->row();
 		$facebook = $row->facebook;
 		$instagram = $row->instagram;
+		$twitter	= $row->twitter;
 	}
 ?>
 <!-- Content Header (Page header) -->
@@ -43,6 +44,15 @@
 									www.instagram.com/
 								</div>
 								<input value="<?=$instagram?>" type="text" class="form-control" name="instagram" placeholder="ex: john">
+							</div>
+						</div>
+						<div class="form-group col-lg-12">
+							<label>Twitter</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									www.twitter.com/
+								</div>
+								<input value="<?=$twitter?>" type="text" class="form-control" name="twitter" placeholder="ex: john">
 							</div>
 						</div>
 						<div class="form-group col-lg-6">

@@ -1,8 +1,12 @@
 <?php
-		$support_title 		= "";
-		$support_tagline 	= "";
-		$support_subtitle 	= "";
-		$support_isi 		= "";
+	$support_title 		= "";
+	$support_tagline 	= "";
+	$support_subtitle 	= "";
+	$support_isi 		= "";
+	$support_title_id 		= "";
+	$support_tagline_id 	= "";
+	$support_subtitle_id 	= "";
+	$support_isi_id 		= "";
 	$sql = "SELECT * FROM ryu_support WHERE support_id = 'tips'";
 	$query 	= $this->db->query($sql);
 	if($query->num_rows()>0){
@@ -11,6 +15,25 @@
 		$support_tagline 	= $row->support_tagline;
 		$support_subtitle 	= $row->support_subtitle;
 		$support_isi 		= $row->support_isi;
+		$support_title_id 		= $row->support_title_id;
+		$support_tagline_id 	= $row->support_tagline_id;
+		$support_subtitle_id 	= $row->support_subtitle_id;
+		$support_isi_id 		= $row->support_isi_id;
+	}
+
+	if($this->session->userdata('site_lang') == "indonesia"){
+		if($support_title_id != ''){
+			$support_title = $support_title_id;
+		}
+		if($support_tagline_id != ''){
+			$support_tagline = $support_tagline_id;
+		}
+		if($support_subtitle_id != ''){
+			$support_subtitle = $support_subtitle_id;
+		}
+		if($support_isi_id != ''){
+			$support_isi = $support_isi_id;
+		}
 	}
 ?>
 <!-- breadcrumb-area-start -->

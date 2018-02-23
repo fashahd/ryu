@@ -1,10 +1,11 @@
 <?php
-	$sql 	= "SELECT image_cover, video, menu_desc FROM ryu_menu where menu_id = '$page_id'";
+	$sql 	= "SELECT image_cover, video, menu_desc, menu_desc_id FROM ryu_menu where menu_id = '$page_id'";
 	$query 	= $this->db->query($sql);
 	$row 	= $query->row();
 	$image_cover = $row->image_cover;
 	$video 	= $row->video;
 	$menu_desc 	= $row->menu_desc;
+	$menu_desc_id 	= $row->menu_desc_id;
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -23,11 +24,17 @@
 				<div class="box-body">
 					<form method="post" id="desc_page">
 						<div class="row">
+							<input type="hidden" name="menu_id" value="<?=$page_id?>" />
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label><?=$category_name?> Description</label>
+									<label><?=$category_name?> Description (English)</label>
 									<textarea name="desc" class="form-control"><?=$menu_desc?></textarea>
-									<input type="hidden" name="menu_id" value="<?=$page_id?>" />
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label><?=$category_name?> Description (Indonesia)</label>
+									<textarea name="desc_id" class="form-control"><?=$menu_desc_id?></textarea>
 								</div>
 							</div>
 						</div>
@@ -47,19 +54,22 @@
 					<form method="post" id="video_page">
 						<div class="row">
 							<div class="col-lg-6">
-								<div class="form-group">
-									<label>Video URL</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										http://youtube.com/v/
+									</div>
 									<input value="<?=$video?>" class="form-control" type="text" name="video_url" placeholder="Video URL">
 									<input type="hidden" name="menu_id" value="<?=$page_id?>" />
 								</div>
 							</div>
 						</div>
+						<br>
 						<button class="btn btn-primary" type="submit">Save</button>
 					</form>
-					<video controls style="width:80%;margin-top:30px">
-					<source src='<?=$video?>' type='video/mp4'>
-						Your browser does not support HTML5 video.
-					</video>
+						<div style="width:100%;height:100%;width: 820px; height: 461.25px; float: none; clear: both; margin: 2px auto;">
+  <embed src="http://www.youtube.com/v/<?=$video?>=6s?version=3&amp;hl=en_US&amp;rel=0&amp;autohide=1&amp;autoplay=1" wmode="transparent" type="application/x-shockwave-flash" width="100%" height="100%" allowfullscreen="true" title="Adobe Flash Player">
+</div> 
+						</div>
 				</div>
 			</div>
 		</div>

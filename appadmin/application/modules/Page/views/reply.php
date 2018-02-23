@@ -57,7 +57,9 @@
             <div class="box-footer">
                 <div class="pull-right">
                     <a href="<?=base_url()?>page/read/<?=$support_id?>" class="btn btn-default"><i class="fa fa-back"></i> Cancel</a>
+                    <div id="buttonreply">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+</div>
                 </div>
             </div>
             <!-- /.box-footer -->

@@ -149,7 +149,7 @@
 					<?=$retnewproduct?>
 				</div>
 				<div class="see-more">
-					<a class="button-new"><?=$this->lang->line('see_more');?></a>
+					<a href="<?=base_url()?>product/all" class="button-new"><?=$this->lang->line('see_more');?></a>
 				</div>
 			</div>
 		</div>

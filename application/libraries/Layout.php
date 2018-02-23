@@ -11,14 +11,16 @@
         }
 
         public function headersource($module = null){
+            $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $ret = '
                 <head>
                     <meta charset="utf-8">
                     <meta http-equiv="x-ua-compatible" content="ie=edge">
                     <title>RYU | '.$module.'</title>
+                    <meta name="title" content="RYU | '.$module.'">
                     <meta name="description" content="">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="canonical" href="http://www.vmdindonesia.com" />
+                    <link rel="canonical" href="'.$actual_link.'" />
 
             
                     <!-- Favicon -->

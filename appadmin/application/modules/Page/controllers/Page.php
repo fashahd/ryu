@@ -36,6 +36,22 @@ class Page extends MX_Controller {
 		$this->layout->content("setting",$data);
 	}
 
+	public function segmentation($type = null)
+	{
+		if($type == "metal"){
+			$data["category_name"] = "Metal Working";
+		}
+		if($type == "wood"){
+			$data["category_name"] = "Wood Working";
+		}
+		if($type == "general"){
+			$data["category_name"] = "General Working";
+		}
+		$data["page_id"] = $type;
+		$data["tittle"] = "Page";
+		$this->layout->content("segmentation",$data);
+	}
+
 	function service(){
 		$data["tittle"] = "Service Center";
 		$this->layout->content("service",$data);
@@ -65,19 +81,30 @@ class Page extends MX_Controller {
 		$this->layout->content("reply",$data);
 	}
 
-	function sendemail(){
-		$config = Array(  
+	function sendemail(){		
+		$username = $this->session->userdata("username");
+		$sql = "SELECT * FROM ryu_users WHERE username = '$username'";
+		$query = $this->db->query($sql);
+		if($query->num_rows()){
+			$row            = $query->row();
+			$username       = $row->username;
+			$fullname       = $row->fullname;
+			$email          = $row->email;
+		}else{
+			$email = "dody@altama.co.id";
+		}
+		$config = Array(
 			'protocol' => 'smtp',  
-			'smtp_host' => 'ssl://smtp.googlemail.com',  
+			'smtp_host' => 'ssl://smtp.gmail.com',  
 			'smtp_port' => 465,  
-			'smtp_user' => 'vmdidn@gmail.com',   
-			'smtp_pass' => 'visioncode',   
+			'smtp_user' => "powertoolsryu@gmail.com",   
+			'smtp_pass' => "kosonginaja",   
 			'mailtype' => 'html',   
 			'charset' => 'iso-8859-1'  
 		); 
 		$this->load->library('email', $config);  
 		$this->email->set_newline("\r\n");  
-		$this->email->from('fashahdarullah22@gmail.com', "Team Support RYU");   
+		$this->email->from($email, "Team Support RYU");   
 		$this->email->to($_POST["email"]);   
 		$this->email->subject($_POST["subject"]);   
 		$this->email->message($_POST["message"]);  
@@ -152,6 +179,53 @@ class Page extends MX_Controller {
 			"support_id"=>$support_id)
 		);
 	}
+	
+
+	function update_support_id(){
+		$this->db->trans_begin();
+		$support_id = $_POST["support_id"];
+		$title 		= $_POST["title"];
+		$tagline	= $_POST["tagline"];
+		$subtitle 	= $_POST["subtitle"];
+		$content 	= $_POST["content"];
+		$sql 	= "SELECT * FROM ryu_support where support_id = '$support_id'";
+		$query	= $this->db->query($sql);
+		if($query->num_rows()>0){
+			$data = array(
+				"support_title_id" 	=> $title,
+				"support_tagline_id" 	=> $tagline,
+				"support_subtitle_id" 	=> $subtitle,
+				"support_isi_id" 	=> $content,
+			);
+			
+			$this->db->where("support_id",$support_id);
+			$query = $this->db->update("ryu_support",$data);
+		}else{
+			$data = array(
+				"support_id_id" 		=> $support_id,
+				"support_title_id" 	=> $title,
+				"support_tagline_id" 	=> $tagline,
+				"support_subtitle_id" 	=> $subtitle,
+				"support_isi_id" 		=> $content,
+			);
+			
+			$query = $this->db->insert("ryu_support",$data);
+		}
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			$status = "gagal";
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$status = "sukses";
+		}
+		echo json_encode(array(
+			"status"=>$status,
+			"support_id"=>$support_id)
+		);
+	}
 
 	function socialmedia(){
 		$data["tittle"] = "Social Media";
@@ -161,7 +235,8 @@ class Page extends MX_Controller {
 	function addsocial(){
 		$data = array(
 			"facebook"=>$_POST["facebook"],
-			"instagram"=>$_POST["instagram"]
+			"instagram"=>$_POST["instagram"],
+			"twitter"=>$_POST["twitter"],
 		);
 		$sql 	= "SELECT * FROM ryu_social";
 		$query	= $this->db->query($sql);
@@ -198,9 +273,47 @@ class Page extends MX_Controller {
 		}
 	}
 
+	function setDescSeg(){
+		$data = array(
+			"seg_desc" => $_POST['desc_seg'],
+			"seg_desc_id" => $_POST['desc_seg_id']
+		);
+		$this->db->where('seg_type',$_POST['seg_type']);
+        $query = $this->db->update('ryu_segmentation',$data);
+		// $sql 	= "UPDATE ryu_segmentation SET seg_desc= '$_POST[desc_seg]', seg_desc_id = '$_POST[desc_seg_id]' WHERE seg_type = '$_POST[seg_type]'";
+		// $query 	= $this->db->query($sql);
+		if($query){
+			$response = "sukses";
+		}else{
+			$response = "gagal";
+		}
+		
+		if($response == "sukses"){
+			$message = "Description Updated";
+		}else{
+			$message = "Description Failed to Update";
+		}
+
+		
+		
+		$data = array(
+			"status" 	=> $response,
+			"message"	=> $message,
+			"setting"	=> $_POST["seg_type"]
+		);
+		echo json_encode($data);
+		return;
+	}
+
 	function setDesc(){
-		$sql 	= "UPDATE ryu_menu SET menu_desc= '$_POST[desc]' WHERE menu_id = '$_POST[menu_id]'";
-		$query 	= $this->db->query($sql);
+		$data = array(
+			"menu_desc" => $_POST['desc'],
+			"menu_desc_id" => $_POST['desc_id']
+		);
+		$this->db->where('menu_id',$_POST['menu_id']);
+        $query = $this->db->update('ryu_menu',$data);
+		// $sql 	= "UPDATE ryu_menu SET menu_desc= '$_POST[desc]', menu_desc_id = '$_POST[desc_id]' WHERE menu_id = '$_POST[menu_id]'";
+		// $query 	= $this->db->query($sql);
 		if($query){
 			$response = "sukses";
 		}else{
@@ -245,6 +358,59 @@ class Page extends MX_Controller {
 			"status" 	=> $response,
 			"message"	=> $message,
 			"setting"	=> $_POST["menu_id"]
+		);
+		echo json_encode($data);
+		return;
+	}
+
+	function setCoverSegment(){
+		if(isset($_FILES["image_upload_file"]["name"])){
+			$validextensions = array("jpeg", "jpg", "png");
+			$temporary 		= explode(".", $_FILES["image_upload_file"]["name"]);
+			$file_extension = end($temporary);
+			if ((($_FILES["image_upload_file"]["type"] == "image/png") || ($_FILES["image_upload_file"]["type"] == "image/jpg") || ($_FILES["image_upload_file"]["type"] == "image/jpeg")) && ($_FILES["image_upload_file"]["size"] < 800000000) && in_array($file_extension, $validextensions)) {
+				if ($_FILES["image_upload_file"]["error"] > 0)
+				{
+					$message = "Upload Image 1 Error";
+				}else
+				{
+					$url = base_url()."appsources/banner/";
+					$image=basename($_FILES['image_upload_file']['name']);
+					$image=str_replace(' ','|',$image);
+					$type = explode(".",$image);
+					$type = $type[count($type)-1];
+					$tmppath="appsources/banner/".uniqid(rand()).".".$type; // uniqid(rand()) function generates unique random number.
+					move_uploaded_file($_FILES['image_upload_file']['tmp_name'],$tmppath);
+					$message = "sukses";
+					$image1 = $tmppath;
+				}
+			}else
+			{
+				$message = "Size More Than 8MB";
+			}
+		}
+
+		if($message == "sukses"){
+			$sql 	= "UPDATE ryu_segmentation SET seg_pic = '$tmppath' WHERE seg_type = '$_POST[seg_type]'";
+			$query 	= $this->db->query($sql);
+			if($query){
+				$response = "sukses";
+			}else{
+				$response = "gagal";
+			}
+			if($response == "sukses"){
+				$message = "Banner Updated";
+			}else{
+				$message = "Banner Failed to Update";
+			}
+		}else{
+			$response = "max_upload";
+		}
+		
+		$data = array(
+			"status" 	=> $response,
+			"message"	=> $message,
+			"setting"	=> $_POST["seg_type"]
 		);
 		echo json_encode($data);
 		return;

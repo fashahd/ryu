@@ -694,6 +694,18 @@ body {
 .slider-text ul li{
 	margin-left:5px;
 }
+.slider-text .left{
+	border-left : 2px solid #6dbf50;
+	padding-left : 15px;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+.slider-text .right{
+	border-right : 2px solid #6dbf50;
+	padding-right : 15px;
+	text-transform: uppercase;
+	font-weight: 600;
+}
 .slider-text p span{
 	color:#6dbf50;
 	text-transform: uppercase;

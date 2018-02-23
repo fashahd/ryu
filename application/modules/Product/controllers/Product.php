@@ -73,6 +73,50 @@ class Product extends MX_Controller {
 		$this->layout->content("search",$data);
 	}
 
+	function all(){
+		// konfigurasi class pagination
+		$config['per_page']		= 12;
+		$config['num_links'] 	= 2;
+		$config['uri_segment']	= 3;
+		$config['full_tag_open'] = '<div class="pagination-number"><ul>';
+		$config['full_tag_close'] = '</ul></div>';
+		
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_link'] = '>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		
+		$config['prev_link'] = '<';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['base_url']		= base_url()."product/all";
+		$config['total_rows']	= $this->db->query("SELECT * FROM ryu_product")->num_rows();
+		
+		$this->pagination->initialize($config);
+		$start = $this->uri->segment(3, 0);
+		$category_name 			= "Product";
+		$data["listproduct"] 	= $this->ModelHome->getProduct($config['per_page'],$start);
+		$data["tittle"] 		= $category_name;
+		$data["category_id"]	= "";
+		$data["pagination"]		= $this->pagination->create_links();
+		$data["start"]			= $start;
+		$data["jml_record"]		= $config['total_rows'];
+		$this->layout->content("shop",$data);
+	}
+
 	public function index($category=null)
 	{
 		if($category != null){

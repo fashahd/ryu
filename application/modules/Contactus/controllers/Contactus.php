@@ -24,6 +24,7 @@ class Contactus extends MX_Controller {
 	}
 
 	function send(){
+		$this->load->library('email');
 		$data = array(
 			"support_id" => $this->getSupportID(),
 			"firstname"	=> $_POST["name_first"],
@@ -39,36 +40,55 @@ class Contactus extends MX_Controller {
 			"created_dttm" => date("Y-m-d H:i:s"),
 		);
 
-		$query	= $this->db->insert("ryu_support_ticket",$data);
-		if($query){
-			$status = "sukses";
-			$msg 	= '
-				<div class="col-lg-2">
-				</div>
-				<div class="col-lg-8">				
-					<div class="entry-header text-center mb-20">
-						<i class="zmdi zmdi-check-circle" style="font-size:200px;color:#6dbf50"></i>
-						<h4>Thank You for contacting us. We will respond to your request within 24 business hours.
-						If you have not heard from us within this time frame, please check your spam, junk mail, or quarantine folder</h4>
+		//configure email settings
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'ssl://smtp.gmail.com';
+		$config['smtp_port'] = '465';
+		$config['smtp_user'] = 'powertoolsryu@gmail.com';
+		$config['smtp_pass'] = 'kosonginaja';
+		$config['mailtype'] = 'html';
+		$config['charset'] = 'iso-8859-1';
+		$config['wordwrap'] = TRUE;
+		$config['newline'] = "\r\n"; //use double quotes
+		//$this->load->library('email', $config);
+		$this->email->initialize($config);                        
+		//send mail
+		$this->email->from($_POST["email"], $_POST["name_first"]." ".$_POST["name_last"]);
+		$this->email->to("dody@altama.co.id");
+		$this->email->subject($_POST["subject"]);
+		$this->email->message($_POST["message"]);
+		if($this->email->send()){
+			$query	= $this->db->insert("ryu_support_ticket",$data);
+			if($query){
+				$status = "sukses";
+				$msg 	= '
+					<div class="col-lg-2">
 					</div>
-				</div>
-				<div class="col-lg-2">
-				</div>				
-			';
-		}else{
-			$status = "gagal";
-			$msg 	= '
-				<div class="col-lg-2">
-				</div>
-				<div class="col-lg-8">				
-					<div class="entry-header text-center mb-20">
-						<i class="zmdi zmdi-alert-circle" style="font-size:200px;color:red"></i>
-						<h4>Can not connect to server, please try again.</h4>
+					<div class="col-lg-8">				
+						<div class="entry-header text-center mb-20">
+							<i class="zmdi zmdi-check-circle" style="font-size:200px;color:#6dbf50"></i>
+							<h4>Thank You for contacting us. We will respond to your request within 24 business hours.
+							If you have not heard from us within this time frame, please check your spam, junk mail, or quarantine folder</h4>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-2">
-				</div>				
-			';
+					<div class="col-lg-2">
+					</div>				
+				';
+			}else{
+				$status = "gagal";
+				$msg 	= '
+					<div class="col-lg-2">
+					</div>
+					<div class="col-lg-8">				
+						<div class="entry-header text-center mb-20">
+							<i class="zmdi zmdi-alert-circle" style="font-size:200px;color:red"></i>
+							<h4>Can not connect to server, please try again.</h4>
+						</div>
+					</div>
+					<div class="col-lg-2">
+					</div>				
+				';
+			}
 		}
 		
 

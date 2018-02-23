@@ -26,9 +26,21 @@ class Service extends MX_Controller {
 		// Header File XML
 		header("Content-type: text/xml");
 		
+
+		if($this->session->userdata("city") != ''){
+			$city = $this->session->userdata("city");
+		}else{
+			$city = "";
+		}
+		if($this->session->userdata("province") != ''){
+			$province = $this->session->userdata("province");
+		}else{
+			$province = "";
+		}
+
 		// 	// Parent node XML
 		echo '<markers>';
-		$sql 	= "SELECT * FROM ryu_service";
+		$sql 	= "SELECT * FROM ryu_service WHERE service_city like '%$city%' AND service_province like '%$province%'";
 		$query 	= $this->db->query($sql);
 		// $listservice = "";
 		if($query->num_rows()>0){
@@ -99,6 +111,12 @@ class Service extends MX_Controller {
 	public function page($type)
 	{
 		if($type == "service"){
+			if(isset($_POST["city"])){
+				$this->session->set_userdata("city",$_POST["city"]);
+			}
+			if(isset($_POST["province"])){
+				$this->session->set_userdata("province",$_POST["province"]);
+			}
 			if($this->session->userdata("city") != ''){
 				$city = $this->session->userdata("city");
 			}else{

@@ -2,12 +2,14 @@
 	$tittle = strtoupper($tittle);
 	$facebook = "";
 	$instagram = "";
+	$twitter = "";
 	$sql 	= "SELECT * FROM ryu_social";
 	$query	= $this->db->query($sql);
 	if($query->num_rows()>0){
 		$row 	= $query->row();
 		$facebook = $row->facebook;
 		$instagram = $row->instagram;
+		$twitter = $row->twitter;
 	}
 	$sql    = " SELECT * FROM `ryu_menu`
 				WHERE menu_parent_id = '0' and editable = 'ya'
@@ -54,6 +56,7 @@
 								<a href="<?=base_url(); ?>LanguageSwitcher/switchLang/indonesia" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/id.jpg" alt="id" /></a>
 								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook.jpg" alt="facebook" /></a> 
 								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram_black.png" alt="instagram" /></a> 
+								<a href="http://www.twitter.com/<?=$twitter?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/twitter_black.png" alt="twitter" /></a> 
 							</div>
 						</div>
 					</div>
@@ -220,8 +223,9 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="payment-area">
 								<?=$this->lang->line('follow_us');?> 
-								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook_black.png" alt="flag" /></a> 
-								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram.png" alt="flag" /></a> 
+								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook_black.png" alt="Facebook" /></a> 
+								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram.png" alt="Instagram" /></a> 
+								<a href="http://www.twitter.com/<?=$twitter?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/twitter.png" alt="Twitter" /></a> 
 							</div>
 						</div>
 					</div>
@@ -338,7 +342,7 @@
 					$("#contentus").html(data.response);
 				}
 			},error: function(xhr, ajaxOptions, thrownError){            
-				// alert(xhr.responseText);
+				alert(xhr.responseText);
 				$("#contentus").html(data.response);
 				return;
 			}
