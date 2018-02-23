@@ -5583,8 +5583,8 @@ width: 170px;
 }
 .coupon-accordion h3 {
   background-color: #f7f6f7;
-  border-top: 3px solid #1e85be;
-  color: #515151;
+  border-top: 3px solid #6dbf50;
+  color: #000;
   font-size: 12px;
   font-weight: 300;
   list-style: outside none none;
@@ -5594,7 +5594,7 @@ width: 170px;
   width: auto;
 }
 .coupon-accordion h3::before {
-  color: #1e85be;
+  color: #6dbf50;
   content: "";
   display: inline-block;
   font-family: fontawesome;

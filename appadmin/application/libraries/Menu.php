@@ -47,6 +47,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 '.$menulist.'
+                                <li><a href="'.base_url().'page/download"><i class="fa fa-circle-o"></i> Downloads</a></li>
                                 <li class="treeview">
                                     <a href="#"><i class="fa fa-circle-o"></i> Segmentation
                                         <span class="pull-right-container">

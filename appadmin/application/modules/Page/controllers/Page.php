@@ -57,6 +57,11 @@ class Page extends MX_Controller {
 		$this->layout->content("service",$data);
 	}
 
+	function download(){
+		$data["tittle"] = "Downloads";
+		$this->layout->content("download",$data);
+	}
+
 	function messages(){
 		$data["tittle"] = "User Messages";
 		$this->layout->content("messages",$data);
@@ -246,6 +251,22 @@ class Page extends MX_Controller {
 			$update = $this->db->insert("ryu_social",$data);
 		}
 		if($update){
+			echo "sukses";
+			return;
+		}else{
+			echo "gagal";
+			return;
+		}
+	}
+
+	function addDownload(){
+		$data = array(
+			"file_name" => $_POST["file_name"],
+			"url_download" => $_POST["url_download"]
+		);
+
+		$query  = $this->db->insert("ryu_download", $data);
+		if($query){
 			echo "sukses";
 			return;
 		}else{
@@ -491,6 +512,26 @@ class Page extends MX_Controller {
 		}else{
 			echo "gagal";
 			return;
+		}
+	}
+
+	function deletedownload(){
+		$tmppcat_id = $_POST["download_id"];
+		$arrcat_id 	= explode("|",$tmppcat_id);
+		$this->db->trans_begin();
+		for($i=0;$i<count($arrcat_id);$i++){
+			$sqldelete 		= "DELETE FROM ryu_download WHERE id = '{$arrcat_id[$i]}'";
+			$querydelete 	= $this->db->query($sqldelete);
+		}
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			echo "URL deleted are failed";
+		}
+		else
+		{
+			$this->db->trans_commit();
+			echo "URL deleted are success";
 		}
 	}
 

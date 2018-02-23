@@ -24,6 +24,37 @@ function deleteslider(image_id){
 	}
 }
 
+function deletedownload(){
+	var sList = "";
+	$('input[name=download_id]:checked').each(function () {
+		sList += $(this).val() + "|";
+	});
+
+	if(sList == ""){
+		alert("Please select a Url");
+		return;
+	}
+	if (confirm('Are you sure you?')) {
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/appadmin/page/deletedownload",
+			data : {download_id:sList},
+			// dataType: "json",
+			success: function(data){
+				alert(data);
+				window.location.reload();
+			},error: function(xhr, ajaxOptions, thrownError){            
+				alert(data);
+				window.location.reload();
+				return;
+			}
+		});
+		// Save it!
+	} else {
+		// Do nothing!
+	}
+}
+
 function deletemessage(){
 	var sList = "";
 	$('input[name=support_id]:checked').each(function () {
@@ -778,6 +809,40 @@ $("#addspec").click(function(){
 function deleterow(id){
 	$("#row_"+id).remove();
 }
+
+$("#addDownload").submit(function(event){
+	event.preventDefault();
+
+    // alert("test");
+    // return;
+	var form = $('#addDownload');
+	$.ajax({
+		type : 'POST',
+		url  : toUrl+"/appadmin/page/addDownload",
+		data : form.serialize(),
+		// dataType: "json",
+		success: function(data){
+			if(data =="sukses"){
+				alert(data);
+				window.location.href=toUrl+"/appadmin/page/download";
+				return;
+			}else{
+				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+				+"Can't Connect, Please Try Again</div>");
+				return;
+			}
+		},error: function(xhr, ajaxOptions, thrownError){            
+			// alert(xhr.responseText);
+			$("#notif").html('<div class="alert alert-danger alert-dismissible">'
+			+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+			+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'
+			+"Can't Connect, Please Try Again</div>");
+			return;
+		}
+	});
+})
 
 $("#addService").submit(function(event){
 	event.preventDefault();
