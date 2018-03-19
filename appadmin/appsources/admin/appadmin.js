@@ -500,11 +500,14 @@ $("#addEvent").submit(function(event){
 
     // alert("test");
     // return;
-	var form = $('#addEvent');
+	var formData = new FormData(this);
 	$.ajax({
 		type : 'POST',
 		url  : toUrl+"/appadmin/page/addEvent",
-		data : form.serialize(),
+		data: formData,
+		cache: false,
+        contentType: false,
+        processData: false,
 		// dataType: "json",
 		success: function(data){
 			if(data =="sukses"){
@@ -512,6 +515,7 @@ $("#addEvent").submit(function(event){
 				window.location.href=toUrl+"/appadmin/page/news";
 				return;
 			}else{
+				alert(data);
 				$("#notif").html('<div class="alert alert-danger alert-dismissible">'
 				+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
 				+'<h4><i class="icon fa fa-ban"></i> Alert!</h4>'

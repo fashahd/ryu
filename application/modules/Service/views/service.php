@@ -9,7 +9,7 @@
 	}else{
 		$province = "";
 	}
-	$sql 	= "SELECT * FROM ryu_service WHERE service_city like '%$city%' AND service_province like '%$province%' limit 4";
+	$sql 	= "SELECT * FROM ryu_service WHERE service_city like '%$city%' AND service_province like '%$province%'";
 	$query 	= $this->db->query($sql);
 	$listservice = "";
 	if($query->num_rows()>0){
@@ -31,7 +31,7 @@
 				<div class="breadcrumb-content text-center">
 					<div class="breadcrumb-title text-left">
 						<h3><a href="#"><?=$this->lang->line("need_repairs")?>?</a></h3>
-						<p style="font-weight:700;margin-top:10px"><?=$this->lang->line("repair_ket")?>.</p>
+						<!-- <p style="font-weight:700;margin-top:10px"><?=$this->lang->line("repair_ket")?>.</p> -->
 					</div>
 				</div>
 			</div>
@@ -51,12 +51,7 @@
 							<div class="search-area">
 									<input name="city" type="text" placeholder="City" value="<?=$city?>"/>
 							</div>
-						</div>				
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-							<div class="search-area">
-									<input name="province" placeholder="Province" value="<?=$province?>" />
-							</div>
-						</div>				
+						</div>		
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 							<div class="search-area text-left">
 								<button class="btn btn-success">Search</button>
@@ -78,13 +73,13 @@
 						<div class="col-lg-8">
 							<div id="googleMap"></div>
 						</div>
-						<div class="col-lg-4" style="background:#f0f0f0;padding-top:20px">
+						<div class="col-lg-4">
 							<!-- blog-main-area-start -->
 							<div class="blog-main-area mb-70">
 								<!-- single-blog-main-start -->
 								<div class="single-blog-main mb-40">
 									<div class="postinfo-wrapper">
-										<div class="post-info">
+										<div class="post-info" style="overflow:scroll;height:420px;background:#f0f0f0;padding:20px">
 											<?=$listservice?>
 										</div>
 									</div>
@@ -111,7 +106,7 @@
         function initMap() {
         var map = new google.maps.Map(document.getElementById('googleMap'), {
           center: new google.maps.LatLng(-6.167537, 106.826463),
-          zoom: 12
+          zoom: 5
         });
         var infoWindow = new google.maps.InfoWindow;
 

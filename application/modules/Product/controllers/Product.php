@@ -103,7 +103,7 @@ class Product extends MX_Controller {
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
 		$config['base_url']		= base_url()."product/all";
-		$config['total_rows']	= $this->db->query("SELECT * FROM ryu_product")->num_rows();
+		$config['total_rows']	= $this->db->query("SELECT * FROM ryu_product where product_new = 'ya'")->num_rows();
 		
 		$this->pagination->initialize($config);
 		$start = $this->uri->segment(3, 0);

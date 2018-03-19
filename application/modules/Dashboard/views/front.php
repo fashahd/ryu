@@ -76,7 +76,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 						<div class="single-banner text-center">
 							<div class="banner-img phone mb-20">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/1.png" alt="banner" /></a>
+								<a><img src="<?=base_url()?>appsources/img/banner/1.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
 								<h4><?=$this->lang->line('banner_text_price');?></h4>
@@ -86,7 +86,17 @@
 					<div class="col-lg-3 col-md-3 hidden-sm col-xs-12">
 						<div class="single-banner text-center">
 							<div class="banner-img card mb-20">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/4.png" alt="banner" /></a>
+								<a><img src="<?=base_url()?>appsources/img/banner/4.png" alt="banner" /></a>
+							</div>
+							<div class="banner-text">
+								<h4><?=$this->lang->line('banner_text_spread');?></h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+						<div class="single-banner text-center">
+							<div class="banner-img mb-20 plane">
+								<a><img src="<?=base_url()?>appsources/img/banner/complete.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
 								<h4><?=$this->lang->line('banner_text_tech');?></h4>
@@ -95,21 +105,11 @@
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 						<div class="single-banner text-center">
-							<div class="banner-img mb-20 plane">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/2.png" alt="banner" /></a>
+							<div class="banner-img mb-20 light">
+								<a><img src="<?=base_url()?>appsources/img/banner/3.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
 								<h4><?=$this->lang->line('banner_text_compatible');?></h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-						<div class="single-banner text-center">
-							<div class="banner-img mb-20 light">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/3.png" alt="banner" /></a>
-							</div>
-							<div class="banner-text">
-								<h4><?=$this->lang->line('banner_text_spread');?></h4>
 							</div>
 						</div>
 					</div>

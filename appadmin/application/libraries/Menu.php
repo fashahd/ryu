@@ -77,7 +77,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="'.base_url().'page/service"><i class="fa fa-circle-o"></i> Service Center</a></li>
                                 <li><a href="'.base_url().'page/support/warranty"><i class="fa fa-circle-o"></i> Warranty</a></li>
-                                <li><a href="'.base_url().'page/support/loan"><i class="fa fa-circle-o"></i> Loan Programme</a></li>
+                                <li><a href="'.base_url().'page/support/loan"><i class="fa fa-circle-o"></i> Loan Program</a></li>
                                 <li><a href="'.base_url().'page/support/tips"><i class="fa fa-circle-o"></i> Tips & Trick</a></li>
                                 <li><a href="'.base_url().'page/support/faq"><i class="fa fa-circle-o"></i> FAQ</a></li>
                             </ul>

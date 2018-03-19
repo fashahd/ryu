@@ -1,7 +1,7 @@
 <?php
     $lang["banner_text_price"] = "Harga Terjangkau";
     $lang["banner_text_tech"] = "Teknologi Jepang";
-    $lang["banner_text_compatible"] = "Suku cadang yang Kompatibel dan Mudah Diperoleh";
+    $lang["banner_text_compatible"] = "Suku Cadang Umum dan Mudah Didapat";
     $lang["banner_text_spread"] = "Service Center Tersebar";
     $lang["search_text"] = "Cari barang yang anda cari di sini";
     $lang["new_arrival"] = "<span class='alphabetic'>P</span>endatang Baru";

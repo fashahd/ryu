@@ -127,7 +127,7 @@ class Page extends MX_Controller {
 			$data["tittle"] = "Warranty";
 		}
 		if($type == "loan"){
-			$data["tittle"] = "Loan Programme";
+			$data["tittle"] = "Loan Program";
 		}
 		if($type == "tips"){
 			$data["tittle"] = "Tips & Tricks";
@@ -261,11 +261,10 @@ class Page extends MX_Controller {
 
 	function addDownload(){
 		$data = array(
-			"file_name" => $_POST["file_name"],
-			"url_download" => $_POST["url_download"]
+			"url" => $_POST["url_download"]
 		);
-
-		$query  = $this->db->insert("ryu_download", $data);
+		$this->db->where("menu_title","Download");
+		$query  = $this->db->update("ryu_menu", $data);
 		if($query){
 			echo "sukses";
 			return;
@@ -496,22 +495,52 @@ class Page extends MX_Controller {
 	}
 
 	function addEvent(){
-		$tanggal 	= $_POST["tanggal"];
-		$time 		= $_POST["time"];
 		$news 		= $_POST["news"];
-
-		$datadetail = array(
-			'event_tittle' => $news,
-			'event_date' => $tanggal,
-			'event_time' => $time,
-		);
-		$query 		= $this->db->insert('ryu_event', $datadetail);
-		if($query){
-			echo "sukses";
-			return;
+		$content	= $_POST["content"];
+		$message = "sukses";
+		$image1 = "";
+		if(isset($_FILES["image_upload_file"]["name"])){
+			$validextensions = array("jpeg", "jpg", "png");
+			$temporary 		= explode(".", $_FILES["image_upload_file"]["name"]);
+			$file_extension = end($temporary);
+			if ((($_FILES["image_upload_file"]["type"] == "image/png") || ($_FILES["image_upload_file"]["type"] == "image/jpg") || ($_FILES["image_upload_file"]["type"] == "image/jpeg")) && ($_FILES["image_upload_file"]["size"] < 800000000) && in_array($file_extension, $validextensions)) {
+				if ($_FILES["image_upload_file"]["error"] > 0)
+				{
+					$message = "Upload Image 1 Error";
+				}else
+				{
+					$url = base_url()."appsources/news/";
+					$image=basename($_FILES['image_upload_file']['name']);
+					$image=str_replace(' ','|',$image);
+					$type = explode(".",$image);
+					$type = $type[count($type)-1];
+					$tmppath="appsources/news/".uniqid(rand()).".".$type; // uniqid(rand()) function generates unique random number.
+					move_uploaded_file($_FILES['image_upload_file']['tmp_name'],$tmppath);
+					$message = "sukses";
+					$image1 = $tmppath;
+				}
+			}else
+			{
+				$message = "Size More Than 8MB";
+			}
+		}
+		if($message == "sukses"){
+			$datadetail = array(
+				'event_tittle' => $news,
+				'event_created_date' => date("Y-m-d H:i:s"),
+				'event_content' => $content,
+				'event_image' => $image1
+			);
+			$query 		= $this->db->insert('ryu_event', $datadetail);
+			if($query){
+				echo "sukses";
+				return;
+			}else{
+				echo "gagal";
+				return;
+			}
 		}else{
-			echo "gagal";
-			return;
+			echo $message;
 		}
 	}
 

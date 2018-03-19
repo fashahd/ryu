@@ -32,26 +32,14 @@ class Service extends MX_Controller {
 		}else{
 			$city = "";
 		}
-		if($this->session->userdata("province") != ''){
-			$province = $this->session->userdata("province");
-		}else{
-			$province = "";
-		}
 
 		// 	// Parent node XML
 		echo '<markers>';
-		$sql 	= "SELECT * FROM ryu_service WHERE service_city like '%$city%' AND service_province like '%$province%'";
+		$sql 	= "SELECT * FROM ryu_service WHERE service_city like '%$city%'";
 		$query 	= $this->db->query($sql);
 		// $listservice = "";
 		if($query->num_rows()>0){
 			foreach($query->result() as $row){
-				// $listservice .= '
-				// <div class="entry-meta2">
-				// 	<p>'.$row->service_store.'</p>
-				// 	<p style="font-weight:normal">'.$row->service_address.' - '.$row->service_phone.'</p>
-				// </div>
-				// ';
-
 				$lat = "";
 				$lng = "";
 				$address = str_replace(" ","+",$row->service_address);

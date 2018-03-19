@@ -5,6 +5,7 @@
             FROM ryu_product as a 
             LEFT JOIN ryu_menu as b on b.menu_id = a.product_category
             LEFT JOIN ryu_subcategory as c on c.sub_id = a.product_subcategory
+			WHERE a.product_new = 'ya'
             ORDER BY a.product_id desc
             Limit 10";
             $query  = $this->db->query($sql);
@@ -218,6 +219,7 @@
         }
         function getProduct($limit, $start = 0){
             $this->db->limit($limit, $start);
+			$this->db->where("product_new","ya");
             $query = $this->db->get("ryu_product");
             $list = "";
             if($query->num_rows()>0){

@@ -4,15 +4,22 @@
 		$month = $this->session->userdata("month");
 	}
 	$year = date("Y");
-	$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$month' AND YEAR(event_date) = '$year' order by event_date asc";
+	$sql = "SELECT * FROM ryu_event WHERE MONTH(event_created_date) = '$month' AND YEAR(event_created_date) = '$year' order by event_created_date asc";
 	$query = $this->db->query($sql);
 	$list = "";
 	if($query->num_rows()>0){
 		foreach($query->result() as $row){
+			if($this->session->userdata('site_lang') == "indonesia"){
+				if($row->event_tittle_indo != ''){
+					$row->event_tittle = $row->event_tittle_indo;
+				}
+			}
 			$list .= '
 				<div class="entry-meta">
-					<p>'.date("l, d M Y", strtotime($row->event_date)).' '.date("H:i", strtotime($row->event_time)).'</p>
-					<p>('.$row->event_tittle.')</p>
+					<a href="'.base_url().'news/read/'.$row->event_id.'">
+					<img width="80px" src="'.base_url().'appadmin/'.$row->event_image.'" style="display:inline-block;float:left;margin-right:20px"/>
+					<p>'.date("l, d M Y H:i", strtotime($row->event_created_date)).'</p>
+					<p>('.$row->event_tittle.')</p></a>
 				</div>
 			';
 		}
@@ -38,12 +45,12 @@
 		"11" => "November",
 		"12" => "December",
 	);
-	$sql 	= "SELECT YEAR(event_date) as year FROM `ryu_event` GROUP BY YEAR(event_date)";
+	$sql 	= "SELECT YEAR(event_created_date) as year FROM `ryu_event` GROUP BY YEAR(event_created_date)";
 	$query	= $this->db->query($sql);
 	$listtahun = "";
 	if($query->num_rows()>0){
 		foreach($query->result() as $key){
-			$sql = "SELECT MONTH(event_date) as month FROM `ryu_event` WHERE YEAR(event_date) = '$key->year' GROUP BY MONTH(event_date)";
+			$sql = "SELECT MONTH(event_created_date) as month FROM `ryu_event` WHERE YEAR(event_created_date) = '$key->year' GROUP BY MONTH(event_created_date)";
 			$query	= $this->db->query($sql);
 			$listbulan = "";
 			if($query->num_rows()>0){
@@ -51,13 +58,19 @@
 					if($h->month < 10){
 						$h->month = "0".$h->month;
 					}
-					$sql = "SELECT * FROM ryu_event WHERE MONTH(event_date) = '$h->month' order by event_date asc";
+					$sql = "SELECT * FROM ryu_event WHERE MONTH(event_created_date) = '$h->month' order by event_created_date asc";
 					$query = $this->db->query($sql);
 					$listjadwal = "";
 					if($query->num_rows()>0){
 						foreach($query->result() as $row){
+							
+							if($this->session->userdata('site_lang') == "indonesia"){
+								if($row->event_tittle_indo != ''){
+									$row->event_tittle = $row->event_tittle_indo;
+								}
+							}
 							$listjadwal .= '
-								<li style="margin-left:20px">('.$row->event_tittle.')</li>
+								<li style="margin-left:20px"><a href="'.base_url().'news/read/'.$row->event_id.'">'.$row->event_tittle.'</a></li>
 							';
 						}
 					}else{

@@ -5,7 +5,7 @@
         public function treemenu($hasil = null,$parent =0){
             $CI     = &get_instance();
             $sql    = " SELECT * FROM `ryu_menu`
-                        WHERE menu_parent_id = '$parent'
+                        WHERE menu_parent_id = '$parent' and publish = 'y'
                         ORDER BY menu_order asc";
             $query  = $CI->db->query($sql);
             if($query->num_rows()>0){
@@ -36,6 +36,15 @@
                         $hasil.='<li class="active"><a href="'.$url.'">'.$h->menu_title.'</a></li>';
                     }
                 }
+				$sql 	= "SELECT * FROM ryu_menu where menu_title = 'Download'";
+				$query	= $CI->db->query($sql);
+				$filename = "";
+				if($query->num_rows()>0){
+					$no 	= 1;
+					$row 	= $query->row();
+					$filename = $row->url;
+				}
+				$hasil .= '<li><a target="_blank" href="'.base_url().'appadmin/'.$filename.'">Download</a></li>';
                 return $hasil;
             }
         }

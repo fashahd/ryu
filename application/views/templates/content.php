@@ -157,7 +157,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Segemntation</h4>
+											<h4>Segmentation</h4>
 										</div>
 										<div class="footer-menu">
 											<ul>

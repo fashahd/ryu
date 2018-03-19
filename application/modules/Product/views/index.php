@@ -27,7 +27,7 @@
 				$list .= '
 					<div class="col-lg-6">
 						<div class="slider-text wow" >
-							<p><span>'.$h->menu_title.'</span></p>
+							<a href="'.base_url().'product/shop/'.$h->menu_id.'"><p><span>'.$h->menu_title.'</span></p></a>
 							<ul>
 								'.listchild($h->menu_id).'
 							</ul>
@@ -52,7 +52,7 @@
 				$list .= '
 					<div class="col-lg-12">
 						<div class="slider-text wow" >
-							<p style="font-size:12pt;margin-left:-15px">'.$h->menu_title.'</p>
+							<p style="font-size:12pt;margin-left:-15px"><a href="'.base_url().'product/shop/'.$h->menu_id.'">'.$h->menu_title.'</a></p>
 							<ul>
 								'.listchild($h->menu_id).'
 							</ul>
@@ -88,7 +88,7 @@
 		</div>
 		<!-- slider-area-end -->
 		<!-- banner-area-2-start -->
-		<div class="banner-area-2 mb-50">
+		<!-- <div class="banner-area-2 mb-50">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
@@ -104,7 +104,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- banner-area-2-end -->
 		<!-- pos_new_product-area-start -->
 		<div class="pos_new_product">

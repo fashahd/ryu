@@ -120,7 +120,7 @@
 													<tr>
 														<td style="font-weight:700;font-size:12pt">'.$row->product_model.'</td>
 														<td style="text-align:right">:</td>
-														<td>'.$row->product_description.'</td>
+														<td style="font-weight:700;font-size:12pt">'.$row->product_description.'</td>
 													</tr>
 												';
 											}
@@ -177,10 +177,16 @@
 									<?php
 										if($spek){
 											foreach($spek as $row){
+												if($this->session->userdata('site_lang') == "indonesia"){
+													if($row->product_model_id != ''){
+														$row->product_model = $row->product_model_id;
+														$row->product_description = $row->product_description_id;
+													}
+												}
 												echo '
 													<tr>
-														<td style="padding: 5px 0 5px 0">'.$row->product_model.'</td>
-														<td style="padding: 5px 0 5px 0">'.$row->product_description.'</td>
+														<td style="font-weight:700;font-size:12pt">'.$row->product_model.'</td>
+														<td style="font-weight:700;font-size:12pt">: '.$row->product_description.'</td>
 													</tr>
 												';
 											}

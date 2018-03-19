@@ -44,7 +44,7 @@
 				<div class="breadcrumb-content text-center">
 					<div class="breadcrumb-title text-left">
 						<h3><a href="#"><?=$support_title?></a></h3>
-						<p style="font-weight:700;margin-top:10px"><?=$support_tagline?></p>
+						<!--<p style="font-weight:700;margin-top:10px"><?=$support_tagline?></p>-->
 					</div>
 				</div>
 			</div>
