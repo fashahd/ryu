@@ -23,4 +23,16 @@ class News extends MX_Controller {
 		$data["tittle"] = "News & Event";
 		$this->layout->content("index",$data);
 	}
+	public function read($newsid = null)
+	{
+		$data["event_id"] = $newsid;
+		$data["tittle"] = "News & Event";
+		$this->layout->content("read",$data);
+	}
+
+	function getlistevent(){
+		$month = $_POST["month"];
+
+		echo "<li>".$month."</li>";
+	}
 }

@@ -1,18 +1,24 @@
-<!-- section-element-area-start -->
-<div class="section-element-area ptb-70">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="entry-header text-center mb-20">
-                    <img src="<?=base_url()?>appsources/img/3.jpg" alt="not-found-img" />
-                    <p>Oops! That page can’t be found.</p>
-                </div>
-                <div class="entry-content text-center mb-30">
-                    <p>Sorry, but the page you are looking for is not found. Please, make sure you have typed the current URL.</p>
-                    <a href="<?=base_url()?>">GO TO HOME</a>
-                </div>
-            </div>
+<section class="content-header">
+      <h1>
+        404 Error Page
+      </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="error-page">
+        <h2 class="headline text-yellow"> 404</h2>
+
+        <div class="error-content">
+            <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+
+            <p>
+            We could not find the page you were looking for.
+            Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
+            </p>
+            <a href="<?=base_url()?>dashboard/front" class="btn btn-warning">Go Home</a>
         </div>
+        <!-- /.error-content -->
     </div>
-</div>
-<!-- section-element-area-end -->
+    <!-- /.error-page -->
+</section>
+<!-- /.content -->

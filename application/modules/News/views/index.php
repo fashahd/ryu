@@ -1,3 +1,110 @@
+<?php
+	$month = date("m");
+	if($this->session->userdata("month") != ''){
+		$month = $this->session->userdata("month");
+	}
+	$year = date("Y");
+	$sql = "SELECT * FROM ryu_event WHERE MONTH(event_created_date) = '$month' AND YEAR(event_created_date) = '$year' order by event_created_date asc";
+	$query = $this->db->query($sql);
+	$list = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $row){
+			if($this->session->userdata('site_lang') == "indonesia"){
+				if($row->event_tittle_indo != ''){
+					$row->event_tittle = $row->event_tittle_indo;
+				}
+			}
+			$list .= '
+				<div class="entry-meta">
+					<a href="'.base_url().'news/read/'.$row->event_id.'">
+					<img width="80px" src="'.base_url().'appadmin/'.$row->event_image.'" style="display:inline-block;float:left;margin-right:20px"/>
+					<p>'.date("l, d M Y H:i", strtotime($row->event_created_date)).'</p>
+					<p>('.$row->event_tittle.')</p></a>
+				</div>
+			';
+		}
+	}else{
+		$list .= '
+			<div class="entry-meta">
+				<p>No any event</p>
+			</div>
+		';
+	}
+
+	$arrmonth = array(
+		"01" => "January",
+		"02" => "February",
+		"03" => "March",
+		"04" => "April",
+		"05" => "May",
+		"06" => "June",
+		"07" => "July",
+		"08" => "August",
+		"09" => "September",
+		"10" => "October",
+		"11" => "November",
+		"12" => "December",
+	);
+	$sql 	= "SELECT YEAR(event_created_date) as year FROM `ryu_event` GROUP BY YEAR(event_created_date)";
+	$query	= $this->db->query($sql);
+	$listtahun = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $key){
+			$sql = "SELECT MONTH(event_created_date) as month FROM `ryu_event` WHERE YEAR(event_created_date) = '$key->year' GROUP BY MONTH(event_created_date)";
+			$query	= $this->db->query($sql);
+			$listbulan = "";
+			if($query->num_rows()>0){
+				foreach($query->result() as $h){
+					if($h->month < 10){
+						$h->month = "0".$h->month;
+					}
+					$sql = "SELECT * FROM ryu_event WHERE MONTH(event_created_date) = '$h->month' order by event_created_date asc";
+					$query = $this->db->query($sql);
+					$listjadwal = "";
+					if($query->num_rows()>0){
+						foreach($query->result() as $row){
+							
+							if($this->session->userdata('site_lang') == "indonesia"){
+								if($row->event_tittle_indo != ''){
+									$row->event_tittle = $row->event_tittle_indo;
+								}
+							}
+							$listjadwal .= '
+								<li style="margin-left:20px"><a href="'.base_url().'news/read/'.$row->event_id.'">'.$row->event_tittle.'</a></li>
+							';
+						}
+					}else{
+						$listjadwal .= '
+							<li style="margin-left:20px">(No Any Event)<li>
+						';
+					}
+					$listbulan .= '
+					<li><a href="#'.$arrmonth[$h->month].'" onclick="seemonth(\''.$h->month.'\')">'.$arrmonth[$h->month].'</a>
+						<ul id="event_'.$h->month.'">
+							'.$listjadwal.'
+						</ul>
+					</li>';
+					$listbulan .= "
+						<script>
+							$('#event_$h->month').hide();
+						</script>
+					";
+				}
+			}
+			$listtahun .= '
+			<li><a href="#'.$key->year.'" onclick="seeyear(\''.$key->year.'\')">'.$key->year.'</a>
+				<ul id="event_'.$key->year.'">
+					'.$listbulan.'
+				</ul>
+			</li>';
+			$listtahun .= "
+				<script>
+					$('#event_$key->year').hide();
+				</script>
+			";
+		}
+	}
+?>
 <!-- counter-area-start -->
 <div class="counter-area ptb-70">
 	<div class="container">
@@ -28,14 +135,7 @@
 					<div class="single-blog-main mb-40">
 						<div class="postinfo-wrapper">
 							<div class="post-info">
-								<div class="entry-meta">
-									<p>(Date)</p>
-									<p>(News Title / Event Title)</p>
-								</div>
-								<div class="entry-meta">
-									<p>(Date)</p>
-									<p>(News Title / Event Title)</p>
-								</div>
+								<?=$list?>
 							</div>
 						</div>
 					</div>
@@ -50,10 +150,7 @@
 							<h4><span>INDEX</span></h4>
 						</div>
 						<ul class="blog-menu">
-							<li><a href="#">Dresses</a></li>
-							<li><a href="#">shoes</a></li>
-							<li><a href="#">Handbags</a></li>
-							<li><a href="#">Clothing</a></li>
+							<?=$listtahun?>
 						</ul>
 					</div>
 				</div>
@@ -62,3 +159,11 @@
 	</div>
 </div>
 <!-- single-blog-sidebar-end -->
+<script>
+	function seemonth(month){
+		$("#event_"+month).toggle();
+	}
+	function seeyear(month){
+		$("#event_"+month).toggle();
+	}
+</script>

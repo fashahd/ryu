@@ -1,5 +1,26 @@
 <?php
 	$tittle = strtoupper($tittle);
+	$facebook = "";
+	$instagram = "";
+	$twitter = "";
+	$sql 	= "SELECT * FROM ryu_social";
+	$query	= $this->db->query($sql);
+	if($query->num_rows()>0){
+		$row 	= $query->row();
+		$facebook = $row->facebook;
+		$instagram = $row->instagram;
+		$twitter = $row->twitter;
+	}
+	$sql    = " SELECT * FROM `ryu_menu`
+				WHERE menu_parent_id = '0' and editable = 'ya'
+				ORDER BY menu_order asc";
+	$query  = $this->db->query($sql);
+	$menufooter = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $h){
+			$menufooter .= '<li><a href="'.base_url().'product/index/'.$h->menu_id.'">'.$h->menu_title.'</a></li>';
+		}
+	}
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -24,17 +45,18 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="search-area">
 								<form action="#">
-									<input type="text" placeholder="Search entire store here ..." />
-									<a href="#"><i class="fa fa-search"></i></a>
+									<input id="keyword" type="text" placeholder="<?=$this->lang->line('search_text');?> ..." />
+									<a href="#" onClick="searchproduct()"><i class="fa fa-search"></i></a>
 								</form>
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-3">
 							<div class="header-user">
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/en.jpg" alt="flag" /></a> 
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/id.jpg" alt="flag" /></a>
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook.jpg" alt="flag" /></a> 
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram.jpg" alt="flag" /></a> 
+								<a href="<?=base_url(); ?>LanguageSwitcher/switchLang/english" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/en.jpg" alt="en" /></a> 
+								<a href="<?=base_url(); ?>LanguageSwitcher/switchLang/indonesia" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/flag/id.jpg" alt="id" /></a>
+								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook.jpg" alt="facebook" /></a> 
+								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram_black.png" alt="instagram" /></a> 
+								<a href="http://www.twitter.com/<?=$twitter?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/twitter_black.png" alt="twitter" /></a> 
 							</div>
 						</div>
 					</div>
@@ -66,99 +88,7 @@
 							<div class="mobile-menu">
 								<nav id="mobile-menu-active">
 									<ul id="nav">
-										<li><a href="index.html">Home</a>
-											<ul>
-												<li><a href="index-2.html">Home-2</a>
-												    <ul>
-												        <li><a href="#">level 2</a></li>
-												        <li><a href="#">level 2</a></li>
-												        <li><a href="#">level 2</a></li>
-												    </ul>
-												</li>
-												<li><a href="index-3.html">Home-3</a>
-												    <ul>
-												        <li><a href="#">level 2</a></li>
-												        <li><a href="#">level 2</a></li>
-												        <li><a href="#">level 2</a></li>
-												    </ul>
-												</li>
-												<li><a href="index-4.html">Home-4</a></li>
-												<li><a href="index-5.html">Home-5</a></li>
-												<li><a href="index-6.html">Home-6</a></li>
-												<li><a href="index-7.html">Home-7</a></li>
-												<li><a href="index-8.html">Home-8</a></li>
-											</ul>
-										</li>
-										<li><a href="shop.html">headphones</a>
-											<ul>
-												<li><a href="shop.html">Headphones with Mic</a></li>
-												<li><a href="shop.html">Bluetooth/Wireless</a></li>
-												<li><a href="shop.html">Extra Bass</a></li>
-												<li><a href="shop.html">Noise Cancelling</a></li>
-												<li><a href="shop.html">Wireless Headphones</a></li>
-												<li><a href="shop.html">On Ear Headphones</a></li>
-												<li><a href="shop.html">Planar Magnetic</a></li>
-												<li><a href="shop.html">Bone Conduction</a></li>
-												<li><a href="shop.html">Wire Managers</a></li>
-												<li><a href="shop.html">Hi-Res Music Players</a></li>
-												<li><a href="shop.html">Headphone Amplifiers</a></li>
-												<li><a href="shop.html">Headphone DACs</a></li>
-												<li><a href="shop.html">Earbud Tips</a></li>
-												<li><a href="shop.html">Headphone Amps</a></li>
-												<li><a href="shop.html">Headphone Cases</a></li>
-												<li><a href="shop.html">Headphone Splitters</a></li>
-											</ul>
-										</li>
-										<li><a href="shop.html">Mobiles & Tablets</a>
-											<ul>
-												<li><a href="shop.html">Apple</a></li>
-												<li><a href="shop.html">Samsung</a></li>
-												<li><a href="shop.html">Motorola</a></li>
-												<li><a href="shop.html">Sony</a></li>
-												<li><a href="shop.html">Ipad</a></li>
-												<li><a href="shop.html">Tablets</a></li>
-												<li><a href="shop.html">Kids' Tablets</a></li>
-												<li><a href="shop.html">iPad & Tablet</a></li>
-												<li><a href="shop.html">Cables</a></li>
-												<li><a href="shop.html">Screen Protectors</a></li>
-												<li><a href="shop.html">Holders & Stands</a></li>
-												<li><a href="shop.html">Storage</a></li>
-											</ul>
-										</li>
-										<li><a href="shop.html">Photo & Camera</a>
-											<ul>
-												<li><a href="shop.html">Digital SLR</a></li>
-												<li><a href="shop.html">Instant Film</a></li>
-												<li><a href="shop.html">Mirrorless</a></li>
-												<li><a href="shop.html">Waterproof</a></li>
-												<li><a href="shop.html">GoPro Cameras</a></li>
-												<li><a href="shop.html">Sports & Action</a></li>
-												<li><a href="shop.html">Traditional</a></li>
-												<li><a href="shop.html">Photo Accessories</a></li>
-											</ul>
-										</li>
-										<li><a href="shop.html">Pages</a>
-											<ul>
-												<li><a href="shop.html">Shop</a></li>
-												<li><a href="product-details.html">product-details</a></li>
-												<li><a href="blog.html">Blog</a></li>
-												<li><a href="blog-details.html">blog-details</a></li>
-												<li><a href="about.html">About</a></li>
-												<li><a href="contact.html">Contact</a></li>
-												<li><a href="checkout.html">Checkout</a></li>
-												<li><a href="cart.html">Cart</a></li>
-												<li><a href="login.html">Login</a></li>
-												<li><a href="register.html">Register</a></li>
-												<li><a href="wishlist.html">Wishlist</a></li>
-												<li><a href="404.html">404 Page</a></li>
-											</ul>
-										</li>
-										<li><a href="blog.html">blog</a>
-											<ul>
-												<li><a href="blog.html">Blog</a></li>
-												<li><a href="blog-details.html">blog-details</a></li>
-											</ul>
-										</li>
+										<?=$this->menu->treemenu()?>
 									</ul>
 								</nav>
 							</div>
@@ -213,14 +143,11 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Product</h4>
+											<h4><?=$this->lang->line('product');?></h4>
 										</div>
 										<div class="footer-menu">
 											<ul>
-												<li><a href="#">Powertools</a></li>
-												<li><a href="#">Accessories</a></li>
-												<li><a href="#">Engine</a></li>
-												<li><a href="#">Welding</a></li>
+												<?=$menufooter?>
 											</ul>
 										</div>
 									</div>
@@ -230,7 +157,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Segemntation</h4>
+											<h4>Segmentation</h4>
 										</div>
 										<div class="footer-menu">
 											<ul>
@@ -246,7 +173,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>News & Event</h4>
+											<h4><a href="<?=base_url()?>news">News & Event</a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -255,7 +182,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Service & Support</h4>
+											<h4><a href="<?=base_url()?>service/page/service">Service & Support</a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -264,7 +191,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Download</h4>
+											<h4><a href="<?=base_url()?>download"><?=$this->lang->line('download');?></a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -273,7 +200,7 @@
 									<!-- single-footer-start -->
 									<div class="single-footer">
 										<div class="footer-title">
-											<h4>Contact Us</h4>
+											<h4><a href="<?=base_url()?>contactus"><?=$this->lang->line('contact_us');?></a></h4>
 										</div>
 									</div>
 									<!-- single-footer-end -->
@@ -295,9 +222,10 @@
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="payment-area">
-								FOLLOW US 
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook_black.png" alt="flag" /></a> 
-								<a href="#" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram_black.png" alt="flag" /></a> 
+								<?=$this->lang->line('follow_us');?> 
+								<a href="http://www.facebook.com/<?=$facebook?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/facebook_black.png" alt="Facebook" /></a> 
+								<a href="http://www.instagram.com/<?=$instagram?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/instagram.png" alt="Instagram" /></a> 
+								<a href="http://www.twitter.com/<?=$twitter?>" target="_blank" style="margin-left:10px"><img src="<?=base_url()?>/appsources/img/logo/twitter.png" alt="Twitter" /></a> 
 							</div>
 						</div>
 					</div>
@@ -375,3 +303,49 @@
         <?=$this->layout->headersourcejs()?>
     </body>
 </html>
+<script>
+	var getUrl 	= window.location;
+	var toUrl 	= getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+	function searchproduct(){
+		var keyword = $("#keyword").val();
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/dashboard/setSearchValue",
+			data: {keyword:keyword},
+			// dataType: "json",
+			success: function(data){
+				window.location.href= toUrl+"/product/search?key="+data;
+			},error: function(xhr, ajaxOptions, thrownError){            
+				alert(xhr.responseText);
+			}
+		});
+	}
+</script>
+
+<script>
+	var getUrl 	= window.location;
+	var toUrl 	= getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    $("#contactus").submit(function(event){
+		event.preventDefault();
+        var form = $('#contactus');
+
+		$.ajax({
+			type : 'POST',
+			url  : toUrl+"/contactus/send",
+			data : form.serialize(),
+			dataType: "json",
+			success: function(data){
+				// alert(data.status);
+				if(data.status =="sukses"){
+					$("#contentus").html(data.response);
+				}else{
+					$("#contentus").html(data.response);
+				}
+			},error: function(xhr, ajaxOptions, thrownError){            
+				alert(xhr.responseText);
+				$("#contentus").html(data.response);
+				return;
+			}
+		});
+    })
+</script>

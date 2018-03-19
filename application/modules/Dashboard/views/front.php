@@ -1,9 +1,71 @@
-
+<?php
+	$retnewproduct = "";
+	if($newproduct){
+		foreach($newproduct as $row){
+			if (strlen($row->product_name) > 30){
+				$product_name = substr($row->product_name, 0, 30) . '...';
+			}else{
+				$product_name = $row->product_name;
+			}
+			$retnewproduct .= '
+			<div class="single-product" style="margin-left:15px">
+				<div class="product-img">
+					<a href="#">
+						<img src="'.base_url().'/appadmin/'.$row->product_image1.'" alt="product" class="first" />
+					</a>
+				</div>
+				<div class="product-content">
+					<h3><a href="#">'.$row->menu_title.'</a></h3>
+					<div class="product-price">
+						<ul>
+							<li class="new-price">'.$product_name.'</li>
+						</ul>
+					</div>
+					<a href="'.base_url().'product/detail/'.$row->product_id.'" class="button-new"> '.$this->lang->line("view_product").'</a>
+				</div>
+			</div>
+			';
+		}
+	}
+	$sql 	= "SELECT * FROM ryu_image where position = 'top' order by created_dttm desc";
+	$query	= $this->db->query($sql);
+	$listimagetop = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $row){
+			$listimagetop .= '
+			<img src="'.base_url().'/appadmin/'.$row->image_url.'" alt="slider-img" title="#caption1" />
+			';
+		}
+	}
+	$sql 	= "SELECT * FROM ryu_image where position = 'down' order by created_dttm desc";
+	$query	= $this->db->query($sql);
+	$listimagebottom = "";
+	$capbottom 		 = "";
+	if($query->num_rows()>0){
+		foreach($query->result() as $row){
+			$listimagebottom .= '
+				<img src="'.base_url().'/appadmin/'.$row->image_url.'" alt="slider-img" title="#caption'.$row->image_id.'" />
+			';
+			$capbottom .= '				
+				<div class="nivo-html-caption" id="caption'.$row->image_id.'" >
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
+									<h2>'.$row->image_desc.'</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			';
+		}
+	}
+?>
 		<!-- slider-area-start -->
 		<div class="slider-area">
 			<div id="slider">
-				<img src="<?=base_url()?>appsources/img/slider/1.jpg" alt="slider-img" title="#caption1" />
-				<img src="<?=base_url()?>appsources/img/slider/2.jpg" alt="slider-img" title="#caption2" />
+				<?=$listimagetop?>
 			</div>
 		</div>
 		<!-- slider-area-end -->
@@ -14,40 +76,40 @@
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 						<div class="single-banner text-center">
 							<div class="banner-img phone mb-20">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/1.png" alt="banner" /></a>
+								<a><img src="<?=base_url()?>appsources/img/banner/1.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Affordable Prices</h4>
+								<h4><?=$this->lang->line('banner_text_price');?></h4>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 hidden-sm col-xs-12">
 						<div class="single-banner text-center">
 							<div class="banner-img card mb-20">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/4.png" alt="banner" /></a>
+								<a><img src="<?=base_url()?>appsources/img/banner/4.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Japanese Technology</h4>
+								<h4><?=$this->lang->line('banner_text_spread');?></h4>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 						<div class="single-banner text-center">
 							<div class="banner-img mb-20 plane">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/2.png" alt="banner" /></a>
+								<a><img src="<?=base_url()?>appsources/img/banner/complete.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Compatible Spare parts And Easy Be Obtained</h4>
+								<h4><?=$this->lang->line('banner_text_tech');?></h4>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 						<div class="single-banner text-center">
 							<div class="banner-img mb-20 light">
-								<a href="#"><img src="<?=base_url()?>appsources/img/banner/3.png" alt="banner" /></a>
+								<a><img src="<?=base_url()?>appsources/img/banner/3.png" alt="banner" /></a>
 							</div>
 							<div class="banner-text">
-								<h4>Spread Service Center</h4>
+								<h4><?=$this->lang->line('banner_text_compatible');?></h4>
 							</div>
 						</div>
 					</div>
@@ -79,86 +141,15 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="section-title mb-30">
-							<h2><span class="alphabetic">n</span>ew arrivals</h2>
+							<h2><?=$this->lang->line('new_arrival');?></h2>
 						</div>
 					</div>
 				</div>	
 				<div class="product-active">
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/36.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/37.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/38.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/39.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
+					<?=$retnewproduct?>
 				</div>
 				<div class="see-more">
-					<a class="button-new">SEE MORE</a>
+					<a href="<?=base_url()?>product/all" class="button-new"><?=$this->lang->line('see_more');?></a>
 				</div>
 			</div>
 		</div>
@@ -166,35 +157,8 @@
 		<!-- slider-area-start -->
 		<div class="slider-area">
 			<div id="slider2">
-				<img src="<?=base_url()?>appsources/img/slider/1.jpg" alt="slider-img" title="#caption4" />
-				<img src="<?=base_url()?>appsources/img/slider/2.jpg" alt="slider-img" title="#caption5" />
+				<?=$listimagebottom?>
 			</div>
-			<div class="nivo-html-caption" id="caption4" >
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<h1>Now Shipping!</h1>
-								<h2>iphone<span> s7</span></h2>
-								<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
-								<a href="#"><i class="fa fa-shopping-cart"></i>buy now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><div class="nivo-html-caption" id="caption5" >
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<h1>Now Shipping!</h1>
-								<h2>iphone<span> s7</span></h2>
-								<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
-								<a href="#"><i class="fa fa-shopping-cart"></i>buy now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?=$capbottom?>
 		</div>
 		<!-- slider-area-end -->

@@ -1,64 +1,86 @@
+<?php
+	$sql 	= "SELECT image_cover, video, menu_desc, menu_desc_id FROM ryu_menu where menu_id = '$category_id'";
+	$query 	= $this->db->query($sql);
+	$row 	= $query->row();
+	$image_cover = $row->image_cover;
+	$video 	= $row->video;
+	$menu_desc = $row->menu_desc;
+	$menu_desc_id = $row->menu_desc_id;
+	if($image_cover == ""){
+		$image_cover = "appsources/banner/13.jpg";
+	}
+	
+	if($this->session->userdata('site_lang') == "indonesia"){
+		if($menu_desc_id != ''){
+			$menu_desc = $menu_desc_id;
+		}
+	}
+	function listdetail($category_id){
+		$CI     = &get_instance();
+		$list = "";
+		$sql    = " SELECT * FROM `ryu_menu`
+					WHERE menu_parent_id = '$category_id'
+					ORDER BY menu_order asc";
+		$query  = $CI->db->query($sql);
+		if($query->num_rows()>0){
+			foreach($query->result() as $h){
+				$list .= '
+					<div class="col-lg-6">
+						<div class="slider-text wow" >
+							<a href="'.base_url().'product/shop/'.$h->menu_id.'"><p><span>'.$h->menu_title.'</span></p></a>
+							<ul>
+								'.listchild($h->menu_id).'
+							</ul>
+						</div>
+					</div>
+				';
+			}
+		}
 
+		return $list;
+	}
+
+	function listchild($menu_id){
+		$CI     = &get_instance();
+		$list = "";
+		$sql    = " SELECT * FROM `ryu_menu`
+					WHERE menu_parent_id = '$menu_id'
+					ORDER BY menu_order asc";
+		$query  = $CI->db->query($sql);
+		if($query->num_rows()>0){
+			foreach($query->result() as $h){
+				$list .= '
+					<div class="col-lg-12">
+						<div class="slider-text wow" >
+							<p style="font-size:12pt;margin-left:-15px"><a href="'.base_url().'product/shop/'.$h->menu_id.'">'.$h->menu_title.'</a></p>
+							<ul>
+								'.listchild($h->menu_id).'
+							</ul>
+						</div>
+					</div>
+				';
+			}
+		}
+
+		return $list;
+	}
+?>
 		<!-- slider-area-start -->
 		<div class="slider-area">
 			<div id="slider">
-				<img src="<?=base_url()?>appsources/img/banner/powertools.jpg" alt="slider-img" title="#caption1" />
+				<img src="<?=base_url()."appadmin/".$image_cover?>" alt="slider-img" title="#caption1" />
 			</div>
 			<div class="nivo-html-caption" id="caption1" >
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-7">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<h2><span>POWERTOOLS</span></h2>
-								<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
+						<div class="col-lg-6">
+							<div class="slider-text wow" >
+								<h2><span><?=$tittle?></span></h2>
+								<p><?=$menu_desc?></p>
 							</div>
 						</div>
-						<div class="col-lg-2">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<p><span>Metal Working</span></p>
-								<ul>
-									<li>Grinders</li>
-									<li>Cut Off Show</li>
-									<li>Drill</li>
-									<li>Impact Drill</li>
-									<li>Magneting Drill</li>
-									<li>Bench Drill</li>
-									<li>Steel Body</li>
-									<li>Miter Saw</li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<p><span>Others</span></p>
-								<ul>
-									<li>Polisher</li>
-									<li>Gun Polisher</li>
-									<li>Drill</li>
-									<li>Impact Drill</li>
-									<li>Magneting Drill</li>
-									<li>Bench Drill</li>
-									<li>Steel Body</li>
-									<li>Miter Saw</li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-7">
-						</div>
-						<div class="col-lg-3">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<p><span>Wood Working</span></p>
-								<ul>
-									<li>Polisher</li>
-									<li>Gun Polisher</li>
-									<li>Drill</li>
-									<li>Impact Drill</li>
-									<li>Magneting Drill</li>
-									<li>Bench Drill</li>
-									<li>Steel Body</li>
-									<li>Miter Saw</li>
-								</ul>
-							</div>
+						<div class="col-lg-6">
+						<?=listdetail($category_id)?>
 						</div>
 					</div>
 				</div>
@@ -66,24 +88,23 @@
 		</div>
 		<!-- slider-area-end -->
 		<!-- banner-area-2-start -->
-		<div class="banner-area-2 mb-50">
+		<!-- <div class="banner-area-2 mb-50">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 					</div>
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 						<div class="single-banner-2" style="text-align:center">
-							<video controls style="width:80%">
-								<source src="<?=base_url()?>appsources/video/ryu-video.mp4" type="video/mp4">
-								Your browser does not support HTML5 video.
-							</video>
+						<div style="width:100%;height:100%;width: 820px; height: 461.25px; float: none; clear: both; margin: 2px auto;">
+  <embed src="http://www.youtube.com/v/<?=$video?>=6s?version=3&amp;hl=en_US&amp;rel=0&amp;autohide=1&amp;autoplay=1" wmode="transparent" type="application/x-shockwave-flash" width="100%" height="100%" allowfullscreen="true" title="Adobe Flash Player">
+</div> 
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- banner-area-2-end -->
 		<!-- pos_new_product-area-start -->
 		<div class="pos_new_product">
@@ -91,120 +112,14 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="section-title1 mb-30">
-							<h2><span class="alphabetic">POWERTOOLS</span></h2>
+							<h2><span class="alphabetic" style="text-transform:uppercase"><?=$tittle?></span></h2>
 						</div>
 					</div>
 				</div>	
 			</div>	
 				<div class="product-active transparent">
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/36.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/37.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/38.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
-					<!-- single-product-start -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img src="<?=base_url()?>appsources/img/product/39.jpg" alt="product" class="first" />
-							</a>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Planer</a></h3>
-							<div class="product-price">
-								<ul>
-									<li class="new-price">RPL 82 - A2</li>
-								</ul>
-							</div>
-							<a class="button-new"> View Product</a>
-						</div>
-					</div>
-					<!-- single-product-end -->
+					<?=$listproduct?>
 				</div>
 			</div>
 		</div>
-		<!-- pos_new_product-area-end -->		
-		<!-- slider-area-start -->
-		<div class="slider-area">
-			<div id="slider2">
-				<img src="<?=base_url()?>appsources/img/slider/1.jpg" alt="slider-img" title="#caption4" />
-				<img src="<?=base_url()?>appsources/img/slider/2.jpg" alt="slider-img" title="#caption5" />
-			</div>
-			<div class="nivo-html-caption" id="caption4" >
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<h1>Now Shipping!</h1>
-								<h2>iphone<span> s7</span></h2>
-								<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
-								<a href="#"><i class="fa fa-shopping-cart"></i>buy now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><div class="nivo-html-caption" id="caption5" >
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="slider-text wow fadeInDownBig" data-wow-delay=".5s" >
-								<h1>Now Shipping!</h1>
-								<h2>iphone<span> s7</span></h2>
-								<p>BodyGuardz is ready to protect your new iPhone. <br /><span>Oder now</span> & be ready too.</p>
-								<a href="#"><i class="fa fa-shopping-cart"></i>buy now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- slider-area-end -->
+		<!-- pos_new_product-area-end -->

@@ -5,11 +5,11 @@
             <div class="col-lg-12">
                 <div class="entry-header text-center mb-20">
                     <img src="<?=base_url()?>appsources/img/3.jpg" alt="not-found-img" />
-                    <p>Oops! That page can’t be found.</p>
+                    <p><?=$this->lang->line('not_found');?></p>
                 </div>
                 <div class="entry-content text-center mb-30">
-                    <p>Sorry, but the page you are looking for is not found. Please, make sure you have typed the current URL.</p>
-                    <a href="<?=base_url()?>">GO TO HOME</a>
+                    <p><?=$this->lang->line('not_found_2');?></p>
+                    <a href="<?=base_url()?>"><?=$this->lang->line('go_to_home');?></a>
                 </div>
             </div>
         </div>
